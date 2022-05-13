@@ -5,6 +5,7 @@ pub struct Config {
     pub port: u16,
     pub database: String,
 
+    pub github_app_id: String,
     pub ext_url: String,
 }
 
@@ -15,6 +16,7 @@ impl Config {
             host: cfg.get("host").ok()?,
             port: cfg.get("port").ok()?,
             database: cfg.get("database").ok()?,
+            github_app_id: cfg.get("github_app_id").ok()?,
             ext_url: cfg.get("ext_url").ok()?,
         })
     }

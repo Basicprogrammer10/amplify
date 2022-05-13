@@ -4,6 +4,7 @@ use afire::Server;
 
 mod api;
 mod app;
+mod auth;
 mod config;
 mod database;
 mod problems;
@@ -14,7 +15,8 @@ fn main() {
     database::init(&app);
 
     let mut server = Server::new(&app.cfg.host, app.cfg.port);
-    api::attatch(&mut server, app);
+    auth::attatch(&mut server, &app);
+    api::attatch(&mut server, &app);
 
     server.start();
 }

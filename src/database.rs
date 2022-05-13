@@ -9,7 +9,7 @@ pub fn init(app: &Arc<App>) {
 
     // Init tables
     for i in [include_str!("sql/create_users.sql")] {
-        trans.execute(i, []).unwrap();
+        // trans.execute(i, []).unwrap();
     }
     trans.commit().unwrap();
 }
