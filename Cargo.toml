@@ -4,6 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-afire = { git = "https://github.com/Basicprogrammer10/afire.git", branch = "dev", features = ["extensions", "tracing"] }
+# afire = { git = "https://github.com/Basicprogrammer10/afire.git", branch = "dev", features = ["extensions", "tracing"] }
+afire = { version = "1.1.0", features = ["serve_static", "logging", "tracing"] }
 rusqlite = { version = "0.27.0", features = ["bundled"] }
 simple_config_parser = "1.0.0"
+ureq = "2.4.0"
+serde_json = "1.0.79"

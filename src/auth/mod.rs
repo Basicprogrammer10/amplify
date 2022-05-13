@@ -1,7 +1,9 @@
 use crate::{App, Arc, Server};
 
-mod auth_redirect;
+mod complete;
+mod redirect;
 
-pub fn attatch(server: &mut Server, app: &Arc<App>) {
-    auth_redirect::attatch(server, app);
+pub fn attatch(server: &mut Server, app: Arc<App>) {
+    redirect::attatch(server, app.clone());
+    complete::attatch(server, app);
 }

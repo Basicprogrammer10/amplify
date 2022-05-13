@@ -2,7 +2,8 @@ use crate::{App, Arc};
 
 use afire::{Method, Response, Server};
 
-pub fn attatch(server: &mut Server, app: &Arc<App>) {
+// TODO: State
+pub fn attatch(server: &mut Server, app: Arc<App>) {
     let path = format!(
         "https://github.com/login/oauth/authorize?client_id={}",
         app.cfg.github_app_id

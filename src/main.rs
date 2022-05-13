@@ -15,8 +15,8 @@ fn main() {
     database::init(&app);
 
     let mut server = Server::new(&app.cfg.host, app.cfg.port);
-    auth::attatch(&mut server, &app);
-    api::attatch(&mut server, &app);
+    auth::attatch(&mut server, app.clone());
+    api::attatch(&mut server, app);
 
     server.start();
 }

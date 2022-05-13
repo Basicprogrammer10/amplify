@@ -1,3 +1,5 @@
+use std::time::Duration;
+
 use simple_config_parser;
 
 pub struct Config {
@@ -6,7 +8,10 @@ pub struct Config {
     pub database: String,
 
     pub github_app_id: String,
+    pub github_app_secret: String,
     pub ext_url: String,
+
+    pub req_duration: Duration,
 }
 
 impl Config {
@@ -17,7 +22,9 @@ impl Config {
             port: cfg.get("port").ok()?,
             database: cfg.get("database").ok()?,
             github_app_id: cfg.get("github_app_id").ok()?,
+            github_app_secret: cfg.get("github_app_secret").ok()?,
             ext_url: cfg.get("ext_url").ok()?,
+            req_duration: Duration::from_secs(cfg.get("req_duration").ok()?),
         })
     }
 }

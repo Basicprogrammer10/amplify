@@ -1,0 +1,46 @@
+use crate::{App, Arc};
+
+use afire::{Method, Query, Response, Server};
+use serde_json::Value;
+use ureq;
+
+pub fn attatch(server: &mut Server, app: Arc<App>) {
+    server.route(Method::GET, "/auth/complete", move |req| {
+        // Get Code from URI
+        let code = match req.query.get("code") {
+            Some(i) => i,
+            _ => return Response::new().status(400).text("No Auth Code Found"),
+        };
+
+        // Get Access Token
+        let resp = ureq::post("https://github.com/login/oauth/access_token")
+            .query("client_secret", &app.cfg.github_app_secret)
+            .query("client_id", &app.cfg.github_app_id)
+            .query("code", &code)
+            .timeout(app.cfg.req_duration)
+            .call()
+            .unwrap()
+            .into_string()
+            .unwrap();
+
+        // Parse Response and net Token
+        let token = Query::from_body(resp)
+            .expect("Error Parseing Response")
+            .get("access_token")
+            .expect("No Access Token!?");
+
+        // Get User Info
+        let user_raw = ureq::get("https://api.github.com/user")
+            .set("Authorization", &format!("token {}", token))
+            .call()
+            .unwrap()
+            .into_reader();
+
+        let user: Value = serde_json::from_reader(user_raw).unwrap();
+
+        Response::new().text(format!(
+            "Hello, {}",
+            user.get("login").unwrap().as_str().unwrap()
+        ))
+    });
+}
