@@ -1,6 +1,7 @@
 use crate::{App, Arc};
 
 use afire::{Method, Query, Response, Server};
+use rusqlite::params;
 use serde_json::Value;
 use ureq;
 
@@ -36,11 +37,29 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
             .unwrap()
             .into_reader();
 
+        // Parse Jason
         let user: Value = serde_json::from_reader(user_raw).unwrap();
+        let id = user.get("id").unwrap().as_str().unwrap();
+
+        // TODO: Check if user in db already
+
+        // Add to the dAAAAAAAta base
+        app.db
+            .lock()
+            .unwrap()
+            .execute(
+                "INSERT OR IGNORE INTO users (id, name, avatar_url) VALUES (?, ?, ?)",
+                params![
+                    id,
+                    user.get("name").unwrap().as_str().unwrap(),
+                    user.get("avatar_url").unwrap().as_str().unwrap()
+                ],
+            )
+            .unwrap();
 
         Response::new().text(format!(
             "Hello, {}",
-            user.get("login").unwrap().as_str().unwrap()
+            user.get("name").unwrap().as_str().unwrap()
         ))
     });
 }
