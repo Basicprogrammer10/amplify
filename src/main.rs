@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use afire::Server;
+use afire::{Content, Response, Server};
 
 mod api;
 mod app;
@@ -17,6 +17,23 @@ fn main() {
     let mut server = Server::new(&app.cfg.host, app.cfg.port);
     auth::attatch(&mut server, app.clone());
     api::attatch(&mut server, app);
+
+    server.error_handler(
+        |req, err| match req.path.split('/').nth(1).unwrap_or_default() {
+            "auth" | "api" => {
+                return Response::new()
+                    .status(500)
+                    .text(format!(r#"{{"error": "{}"}}"#, err))
+                    .content(Content::JSON)
+            }
+            _ => {
+                return Response::new()
+                    .status(500)
+                    .text(format!("Internal Server Error :/\nError: {}", err))
+                    .content(Content::TXT)
+            }
+        },
+    );
 
     server.start();
 }
