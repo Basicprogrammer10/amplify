@@ -1,4 +1,7 @@
-use crate::{App, Arc};
+use crate::{
+    common::{current_epoch, json_err},
+    App, Arc,
+};
 
 use afire::{Method, Query, Response, Server};
 use rusqlite::params;
@@ -10,8 +13,30 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
         // Get Code from URI
         let code = match req.query.get("code") {
             Some(i) => i,
-            _ => return Response::new().status(400).text("No Auth Code Found"),
+            _ => return json_err("No Auth Code Found"),
         };
+
+        // Get and verify state
+        let state = match req.query.get("state") {
+            Some(i) => i,
+            _ => return json_err("No State Found"),
+        };
+
+        {
+            let mut os = app.oauth_state.lock();
+            let real_state = match os.iter().position(|x| x.0 == state) {
+                Some(i) => os.remove(i),
+                None => return json_err("Invalid State"),
+            };
+
+            if current_epoch() - real_state.1 >= 60 * 10 {
+                return json_err("State Expired");
+            }
+
+            if real_state.0 != state {
+                return json_err("State Dosent Match");
+            }
+        }
 
         // Get Access Token
         let resp = ureq::post("https://github.com/login/oauth/access_token")

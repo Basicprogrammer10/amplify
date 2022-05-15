@@ -5,6 +5,7 @@ use afire::{Content, Response, Server};
 mod api;
 mod app;
 mod auth;
+mod common;
 mod config;
 mod database;
 mod problems;
