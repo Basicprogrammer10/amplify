@@ -67,16 +67,7 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
         let id = user.get("id").unwrap().as_u64().unwrap();
         let name = user.get("name").unwrap().as_str().unwrap();
 
-        // Check if user in db already
-        let new = app
-            .db
-            .lock()
-            .query_row::<u32, _, _>("SELECT COUNT(*) FROM users WHERE id = ?", [id], |row| {
-                row.get(0)
-            })
-            .unwrap()
-            == 0;
-
+        // Add to / Update database
         app.db
             .lock()
             .execute(
@@ -104,20 +95,9 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
             .path("/")
             .max_age(30 * 24 * 60 * 60);
 
-        if new {
-            return Response::new()
-                .text(format!(
-                    "Welcome, {}",
-                    user.get("name").unwrap().as_str().unwrap()
-                ))
-                .cookie(cookie);
-        }
-
-        Response::new()
-            .text(format!(
-                "Hello, {}",
-                user.get("name").unwrap().as_str().unwrap()
-            ))
-            .cookie(cookie)
+        return Response::new()
+            .status(308)
+            .header("Location", "/")
+            .cookie(cookie);
     });
 }

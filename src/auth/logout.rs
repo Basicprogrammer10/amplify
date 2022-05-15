@@ -18,7 +18,8 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
 
         // Remove Session Cookie
         Response::new()
-            .text("Goodbye")
-            .cookie(SetCookie::new("session", "LOGOUT").max_age(0))
+            .status(308)
+            .header("Location", "/")
+            .cookie(SetCookie::new("session", "LOGOUT").path("/").max_age(0))
     });
 }

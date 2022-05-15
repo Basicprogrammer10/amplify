@@ -8,7 +8,6 @@ use serde_json::json;
 
 pub fn attatch(server: &mut Server, app: Arc<App>) {
     server.route(Method::GET, "/api/generic_self", move |req| {
-        dbg!(&req.cookies);
         // Get Session
         let session_id = match get_cookie(&req, "session") {
             Some(i) => i.value,
