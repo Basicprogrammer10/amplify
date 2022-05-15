@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use afire::{Content, Response, Server};
+use afire::{Content, Response, ServeStatic, Server};
 
 mod api;
 mod app;
@@ -16,6 +16,8 @@ fn main() {
     database::init(&app);
 
     let mut server = Server::new(&app.cfg.host, app.cfg.port);
+    ServeStatic::new("web/static").attach(&mut server);
+
     auth::attatch(&mut server, app.clone());
     api::attatch(&mut server, app);
 
