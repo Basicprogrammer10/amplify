@@ -8,7 +8,10 @@ pub fn init(app: &Arc<App>) {
     let trans = conn.transaction().unwrap();
 
     // Init tables
-    for i in [include_str!("sql/create_users.sql")] {
+    for i in [
+        include_str!("sql/create_users.sql"),
+        include_str!("sql/create_sessions.sql"),
+    ] {
         trans.execute(i, []).unwrap();
     }
     trans.commit().unwrap();

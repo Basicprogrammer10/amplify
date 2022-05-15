@@ -1,9 +1,9 @@
 use crate::{
-    common::{current_epoch, json_err},
+    common::{current_epoch, json_err, rand_str},
     App, Arc,
 };
 
-use afire::{Method, Query, Response, Server};
+use afire::{Method, Query, Response, Server, SetCookie};
 use rusqlite::params;
 use serde_json::Value;
 use ureq;
@@ -77,38 +77,43 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
             .unwrap()
             == 0;
 
-        if new {
-            app.db
-                .lock()
-                .execute(
-                    "INSERT OR IGNORE INTO users (id, name, avatar_url, token) VALUES (?, ?, ?, ?)",
-                    params![
-                        id,
-                        name,
-                        user.get("avatar_url").unwrap().as_str().unwrap(),
-                        token
-                    ],
-                )
-                .unwrap();
-
-            return Response::new().text(format!(
-                "Welcome, {}",
-                user.get("name").unwrap().as_str().unwrap()
-            ));
-        }
-
-        // Update user's name and token
         app.db
             .lock()
             .execute(
-                "UPDATE users SET token = ?, name = ? WHERE id = ?",
-                params![token, name, id],
+                include_str!("../sql/login_upsert.sql"),
+                params![
+                    id,
+                    name,
+                    user.get("avatar_url").unwrap().as_str().unwrap(),
+                    token
+                ],
             )
             .unwrap();
 
-        Response::new().text(format!(
-            "Hello, {}",
-            user.get("name").unwrap().as_str().unwrap()
-        ))
+        // Make a new session
+        let session_token = rand_str(15);
+        app.db
+            .lock()
+            .execute(
+                "INSERT INTO sessions (created, user_id, session_id) VALUES (?, ?, ?)",
+                params![current_epoch(), id, session_token],
+            )
+            .unwrap();
+
+        if new {
+            return Response::new()
+                .text(format!(
+                    "Welcome, {}",
+                    user.get("name").unwrap().as_str().unwrap()
+                ))
+                .cookie(SetCookie::new("session", session_token));
+        }
+
+        Response::new()
+            .text(format!(
+                "Hello, {}",
+                user.get("name").unwrap().as_str().unwrap()
+            ))
+            .cookie(SetCookie::new("session", session_token))
     });
 }

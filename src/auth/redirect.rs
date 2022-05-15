@@ -1,15 +1,13 @@
-use crate::{common::current_epoch, App, Arc};
+use crate::{
+    common::{current_epoch, rand_str},
+    App, Arc,
+};
 
 use afire::{Method, Response, Server};
-use rand::{distributions::Alphanumeric, Rng};
 
 pub fn attatch(server: &mut Server, app: Arc<App>) {
     server.route(Method::GET, "/auth/redirect", move |_| {
-        let state = rand::thread_rng()
-            .sample_iter(&Alphanumeric)
-            .take(10)
-            .map(char::from)
-            .collect::<String>();
+        let state = rand_str(10);
 
         app.oauth_state
             .lock()
