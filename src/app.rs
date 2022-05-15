@@ -1,5 +1,4 @@
-use std::sync::Mutex;
-
+use parking_lot::Mutex;
 use rusqlite::Connection;
 
 use crate::config::Config;
