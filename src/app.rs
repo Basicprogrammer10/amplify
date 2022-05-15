@@ -11,7 +11,7 @@ pub struct App {
 
 impl App {
     pub fn new() -> Self {
-        let cfg = Config::load("config.cfg").unwrap();
+        let cfg = Config::load("data/config.cfg").unwrap();
 
         Self {
             db: Mutex::new(Connection::open(&cfg.database).unwrap()),
