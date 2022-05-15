@@ -80,7 +80,7 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
         app.db
             .lock()
             .execute(
-                include_str!("../sql/login_upsert.sql"),
+                include_str!("../sql/upsert_login.sql"),
                 params![
                     id,
                     name,
@@ -100,13 +100,17 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
             )
             .unwrap();
 
+        let cookie = SetCookie::new("session", session_token)
+            .path("/")
+            .max_age(30 * 24 * 60 * 60);
+
         if new {
             return Response::new()
                 .text(format!(
                     "Welcome, {}",
                     user.get("name").unwrap().as_str().unwrap()
                 ))
-                .cookie(SetCookie::new("session", session_token).max_age(30 * 24 * 60 * 60));
+                .cookie(cookie);
         }
 
         Response::new()
@@ -114,6 +118,6 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
                 "Hello, {}",
                 user.get("name").unwrap().as_str().unwrap()
             ))
-            .cookie(SetCookie::new("session", session_token).max_age(30 * 24 * 60 * 60))
+            .cookie(cookie)
     });
 }
