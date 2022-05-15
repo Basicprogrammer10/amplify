@@ -106,7 +106,7 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
                     "Welcome, {}",
                     user.get("name").unwrap().as_str().unwrap()
                 ))
-                .cookie(SetCookie::new("session", session_token));
+                .cookie(SetCookie::new("session", session_token).max_age(30 * 24 * 60 * 60));
         }
 
         Response::new()
@@ -114,6 +114,6 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
                 "Hello, {}",
                 user.get("name").unwrap().as_str().unwrap()
             ))
-            .cookie(SetCookie::new("session", session_token))
+            .cookie(SetCookie::new("session", session_token).max_age(30 * 24 * 60 * 60))
     });
 }
