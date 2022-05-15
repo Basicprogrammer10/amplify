@@ -1,14 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
 	background-image: radial-gradient(#1E293B 1px, transparent 1px);
-	background-size: 25px 25px;
+	background-size: 20px 20px;
+  color: rgb(203 213 225);
+}
+
+a {
+  color: rgb(14 165 233);
+  text-decoration: underline;
 }
 
 [log] {
   color: #94a3b8;
   font-size: 30px;
   padding: 3px;
-}
-
-[nav-bar] * {
-  display: inline-block;
 }
