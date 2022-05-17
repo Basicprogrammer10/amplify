@@ -17,12 +17,10 @@
     x-init="
     session = await getSession();
     loading = false;
-    if (session) {
-      page = 'dashboard';
+    if (session)
       fetch('/api/problems')
         .then((d) => d.json())
         .then((d) => (problems = d));
-    }
     "
   >
     <nav
@@ -30,31 +28,22 @@
       class="bg-slate-800 m-6 w-1/2 h-12 mx-auto rounded flex justify-start items-center drop-shadow-lg"
     >
       <div
-        class="flex items-center cursor-pointer"
-        @click="
-        if (session) page = 'dashboard'
-        else page = 'home'
-        "
+        class="flex items-center cursor-pointer mr-1.5"
+        @click="page = 'home'"
       >
         <img src="/img/favicon-32x32.png" class="mx-3 inline-block" />
         <p class="text-xl inline-block">amplify</p>
       </div>
 
-      <div
-        class="cursor-pointer bg-slate-800 hover:bg-slate-700 rounded p-1.5 px-2 ml-4"
-        :item="page == 'dashboard' || page == 'home'"
-        @click="page = session ? 'dashboard' : 'home'"
-      >
-        <p>home</p>
-      </div>
+      <div class="border border-slate-700 rounded m-1 h-1/2"></div>
 
-      <template x-for="i in [['about', 'about']]">
+      <template x-for="i in ['home', 'about']">
         <div
           class="cursor-pointer bg-slate-800 hover:bg-slate-700 rounded p-1.5 px-2 ml-1.5"
-          :item="page == i[1]"
-          @click="page = i[0]"
+          :item="page == i"
+          @click="page = i"
         >
-          <p x-text="i[1]"></p>
+          <p x-text="i"></p>
         </div>
       </template>
 
@@ -95,7 +84,7 @@
     >
       <p x-show="loading">Loading</p>
 
-      <template x-if="page == 'home' && !loading">
+      <template x-if="page == 'home' && !session && !loading">
         <div>
           <p>Hello and welcome to <em>amplify</em>!</p>
           <p>// TODO: finish this home page</p>
@@ -110,7 +99,7 @@
         </div>
       </template>
 
-      <template x-if="page == 'dashboard' && !loading">
+      <template x-if="page == 'home' && session && !loading">
         <div>
           <p>
             Welcome <span x-text="session.new ? 'to amplify' : 'back'"></span>,
@@ -149,7 +138,10 @@
       </template>
 
       <template x-if="page == 'about' && !loading">
-        <p>ABOUT</p>
+        <div>
+          <p>This is amplify</p>
+          <p>Check it out on github <a href="https://github.com/Basicprogrammer10/amplify">here</a>!</p>
+        </div>
       </template>
     </div>
   </body>

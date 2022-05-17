@@ -526,6 +526,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 0.5rem;
 }
 
+.mr-2\.5 {
+  margin-right: 0.625rem;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -540,6 +544,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-full {
   height: 100%;
+}
+
+.h-1\/2 {
+  height: 50%;
 }
 
 .w-1\/2 {
