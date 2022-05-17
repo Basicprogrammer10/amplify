@@ -14,6 +14,10 @@ async function getSession() {
   return null;
 }
 
+function login() {
+  location = `/auth/redirect?${(Math.random() + 1).toString(36).substring(7)}`;
+}
+
 function statusBadgeColor(id) {
   let color = BADGE_COLORS[id];
   return `background: ${color[0]};color: ${color[1]};`;

@@ -42,7 +42,7 @@
 
       <template x-if="!session">
         <ion-icon
-          @click="location='/auth/redirect'"
+          @click="login()"
           name="log-in"
           title="Log In"
           log
@@ -61,7 +61,7 @@
             class="cursor-pointer bg-slate-800 hover:bg-slate-700 rounded mr-1.5"
           />
           <ion-icon
-            @click="location='/auth/logout'"
+            @click="login()"
             name="log-out"
             title="Log Out"
             log
