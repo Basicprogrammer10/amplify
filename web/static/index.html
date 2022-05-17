@@ -42,7 +42,7 @@
 
       <template x-if="!session">
         <ion-icon
-          @click="login()"
+          @click="redirect('/auth/redirect')"
           name="log-in"
           title="Log In"
           log
@@ -61,7 +61,7 @@
             class="cursor-pointer bg-slate-800 hover:bg-slate-700 rounded mr-1.5"
           />
           <ion-icon
-            @click="login()"
+            @click="redirect('/auth/logout')"
             name="log-out"
             title="Log Out"
             log
@@ -81,13 +81,22 @@
           <p>Hello and welcome to <em>amplify</em>!</p>
           <p>// TODO: finish this home page</p>
           <br />
-          <p>To start <a href="/auth/redirect">login</a> with github.</p>
+          <p>
+            To start
+            <a @click="redirect('/auth/redirect')" class="cursor-pointer"
+              >login</a
+            >
+            with github.
+          </p>
         </div>
       </template>
 
       <template x-if="page == 'dashboard' && !loading">
         <div>
-          <p>Welcome back <span x-text="session.name"></span>!</p>
+          <p>
+            Welcome <span x-text="session.new ? 'to amplify' : 'back'"></span>,
+            <span x-text="session.name"></span>!
+          </p>
           <br />
           <p class="text-2xl">Problems</p>
           <hr class="mb-3" />

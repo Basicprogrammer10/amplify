@@ -18,18 +18,26 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
         let session = app
             .db
             .lock()
-            .query_row::<(u64, String, String, String), _, _>(
+            .query_row::<(u64, String, String, String, u64), _, _>(
                 include_str!("../sql/query_generic_info.sql"),
-                [session_id],
+                [&session_id],
                 |row| {
                     Ok((
                         row.get(0)?,
                         row.get(1).unwrap_or_default(),
                         row.get(2).unwrap_or_default(),
                         row.get(3).unwrap_or_default(),
+                        row.get(4).unwrap_or_default(),
                     ))
                 },
             )
+            .unwrap();
+        let new = session.4 > 0;
+
+        // Set User to not new
+        app.db
+            .lock()
+            .execute(include_str!("../sql/update_not_new.sql"), [session_id])
             .unwrap();
 
         if session.0 == 0 {
@@ -38,7 +46,7 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
 
         // Send Response
         Response::new()
-            .text(json!({"name": session.1, "avatar": session.2, "id": session.3}))
+            .text(json!({"name": session.1, "avatar": session.2, "id": session.3, "new": new}))
             .content(Content::JSON)
     });
 }

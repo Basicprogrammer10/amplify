@@ -1,7 +1,8 @@
 SELECT Count(*),
       name,
       avatar_url,
-      id
+      id,
+      new
 FROM   sessions
       JOIN users
         ON sessions.user_id = users.id
