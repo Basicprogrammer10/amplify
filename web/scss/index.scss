@@ -18,3 +18,7 @@ a {
   font-size: 30px;
   padding: 3px;
 }
+
+[problem]:last-child [separator] {
+  display: none;
+}
