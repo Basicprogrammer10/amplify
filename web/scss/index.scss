@@ -22,3 +22,7 @@ a {
 [problem]:last-child [separator] {
   display: none;
 }
+
+[item="true"] {
+  background: #334155;
+}

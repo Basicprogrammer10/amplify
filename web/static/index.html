@@ -40,6 +40,24 @@
         <p class="text-xl inline-block">amplify</p>
       </div>
 
+      <div
+        class="cursor-pointer bg-slate-800 hover:bg-slate-700 rounded p-1.5 px-2 ml-4"
+        :item="page == 'dashboard' || page == 'home'"
+        @click="page = session ? 'dashboard' : 'home'"
+      >
+        <p>home</p>
+      </div>
+
+      <template x-for="i in [['about', 'about']]">
+        <div
+          class="cursor-pointer bg-slate-800 hover:bg-slate-700 rounded p-1.5 px-2 ml-1.5"
+          :item="page == i[1]"
+          @click="page = i[0]"
+        >
+          <p x-text="i[1]"></p>
+        </div>
+      </template>
+
       <template x-if="!session">
         <ion-icon
           @click="redirect('/auth/redirect')"
@@ -53,6 +71,7 @@
         <div class="ml-auto flex mr-1.5">
           <img
             @click="page = 'profile'"
+            :item="page == 'profile'"
             :src="session.avatar"
             width="36px"
             height="auto"
@@ -127,6 +146,10 @@
 
       <template x-if="page == 'profile' && !loading">
         <p>PROFILE</p>
+      </template>
+
+      <template x-if="page == 'about' && !loading">
+        <p>ABOUT</p>
       </template>
     </div>
   </body>

@@ -494,6 +494,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 0.75rem;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
+.ml-1\.5 {
+  margin-left: 0.375rem;
+}
+
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
 .ml-auto {
   margin-left: auto;
 }
@@ -538,10 +550,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   cursor: pointer;
 }
 
-.content-between {
-  align-content: space-between;
-}
-
 .items-center {
   align-items: center;
 }
@@ -573,28 +581,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(30 41 59 / var(--tw-bg-opacity));
 }
 
-.bg-yellow-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(202 138 4 / var(--tw-bg-opacity));
-}
-
-.bg-red-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
-}
-
-.bg-stone-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(87 83 78 / var(--tw-bg-opacity));
-}
-
 .bg-slate-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(71 85 105 / var(--tw-bg-opacity));
-}
-
-.p-3 {
-  padding: 0.75rem;
 }
 
 .p-1\.5 {
@@ -605,6 +594,15 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 0.25rem;
 }
 
+.p-3 {
+  padding: 0.75rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -613,11 +611,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-2\.5 {
   padding-left: 0.625rem;
   padding-right: 0.625rem;
-}
-
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
 }
 
 .font-mono {
@@ -653,21 +646,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(148 163 184 / var(--tw-text-opacity));
 }
 
-.text-yellow-100 {
-  --tw-text-opacity: 1;
-  color: rgb(254 249 195 / var(--tw-text-opacity));
-}
-
-.text-red-100 {
-  --tw-text-opacity: 1;
-  color: rgb(254 226 226 / var(--tw-text-opacity));
-}
-
-.text-stone-100 {
-  --tw-text-opacity: 1;
-  color: rgb(245 245 244 / var(--tw-text-opacity));
-}
-
 .text-slate-100 {
   --tw-text-opacity: 1;
   color: rgb(241 245 249 / var(--tw-text-opacity));
@@ -697,6 +675,10 @@ a {
 
 [problem]:last-child [separator] {
   display: none;
+}
+
+[item=true] {
+  background: #334155;
 }
 
 .hover\:bg-slate-700:hover {
