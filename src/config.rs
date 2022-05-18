@@ -10,8 +10,11 @@ pub struct Config {
     pub github_app_id: String,
     pub github_app_secret: String,
     pub ext_url: String,
-
     pub req_duration: Duration,
+
+    pub docker_command: String,
+    pub docker_image: String,
+    pub docker_timeout: String,
 }
 
 impl Config {
@@ -25,6 +28,9 @@ impl Config {
             github_app_secret: cfg.get("github_app_secret").ok()?,
             ext_url: cfg.get("ext_url").ok()?,
             req_duration: Duration::from_secs(cfg.get("req_duration").ok()?),
+            docker_command: cfg.get("docker_command").ok()?,
+            docker_image: cfg.get("docker_image").ok()?,
+            docker_timeout: cfg.get("docker_timeout").ok()?,
         })
     }
 }

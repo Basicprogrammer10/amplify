@@ -3,8 +3,8 @@ use crate::{App, Arc};
 use afire::{Content, Method, Response, Server};
 use serde_json::json;
 
-pub fn attatch(server: &mut Server, app: Arc<App>) {
-    server.route(Method::GET, "/api/problems", |req| {
+pub fn attatch(server: &mut Server, _app: Arc<App>) {
+    server.route(Method::GET, "/api/problems", |_req| {
         Response::new()
             .text(json!([
                 {"name": "Simple Math", "date": "May 15 2022", "status": 0},
