@@ -1,3 +1,4 @@
+use std::fs;
 use std::sync::Arc;
 
 use afire::{Content, Response, ServeStatic, Server};
@@ -12,6 +13,8 @@ mod problems;
 use app::App;
 
 fn main() {
+    let _ = fs::create_dir("data/tmp");
+
     let app = Arc::new(App::new());
     database::init(&app);
 

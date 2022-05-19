@@ -1,1 +1,1 @@
-timeout --signal=KILL ${TIMEOUT} cargo run
+timeout --signal=KILL ${TIMEOUT} /root/.cargo/bin/cargo run
