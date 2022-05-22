@@ -1,4 +1,4 @@
-FROM python:3
+FROM gcc:latest
 
 RUN useradd -m runner -d /runner
 RUN usermod -p '!!' root
@@ -8,4 +8,4 @@ WORKDIR /runner
 
 ADD --chown=runner run.sh .
 
-ENTRYPOINT ["sh", "./run.sh"]
+CMD ["sh", "./run.sh"]

@@ -10,5 +10,17 @@
         "path": "python",
         "imageName": "python-runner",
         "sourcePath": "main.py"
+    },
+    {
+        "name": "c",
+        "path": "c",
+        "imageName": "c-runner",
+        "sourcePath": "src/main.c"
+    },
+    {
+        "name": "cpp",
+        "path": "cpp",
+        "imageName": "cpp-runner",
+        "sourcePath": "src/main.cpp"
     }
 ]
