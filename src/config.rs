@@ -13,7 +13,6 @@ pub struct Config {
     pub req_duration: Duration,
 
     pub docker_command: String,
-    pub docker_image: String,
     pub docker_timeout: String,
 }
 
@@ -29,7 +28,6 @@ impl Config {
             ext_url: cfg.get("ext_url").ok()?,
             req_duration: Duration::from_secs(cfg.get("req_duration").ok()?),
             docker_command: cfg.get("docker_command").ok()?,
-            docker_image: cfg.get("docker_image").ok()?,
             docker_timeout: cfg.get("docker_timeout").ok()?,
         })
     }

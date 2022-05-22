@@ -1,0 +1,14 @@
+[
+    {
+        "name": "rust",
+        "path": "rust",
+        "imageName": "rust-runner",
+        "sourcePath": "src/main.rs"
+    },
+    {
+        "name": "python",
+        "path": "python",
+        "imageName": "python-runner",
+        "sourcePath": "main.py"
+    }
+]
