@@ -8,4 +8,4 @@ WORKDIR /runner
 
 ADD --chown=runner run.sh .
 
-CMD ["sh", "./run.sh"]
+CMD ["bash", "./run.sh"]

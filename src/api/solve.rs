@@ -6,6 +6,7 @@ use std::time::Instant;
 use afire::{Content, Method, Response, Server};
 use serde_json::{from_str, json, Value};
 use tempfile;
+use urlencoding;
 
 use super::langs::LANGS;
 use crate::{common::json_err, App, Arc};
@@ -28,6 +29,8 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
             Some(i) => i,
             None => return json_err("Undefined Languge"),
         };
+
+        let args = "HELLO WORLD";
 
         let mut code_file = tempfile::NamedTempFile::new_in("data/tmp").unwrap();
         code_file.write_all(code.as_bytes()).unwrap();
@@ -55,6 +58,8 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
                 ),
                 "-e",
                 &format!("TIMEOUT={}", &app.cfg.docker_timeout),
+                "-e",
+                &format!("ARGS={}", urlencoding::encode(args)),
                 &languge.0,
             ])
             .stdout(Stdio::piped())

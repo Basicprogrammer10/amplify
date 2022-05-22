@@ -9,4 +9,4 @@ WORKDIR /runner
 ADD --chown=runner Cargo.toml .
 ADD --chown=runner run.sh .
 
-ENTRYPOINT ["sh", "./run.sh"]
+ENTRYPOINT ["bash", "./run.sh"]
