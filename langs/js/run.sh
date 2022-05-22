@@ -1,0 +1,1 @@
+timeout --signal=KILL ${TIMEOUT} node main.js

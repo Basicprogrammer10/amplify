@@ -12,6 +12,12 @@
         "sourcePath": "main.py"
     },
     {
+        "name": "javascript",
+        "path": "js",
+        "imageName": "js-runner",
+        "sourcePath": "main.js"
+    },
+    {
         "name": "c",
         "path": "c",
         "imageName": "c-runner",
