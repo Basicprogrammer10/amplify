@@ -33,6 +33,7 @@ dependencies = [
  "lazy_static",
  "parking_lot",
  "rand",
+ "rand_chacha",
  "rusqlite",
  "serde_json",
  "simple_config_parser",
