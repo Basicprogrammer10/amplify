@@ -1,7 +1,5 @@
 use std::time::Duration;
 
-use simple_config_parser;
-
 pub struct Config {
     pub host: String,
     pub port: u16,

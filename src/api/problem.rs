@@ -4,7 +4,7 @@ use serde_json::json;
 use crate::problems::PROBLEMS;
 use crate::{App, Arc};
 
-pub fn attatch(server: &mut Server, app: Arc<App>) {
+pub fn attatch(server: &mut Server, _app: Arc<App>) {
     server.route(Method::GET, "/api/problem/{id}", move |req| {
         let id = req
             .path_param("id")

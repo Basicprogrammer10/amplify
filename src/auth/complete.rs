@@ -6,7 +6,6 @@ use crate::{
 use afire::{Method, Query, Response, Server, SetCookie};
 use rusqlite::params;
 use serde_json::Value;
-use ureq;
 
 pub fn attatch(server: &mut Server, app: Arc<App>) {
     server.route(Method::GET, "/auth/complete", move |req| {
@@ -95,9 +94,9 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
             .path("/")
             .max_age(30 * 24 * 60 * 60);
 
-        return Response::new()
+        Response::new()
             .status(308)
             .header("Location", "/")
-            .cookie(cookie);
+            .cookie(cookie)
     });
 }

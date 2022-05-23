@@ -5,8 +5,6 @@ use std::time::Instant;
 
 use afire::{Content, Method, Response, Server};
 use serde_json::{from_str, json, Value};
-use tempfile;
-use urlencoding;
 
 use super::langs::LANGS;
 use crate::{common::json_err, App, Arc};
