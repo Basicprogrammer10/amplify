@@ -8,7 +8,7 @@
 1. 🔴 Tic Tak Toe Win Checker
 1. 🔴 Poker Scorer
 1. 🔴 Cal callender gen
-1. 🟡 Nth prime number
+1. 🟢 Nth prime number
 1. 🔴 Readable Timestamp
 1. 🔴 Rule 30
 1. 🔴 Langton's ant

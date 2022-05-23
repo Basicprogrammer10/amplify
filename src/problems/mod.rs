@@ -3,13 +3,19 @@ use std::vec;
 use lazy_static::lazy_static;
 
 mod bracket_depth;
+mod nth_prine;
 mod simple_math;
 
 lazy_static! {
-    pub static ref PROBLEMS: Vec<Box<dyn Problem + Send + Sync>> = vec![
-        Box::new(simple_math::SimpleMath),
-        Box::new(bracket_depth::BracketDepth)
-    ];
+    pub static ref PROBLEMS: Vec<Box<dyn Problem + Send + Sync>> = {
+        let mut problems: Vec<Box<dyn Problem + Send + Sync>> = vec![
+            Box::new(bracket_depth::BracketDepth),
+            Box::new(nth_prine::NthPrime),
+            Box::new(simple_math::SimpleMath),
+        ];
+        problems.sort_by(|a, b| b.id().cmp(&a.id()));
+        problems
+    };
 }
 
 pub trait Problem {
