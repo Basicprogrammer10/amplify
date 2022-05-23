@@ -1,148 +1,128 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <title>amplify — home</title>
-    <link rel="stylesheet" href="/css/index.css" />
-    <script
-      defer
-      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
-    ></script>
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-    <script src="/index.js"></script>
-  </head>
-  <body
-    class="bg-slate-900 font-mono"
-    x-data="{loading: true, session: null, problems: [], page: 'home'}"
-    x-init="
+
+<head>
+  <meta charset="utf-8" />
+  <title>amplify — home</title>
+  <link rel="stylesheet" href="/css/index.css" />
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.3/lib/codemirror.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.3/lib/codemirror.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.4/theme/material-darker.css">
+  <script src="/index.js"></script>
+</head>
+
+<body class="bg-slate-900 font-mono" x-data="{loading: true, session: null, problems: [], problem: null, page: 'home'}"
+  x-init="
     session = await getSession();
     loading = false;
     if (session)
       fetch('/api/problems')
         .then((d) => d.json())
         .then((d) => (problems = d));
-    "
-  >
-    <nav
-      nav-bar
-      class="bg-slate-800 m-6 w-1/2 h-12 mx-auto rounded flex justify-start items-center drop-shadow-lg"
-    >
-      <div
-        class="flex items-center cursor-pointer mr-1.5"
-        @click="page = 'home'"
-      >
-        <img src="/img/favicon-32x32.png" class="mx-3 inline-block" />
-        <p class="text-xl inline-block">amplify</p>
-      </div>
-
-      <div class="border border-slate-700 rounded m-1 h-1/2"></div>
-
-      <template x-for="i in ['home', 'about']">
-        <div
-          class="cursor-pointer bg-slate-800 hover:bg-slate-700 rounded p-1.5 px-2 ml-1.5"
-          :item="page == i"
-          @click="page = i"
-        >
-          <p x-text="i"></p>
-        </div>
-      </template>
-
-      <template x-if="!session">
-        <ion-icon
-          @click="redirect('/auth/redirect')"
-          name="log-in"
-          title="Log In"
-          log
-          class="ml-auto cursor-pointer bg-slate-800 hover:bg-slate-700 rounded m-1.5 inline-block"
-        ></ion-icon>
-      </template>
-      <template x-if="session">
-        <div class="ml-auto flex mr-1.5">
-          <img
-            @click="page = 'profile'"
-            :item="page == 'profile'"
-            :src="session.avatar"
-            width="36px"
-            height="auto"
-            title="Your Profile"
-            log-in
-            class="cursor-pointer bg-slate-800 hover:bg-slate-700 rounded mr-1.5"
-          />
-          <ion-icon
-            @click="redirect('/auth/logout')"
-            name="log-out"
-            title="Log Out"
-            log
-            class="cursor-pointer bg-slate-800 hover:bg-slate-700 rounded"
-          ></ion-icon>
-        </div>
-      </template>
-    </nav>
-
-    <div
-      class="bg-slate-800 m-8 w-1/2 p-3 h-full mx-auto rounded drop-shadow-lg"
-    >
-      <p x-show="loading">Loading</p>
-
-      <template x-if="page == 'home' && !session && !loading">
-        <div>
-          <p>Hello and welcome to <em>amplify</em>!</p>
-          <p>// TODO: finish this home page</p>
-          <br />
-          <p>
-            To start
-            <a @click="redirect('/auth/redirect')" class="cursor-pointer"
-              >login</a
-            >
-            with github.
-          </p>
-        </div>
-      </template>
-
-      <template x-if="page == 'home' && session && !loading">
-        <div>
-          <p>
-            Welcome <span x-text="session.new ? 'to amplify' : 'back'"></span>,
-            <span x-text="session.name"></span>!
-          </p>
-          <br />
-          <p class="text-2xl">Problems</p>
-          <hr class="mb-3" />
-
-          <template x-for="p in problems">
-            <div problem>
-              <div
-                class="flex items-center bg-slate-800 hover:bg-slate-700 rounded p-1.5 cursor-pointer"
-              >
-                <div class="">
-                  <p class="text-lg" x-text="p.name" />
-                  <div class="flex items-center text-slate-400">
-                    <ion-icon name="calendar" class="mr-2"></ion-icon>
-                    <p x-text="p.date" />
-                  </div>
-                </div>
-                <div
-                  class="ml-auto text-xs py-1 px-2.5 font-bold bg-slate-600 text-slate-100 rounded"
-                  x-text="BADGE_TEXT[p.status]"
-                  :style="statusBadgeColor(p.status)"
-                />
-              </div>
-            </div>
-            <div separator class="border border-slate-700 rounded m-1"></div>
-          </template>
-        </div>
-      </template>
-
-      <template x-if="page == 'profile' && !loading">
-        <p>PROFILE</p>
-      </template>
-
-      <template x-if="page == 'about' && !loading">
-        <div>
-          <p>This is amplify</p>
-          <p>Check it out on github <a href="https://github.com/Basicprogrammer10/amplify">here</a>!</p>
-        </div>
-      </template>
+    ">
+  <nav nav-bar class="bg-slate-800 m-6 w-1/2 h-12 mx-auto rounded flex justify-start items-center drop-shadow-lg">
+    <div class="flex items-center cursor-pointer mr-1.5" @click="page = 'home'">
+      <img src="/img/favicon-32x32.png" class="mx-3 inline-block" />
+      <p class="text-xl inline-block">amplify</p>
     </div>
-  </body>
+
+    <div class="border border-slate-700 rounded m-1 h-1/2"></div>
+
+    <template x-for="i in ['home', 'about']">
+      <div class="cursor-pointer bg-slate-800 hover:bg-slate-700 rounded p-1.5 px-2 ml-1.5" :item="page == i"
+        @click="page = i">
+        <p x-text="i"></p>
+      </div>
+    </template>
+
+    <template x-if="!session">
+      <ion-icon @click="redirect('/auth/redirect')" name="log-in" title="Log In" log
+        class="ml-auto cursor-pointer bg-slate-800 hover:bg-slate-700 rounded m-1.5 inline-block"></ion-icon>
+    </template>
+    <template x-if="session">
+      <div class="ml-auto flex mr-1.5">
+        <img @click="page = 'profile'" :item="page == 'profile'" :src="session.avatar" width="36px" height="auto"
+          title="Your Profile" log-in class="cursor-pointer bg-slate-800 hover:bg-slate-700 rounded mr-1.5" />
+        <ion-icon @click="redirect('/auth/logout')" name="log-out" title="Log Out" log
+          class="cursor-pointer bg-slate-800 hover:bg-slate-700 rounded"></ion-icon>
+      </div>
+    </template>
+  </nav>
+
+  <div class="bg-slate-800 m-8 w-1/2 p-3 h-full mx-auto rounded drop-shadow-lg">
+    <p x-show="loading || (page.startsWith('problem-') && problem == null)">Loading</p>
+
+    <template x-if="page == 'home' && !session && !loading">
+      <div>
+        <p>Hello and welcome to <em>amplify</em>!</p>
+        <p>// TODO: finish this home page</p>
+        <br />
+        <p>
+          To start
+          <a @click="redirect('/auth/redirect')" class="cursor-pointer">login</a>
+          with github.
+        </p>
+      </div>
+    </template>
+
+    <template x-if="page == 'home' && session && !loading">
+      <div>
+        <p>
+          Welcome <span x-text="session.new ? 'to amplify' : 'back'"></span>,
+          <span x-text="session.name"></span>!
+        </p>
+        <br />
+        <p class="text-2xl">Problems</p>
+        <hr class="mb-3" />
+
+        <template x-for="p in problems">
+          <div problem @click="page=`problem-${p.id}`;problem=await (await fetch(`/api/problem/${p.id}`)).json()">
+            <div class="flex items-center bg-slate-800 hover:bg-slate-700 rounded p-1.5 cursor-pointer">
+              <div class="">
+                <p class="text-lg" x-text="p.name" />
+                <div class="flex items-center text-slate-400">
+                  <ion-icon name="calendar" class="mr-2"></ion-icon>
+                  <p x-text="p.date" />
+                </div>
+              </div>
+              <div class="ml-auto text-xs py-1 px-2.5 font-bold bg-slate-600 text-slate-100 rounded"
+                x-text="BADGE_TEXT[p.status]" :style="statusBadgeColor(p.status)" />
+            </div>
+          </div>
+          <div separator class="border border-slate-700 rounded m-1"></div>
+        </template>
+      </div>
+    </template>
+
+    <template x-if="page.startsWith('problem-') && !loading && problem != null">
+      <div problem-editor>
+        <script>
+          CodeMirror(document.querySelector('[problem-editor]'), {
+            lineNumbers: true,
+            theme: 'material-darker',
+          })
+        </script>
+
+        <p class="text-2xl" x-text="problem.name" />
+        <hr class="mb-3" />
+        <div x-html="problem.text" />
+        <br>
+      </div>
+    </template>
+
+    <template x-if="page == 'profile' && !loading">
+      <p>PROFILE</p>
+    </template>
+
+    <template x-if="page == 'about' && !loading">
+      <div>
+        <p>This is amplify</p>
+        <p>Check it out on github <a href="https://github.com/Basicprogrammer10/amplify">here</a>!</p>
+      </div>
+    </template>
+  </div>
+</body>
+
 </html>

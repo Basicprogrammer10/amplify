@@ -59,7 +59,7 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
                 let data = NaiveDateTime::from_timestamp(x.2 as i64, 0)
                     .format("%b %e %Y")
                     .to_string();
-                json!({"name": x.0, "id": x.1, "date": data, "status": x.3}).to_string()
+                json!({"name": x.0, "id": x.1, "date": data, "status": x.3}).to_string()    
             })
             .collect::<Vec<_>>()
             .join(",");
