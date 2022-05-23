@@ -1,4 +1,4 @@
-use std::vec;
+use std::{cmp::Reverse, vec};
 
 use lazy_static::lazy_static;
 
@@ -15,7 +15,7 @@ lazy_static! {
             Box::new(rust_tastic::RustTastic),
             Box::new(simple_math::SimpleMath),
         ];
-        problems.sort_by(|a, b| b.id().cmp(&a.id()));
+        problems.sort_by_key(|b| Reverse(b.id()));
         problems
     };
 }
@@ -37,5 +37,5 @@ pub trait Problem {
     fn gen(&self, seed: u64) -> String;
 
     // Check the program output
-    fn check(&self, seed: u64, output: String) -> bool;
+    fn check(&self, seed: u64) -> String;
 }

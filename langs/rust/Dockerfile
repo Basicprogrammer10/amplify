@@ -1,4 +1,4 @@
-FROM rust:1.31
+FROM rust:latest
 
 RUN useradd -m runner -d /runner
 RUN usermod -p '!!' root

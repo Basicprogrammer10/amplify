@@ -40,7 +40,7 @@ impl Problem for SimpleMath {
         maths.join(" ")
     }
 
-    fn check(&self, seed: u64, output: String) -> bool {
+    fn check(&self, seed: u64) -> String {
         let mut rng = ChaCha8Rng::seed_from_u64(seed);
         let mut real = Vec::new();
 
@@ -60,13 +60,13 @@ impl Problem for SimpleMath {
             )
         }
 
-        output == real.join("\n")
+        real.join("\n")
     }
 }
 
 #[cfg(test)]
 mod test {
-    use super::{SimpleMath, Problem};
+    use super::{Problem, SimpleMath};
     use rand::RngCore;
 
     #[test]
@@ -91,6 +91,6 @@ mod test {
             );
         }
 
-        assert!(SimpleMath.check(seed, out.join("\n")))
+        assert_eq!(SimpleMath.check(seed), out.join("\n"))
     }
 }

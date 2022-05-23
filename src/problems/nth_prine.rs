@@ -34,19 +34,17 @@ impl Problem for NthPrime {
             .join(" ")
     }
 
-    fn check(&self, seed: u64, output: String) -> bool {
+    fn check(&self, seed: u64) -> String {
         let mut rng = ChaCha8Rng::seed_from_u64(seed);
         let primes_list = gen_primes(541);
 
-        output
-            == (0..10)
-                .into_iter()
-                .map(|_| {
-                    primes_list[rng.gen_range::<i32, RangeInclusive<i32>>(1..=100) as usize]
-                        .to_string()
-                })
-                .collect::<Vec<_>>()
-                .join("\n")
+        (0..10)
+            .into_iter()
+            .map(|_| {
+                primes_list[rng.gen_range::<i32, RangeInclusive<i32>>(1..=100) as usize].to_string()
+            })
+            .collect::<Vec<_>>()
+            .join("\n")
     }
 }
 
@@ -81,6 +79,6 @@ mod test {
             .collect::<Vec<_>>()
             .join("\n");
 
-        assert!(NthPrime.check(seed, output));
+        assert_eq!(NthPrime.check(seed), output);
     }
 }

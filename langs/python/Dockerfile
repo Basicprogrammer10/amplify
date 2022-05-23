@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:latest
 
 RUN useradd -m runner -d /runner
 RUN usermod -p '!!' root

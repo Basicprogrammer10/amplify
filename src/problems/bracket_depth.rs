@@ -52,7 +52,7 @@ impl Problem for BracketDepth {
         out.join(" ")
     }
 
-    fn check(&self, seed: u64, output: String) -> bool {
+    fn check(&self, seed: u64) -> String {
         let mut rng = ChaCha8Rng::seed_from_u64(seed);
         let mut out = Vec::new();
 
@@ -77,7 +77,7 @@ impl Problem for BracketDepth {
             out.push(max_depth.to_string());
         }
 
-        output == out.join("\n")
+        out.join("\n")
     }
 }
 

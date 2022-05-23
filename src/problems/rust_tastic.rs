@@ -23,17 +23,17 @@ impl Problem for RustTastic {
         String::new()
     }
 
-    fn check(&self, _: u64, output: String) -> bool {
-       output == "10"
+    fn check(&self, _: u64) -> String {
+        "10".to_owned()
     }
 }
 
 #[cfg(test)]
 mod test {
-    use super::{RustTastic, Problem};
+    use super::{Problem, RustTastic};
 
     #[test]
     fn rust_tastic() {
-        assert!(RustTastic.check(0, "10".to_owned()))
+        assert_eq!(RustTastic.check(0), "10".to_owned())
     }
 }
