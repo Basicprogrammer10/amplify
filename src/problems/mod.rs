@@ -4,6 +4,7 @@ use lazy_static::lazy_static;
 
 mod bracket_depth;
 mod nth_prine;
+mod rust_tastic;
 mod simple_math;
 
 lazy_static! {
@@ -11,6 +12,7 @@ lazy_static! {
         let mut problems: Vec<Box<dyn Problem + Send + Sync>> = vec![
             Box::new(bracket_depth::BracketDepth),
             Box::new(nth_prine::NthPrime),
+            Box::new(rust_tastic::RustTastic),
             Box::new(simple_math::SimpleMath),
         ];
         problems.sort_by(|a, b| b.id().cmp(&a.id()));

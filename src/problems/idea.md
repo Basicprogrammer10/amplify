@@ -14,4 +14,4 @@
 1. 🔴 Langton's ant
 1. 🔴 BrainF Runner
 1. 🔴 Conways Game of life to n steps
-1. 🔴 Scale of 1-10 how good is rust
+1. 🟢 Scale of 1-10 how good is rust

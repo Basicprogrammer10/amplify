@@ -70,7 +70,7 @@ mod test {
     use rand::RngCore;
 
     #[test]
-    fn simple_math() {
+    fn nth_prime() {
         let seed = rand::thread_rng().next_u64();
         let primes = NthPrime.gen(seed);
         let primes_list = gen_primes(541);

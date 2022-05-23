@@ -87,7 +87,7 @@ mod test {
     use rand::RngCore;
 
     #[test]
-    fn simple_math() {
+    fn bracket_depth() {
         let seed = rand::thread_rng().next_u64();
         let brackets = BracketDepth.gen(seed);
         let mut out = Vec::new();
