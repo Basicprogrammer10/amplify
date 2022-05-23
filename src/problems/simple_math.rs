@@ -12,6 +12,10 @@ impl Problem for SimpleMath {
         0
     }
 
+    fn time(&self) -> u64 {
+        1653273796
+    }
+
     fn name(&self) -> &'static str {
         "Simple Math"
     }

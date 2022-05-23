@@ -13,6 +13,9 @@ pub trait Problem {
     // Problem ID
     fn id(&self) -> u64;
 
+    // Problem actavation time
+    fn time(&self) -> u64;
+
     // Problem name
     fn name(&self) -> &'static str;
 
