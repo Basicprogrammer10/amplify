@@ -8,15 +8,19 @@ use super::Problem;
 pub struct SimpleMath;
 
 impl Problem for SimpleMath {
-    fn id() -> u64 {
+    fn id(&self) -> u64 {
         0
     }
 
-    fn text() -> &'static str {
+    fn name(&self) -> &'static str {
+        "Simple Math"
+    }
+
+    fn text(&self) -> &'static str {
         include_str!("text/simple_math.html")
     }
 
-    fn gen(seed: u64) -> String {
+    fn gen(&self, seed: u64) -> String {
         let mut rng = ChaCha8Rng::seed_from_u64(seed);
         let mut maths = Vec::new();
 
@@ -32,7 +36,7 @@ impl Problem for SimpleMath {
         maths.join(" ")
     }
 
-    fn check(seed: u64, output: String) -> bool {
+    fn check(&self, seed: u64, output: String) -> bool {
         let mut rng = ChaCha8Rng::seed_from_u64(seed);
         let mut real = Vec::new();
 
@@ -59,7 +63,7 @@ impl Problem for SimpleMath {
 #[test]
 fn simple_math() {
     let seed = rand::thread_rng().next_u64();
-    let math = SimpleMath::gen(seed);
+    let math = SimpleMath.gen(seed);
     let mut out = Vec::new();
 
     for i in math.split(" ") {
@@ -78,5 +82,5 @@ fn simple_math() {
         );
     }
 
-    assert!(SimpleMath::check(seed, out.join("\n")))
+    assert!(SimpleMath.check(seed, out.join("\n")))
 }
