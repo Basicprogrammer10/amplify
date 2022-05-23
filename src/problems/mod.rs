@@ -2,11 +2,14 @@ use std::vec;
 
 use lazy_static::lazy_static;
 
+mod bracket_depth;
 mod simple_math;
 
 lazy_static! {
-    pub static ref PROBLEMS: Vec<Box<dyn Problem + Send + Sync>> =
-        vec![Box::new(simple_math::SimpleMath)];
+    pub static ref PROBLEMS: Vec<Box<dyn Problem + Send + Sync>> = vec![
+        Box::new(simple_math::SimpleMath),
+        Box::new(bracket_depth::BracketDepth)
+    ];
 }
 
 pub trait Problem {
