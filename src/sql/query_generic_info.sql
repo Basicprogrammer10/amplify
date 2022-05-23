@@ -3,7 +3,6 @@ SELECT Count(*),
       avatar_url,
       id,
       new
-FROM   sessions
-      JOIN users
-        ON sessions.user_id = users.id
-WHERE  session_id = ?
+FROM sessions
+      JOIN users ON sessions.user_id = users.id
+WHERE session_id = ?

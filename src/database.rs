@@ -11,6 +11,7 @@ pub fn init(app: &Arc<App>) {
     for i in [
         include_str!("sql/create_users.sql"),
         include_str!("sql/create_sessions.sql"),
+        include_str!("sql/create_solutions.sql"),
     ] {
         trans.execute(i, []).unwrap();
     }

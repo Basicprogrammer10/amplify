@@ -60,27 +60,33 @@ impl Problem for SimpleMath {
     }
 }
 
-#[test]
-fn simple_math() {
-    let seed = rand::thread_rng().next_u64();
-    let math = SimpleMath.gen(seed);
-    let mut out = Vec::new();
+#[cfg(test)]
+mod test {
+    use super::{SimpleMath, Problem};
+    use rand::RngCore;
 
-    for i in math.split(" ") {
-        let p1 = &i[0..3].parse::<i32>().unwrap();
-        let op = i.chars().nth(3).unwrap();
-        let p2 = &i[4..7].parse::<i32>().unwrap();
+    #[test]
+    fn simple_math() {
+        let seed = rand::thread_rng().next_u64();
+        let math = SimpleMath.gen(seed);
+        let mut out = Vec::new();
 
-        out.push(
-            match op {
-                '+' => p1 + p2,
-                '-' => p1 - p2,
-                '*' => p1 * p2,
-                _ => unreachable!(),
-            }
-            .to_string(),
-        );
+        for i in math.split(" ") {
+            let p1 = &i[0..3].parse::<i32>().unwrap();
+            let op = i.chars().nth(3).unwrap();
+            let p2 = &i[4..7].parse::<i32>().unwrap();
+
+            out.push(
+                match op {
+                    '+' => p1 + p2,
+                    '-' => p1 - p2,
+                    '*' => p1 * p2,
+                    _ => unreachable!(),
+                }
+                .to_string(),
+            );
+        }
+
+        assert!(SimpleMath.check(seed, out.join("\n")))
     }
-
-    assert!(SimpleMath.check(seed, out.join("\n")))
 }
