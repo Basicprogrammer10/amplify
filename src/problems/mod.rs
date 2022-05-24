@@ -4,16 +4,17 @@ use lazy_static::lazy_static;
 
 mod bracket_depth;
 mod increase_count;
-mod nth_prine;
+mod nth_prime;
 mod position_orders;
 mod rust_tastic;
 mod simple_math;
+mod less_simple_math;
 
 lazy_static! {
     pub static ref PROBLEMS: Vec<Box<dyn Problem + Send + Sync>> = {
         let mut problems: Vec<Box<dyn Problem + Send + Sync>> = vec![
             Box::new(bracket_depth::BracketDepth),
-            Box::new(nth_prine::NthPrime),
+            Box::new(nth_prime::NthPrime),
             Box::new(rust_tastic::RustTastic),
             Box::new(position_orders::PositionOrders),
             Box::new(simple_math::SimpleMath),
