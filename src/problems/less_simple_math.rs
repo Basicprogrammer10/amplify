@@ -1,5 +1,3 @@
-use std::ops::{Range, RangeInclusive};
-
 use rand::prelude::*;
 use rand_chacha::ChaCha8Rng;
 
@@ -83,19 +81,40 @@ mod test {
         Mul,
     }
 
+    fn push_token(tokens: &mut Vec<Token>, group: &mut Option<Vec<Token>>, token: Token) {
+        if let Some(i) = group {
+            return i.push(token);
+        }
+        tokens.push(token);
+    }
+
+    // fn execute(mut tokens: Vec<Token>) {
+    //     // Mul = 2
+    //     // Add / Sub = 1
+    //     let mut level = 0;
+    //     let mut i = 0;
+
+    //     while tokens.len() > 1 {
+    //         let f = tokens.iter().enumerate().find(|x| {
+                
+    //         });
+    //     }
+    // }
+
     #[test]
     fn simple_math() {
         let seed = rand::thread_rng().next_u64();
         let math = LessSimpleMath.gen(seed);
 
-        for i in math.split(" ").take(1) {
+        for exp in math.split(" ").take(1) {
             // Tokenize
             let mut tokens = Vec::new();
-            let chars = i.chars().collect::<Vec<_>>();
+            let chars = exp.chars().collect::<Vec<_>>();
             let mut i = 0;
 
             let mut parse_num = false;
             let mut num_build = String::new();
+            let mut group = None;
 
             while i < chars.len() {
                 let on_digit = DIGIT.contains(&chars[i]);
@@ -105,14 +124,23 @@ mod test {
                 }
                 if !on_digit && parse_num {
                     parse_num = false;
-                    tokens.push(Token::Num(num_build.parse::<i32>().unwrap()));
+                    push_token(
+                        &mut tokens,
+                        &mut group,
+                        Token::Num(num_build.parse::<i32>().unwrap()),
+                    );
                     num_build.clear();
                 }
 
                 match chars[i] {
-                    '+' => tokens.push(Token::Add),
-                    '-' => tokens.push(Token::Sub),
-                    '*' => tokens.push(Token::Mul),
+                    '+' => push_token(&mut tokens, &mut group, Token::Add),
+                    '-' => push_token(&mut tokens, &mut group, Token::Sub),
+                    '*' => push_token(&mut tokens, &mut group, Token::Mul),
+                    '(' => group = Some(Vec::new()),
+                    ')' => {
+                        tokens.push(Token::Group(group.unwrap()));
+                        group = None;
+                    }
 
                     _ => {}
                 }
@@ -120,9 +148,17 @@ mod test {
                 i += 1;
             }
 
+            // Execute parentasies
+            // *ALL OF THE BODGES*
+
+            for i in &mut tokens {
+                if let Token::Group(t) = i {
+
+                }
+            }
+
+            println!("{}", exp);
             dbg!(tokens);
         }
-
-        println!("{}", math);
     }
 }
