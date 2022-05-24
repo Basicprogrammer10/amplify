@@ -3,12 +3,13 @@ use std::{cmp::Reverse, vec};
 use lazy_static::lazy_static;
 
 mod bracket_depth;
+mod duration_parser;
 mod increase_count;
+mod less_simple_math;
 mod nth_prime;
 mod position_orders;
 mod rust_tastic;
 mod simple_math;
-mod less_simple_math;
 
 lazy_static! {
     pub static ref PROBLEMS: Vec<Box<dyn Problem + Send + Sync>> = {
