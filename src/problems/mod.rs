@@ -6,6 +6,7 @@ mod bracket_depth;
 mod nth_prine;
 mod rust_tastic;
 mod simple_math;
+mod increase_count;
 
 lazy_static! {
     pub static ref PROBLEMS: Vec<Box<dyn Problem + Send + Sync>> = {
