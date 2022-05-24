@@ -5,6 +5,7 @@ use lazy_static::lazy_static;
 mod bracket_depth;
 mod increase_count;
 mod nth_prine;
+mod position_orders;
 mod rust_tastic;
 mod simple_math;
 
@@ -14,6 +15,7 @@ lazy_static! {
             Box::new(bracket_depth::BracketDepth),
             Box::new(nth_prine::NthPrime),
             Box::new(rust_tastic::RustTastic),
+            Box::new(position_orders::PositionOrders),
             Box::new(simple_math::SimpleMath),
             Box::new(increase_count::IncreaseCount),
         ];
