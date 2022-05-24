@@ -1,3 +1,5 @@
+use std::ops::Range;
+
 use rand::prelude::*;
 use rand_chacha::ChaCha8Rng;
 
@@ -40,8 +42,27 @@ impl Problem for IncreaseCount {
 
     fn check(&self, seed: u64) -> String {
         let mut rng = ChaCha8Rng::seed_from_u64(seed);
+        let mut out = Vec::new();
 
-        unimplemented!()
+        for _ in 0..10 {
+            let mut sub = Vec::new();
+
+            for _ in 0..rng.gen_range::<i32, Range<i32>>(10..20) {
+                sub.push(rng.gen_range::<i32, Range<i32>>(0..10000));
+            }
+            out.push(
+                sub.windows(2)
+                    .fold(0, |inc, x| {
+                        if x[1] > x[0] {
+                            return inc + 1;
+                        }
+                        inc
+                    })
+                    .to_string(),
+            );
+        }
+
+        out.join(" ")
     }
 }
 
@@ -52,8 +73,7 @@ mod test {
 
     #[test]
     fn nth_prime() {
-        // let seed = rand::thread_rng().next_u64();
-        let seed = 12;
+        let seed = rand::thread_rng().next_u64();
         let nums = IncreaseCount.gen(seed);
         let mut out = Vec::new();
 
@@ -74,6 +94,6 @@ mod test {
             out.push(inc.to_string());
         }
 
-        println!("{}", out.join(" "))
+        assert_eq!(out.join(" "), IncreaseCount.check(seed));
     }
 }

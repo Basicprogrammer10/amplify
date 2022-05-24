@@ -3,10 +3,10 @@ use std::{cmp::Reverse, vec};
 use lazy_static::lazy_static;
 
 mod bracket_depth;
+mod increase_count;
 mod nth_prine;
 mod rust_tastic;
 mod simple_math;
-mod increase_count;
 
 lazy_static! {
     pub static ref PROBLEMS: Vec<Box<dyn Problem + Send + Sync>> = {
@@ -15,6 +15,7 @@ lazy_static! {
             Box::new(nth_prine::NthPrime),
             Box::new(rust_tastic::RustTastic),
             Box::new(simple_math::SimpleMath),
+            Box::new(increase_count::IncreaseCount),
         ];
         problems.sort_by_key(|b| Reverse(b.id()));
         problems
