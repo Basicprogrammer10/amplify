@@ -30,19 +30,38 @@ impl Problem for TagVerifier {
     fn gen(&self, seed: u64) -> String {
         let mut rng = ChaCha8Rng::seed_from_u64(seed);
         let mut out = Vec::new();
+        let ans = (0..10).map(|_| rng.gen_bool(0.5)).collect::<Vec<_>>();
 
-        for _ in 0..10 {
+        for i in 0..10 {
             let mut open = Vec::new();
             let mut seg = Vec::new();
 
             for _ in 0..rng.gen_range(5..10) {
-                match rng.gen_bool(0.5) {
-                    true => {
-                        let tag = TAGS[rng.gen_range(0..19) as usize];
-                        seg.push(tag);
-                        open.push(tag);
-                    },
-                    false => {}
+                if rng.gen_bool(0.5) {
+                    let tag = TAGS[rng.gen_range(0..19) as usize];
+                    seg.push(format!("<{tag}>"));
+                    open.push(tag);
+                    continue;
+                }
+
+                if open.len() <= 1 {
+                    continue;
+                }
+
+                for _ in 0..rng.gen_range(1..open.len()) {
+                    seg.push(format!("</{}>", open.pop().unwrap()));
+                }
+            }
+
+            seg.extend(open.iter().rev().map(|x| format!("</{x}>")));
+
+            if !ans[i] {
+                for _ in 0..rng.gen_range(1..2) {
+                    if seg.len() == 0 {
+                        break;
+                    }
+
+                    seg.remove(rng.gen_range(0..seg.len()));
                 }
             }
 
@@ -63,11 +82,64 @@ mod test {
     use super::{Problem, TagVerifier};
     use rand::RngCore;
 
+    #[derive(Debug)]
+    enum Token {
+        Start(String),
+        End(String),
+    }
+
     #[test]
     fn simple_math() {
-        let seed = rand::thread_rng().next_u64();
+        // let seed = rand::thread_rng().next_u64();
+        let seed = 12;
         let tags = TagVerifier.gen(seed);
 
-        println!("{}", tags);
+        for line in tags.split(" ").take(1) {
+            // Tokenize
+            let mut i = 0;
+            let chars = line.chars().collect::<Vec<_>>();
+            let mut tokens = Vec::new();
+
+            let mut parse_tag = false;
+            let mut tag_type = false; // 0 OPEN -- 1 CLOSED
+            let mut tag_builder = String::new();
+
+            while i < chars.len() {
+                match chars[i] {
+                    '<' => {
+                        parse_tag = true;
+                        i += 1;
+                        continue;
+                    }
+                    '>' => {
+                        parse_tag = false;
+                        tokens.push(match tag_type {
+                            true => Token::End(tag_builder.to_owned()),
+                            false => Token::Start(tag_builder.to_owned()),
+                        });
+                        tag_builder.clear();
+                        i += 1;
+                        continue;
+                    }
+                    '/' => {
+                        tag_type = true;
+                        i += 1;
+                        continue;
+                    }
+                    _ => {}
+                }
+
+                if parse_tag {
+                    tag_builder.push(chars[i]);
+                }
+
+                i += 1;
+            }
+
+            // Check
+            let mut i = 0;
+
+            while i < tokens.len() {}
+        }
     }
 }
