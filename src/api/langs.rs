@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, os::windows::raw};
 use std::fs;
 
 use afire::{Content, Method, Response, Server};
@@ -13,7 +13,7 @@ lazy_static! {
             .expect("Error parsing langs/languages.json");
         let mut langs = HashMap::new();
 
-        for i in raw_langs.as_array().unwrap().to_owned() {
+        for i in raw_langs.as_array().unwrap() {
             langs.insert(
                 i.get("name").unwrap().as_str().unwrap().to_owned(),
                 (

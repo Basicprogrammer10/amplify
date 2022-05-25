@@ -10,6 +10,7 @@ mod nth_prime;
 mod position_orders;
 mod rust_tastic;
 mod simple_math;
+mod tag_verifier;
 
 lazy_static! {
     pub static ref PROBLEMS: Vec<Box<dyn Problem + Send + Sync>> = {
