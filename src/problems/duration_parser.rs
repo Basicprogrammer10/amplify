@@ -24,13 +24,52 @@ impl Problem for DurationParser {
 
     fn gen(&self, seed: u64) -> String {
         let mut rng = ChaCha8Rng::seed_from_u64(seed);
+        let mut out = Vec::new();
 
-        "1 hour 3 days 10 seconds 9 minutes".to_owned()
+        for _ in 0..10 {
+            let mut seg = String::new();
+
+            for i in [
+                ["d", "dy", "day"],
+                ["h", "hr", "hour"],
+                ["m", "min", "minute"],
+                ["s", "sec", "second"],
+            ] {
+                let count = rng.gen_range(0..1000);
+                let sub_index = rng.gen_range(0..3);
+
+                seg.push_str(&format!(
+                    "{}{}{}",
+                    count,
+                    i[sub_index as usize],
+                    if count > 1 && sub_index > 0 { "s" } else { "" }
+                ));
+            }
+
+            out.push(seg);
+        }
+
+        out.join(" ")
     }
 
     fn check(&self, seed: u64) -> String {
         let mut rng = ChaCha8Rng::seed_from_u64(seed);
-        todo!()
+        let mut out = Vec::new();
+
+        for _ in 0..10 {
+            let mut sub = 0;
+
+            for i in [60 * 60 * 24, 60 * 60, 60, 1] {
+                let count = rng.gen_range(0..1000);
+                let _ = rng.gen_range(0..3);
+
+                sub += count * i;
+            }
+
+            out.push(sub.to_string());
+        }
+
+        out.join("\n")
     }
 }
 
@@ -54,70 +93,75 @@ mod test {
     fn simple_math() {
         let seed = rand::thread_rng().next_u64();
         let time = DurationParser.gen(seed);
+        let mut out = Vec::new();
 
-        // Tokenize (sorry this is bad)
-        let chars = time.chars().collect::<Vec<_>>();
-        let mut tokens = Vec::new();
-        let mut i = 0;
+        for i in time.split(" ") {
+            // Tokenize (sorry this is bad)
+            let chars = i.chars().collect::<Vec<_>>();
+            let mut tokens = Vec::new();
+            let mut i = 0;
 
-        let mut parse_num = false;
-        let mut num_builder = String::new();
+            let mut parse_num = false;
+            let mut num_builder = String::new();
 
-        let mut parse_ident = false;
-        let mut ident_builder = String::new();
+            let mut parse_ident = false;
+            let mut ident_builder = String::new();
 
-        while i < chars.len() {
-            let is_digit = DIGIT.contains(&chars[i]);
+            while i < chars.len() {
+                let is_digit = DIGIT.contains(&chars[i]);
 
-            if is_digit {
-                parse_num = true;
-                num_builder.push(chars[i]);
+                if is_digit {
+                    parse_num = true;
+                    num_builder.push(chars[i]);
+                }
+
+                if !is_digit && parse_num {
+                    parse_num = false;
+                    tokens.push(Token::Num(num_builder.parse().unwrap()));
+                    num_builder.clear();
+                }
+
+                if !is_digit && !chars[i].is_whitespace() {
+                    parse_ident = true;
+                    ident_builder.push(chars[i]);
+                }
+
+                if parse_ident && (is_digit || i == chars.len() - 1) {
+                    parse_ident = false;
+                    tokens.push(
+                        match ident_builder.chars().next().unwrap().to_ascii_lowercase() {
+                            's' => Token::Second,
+                            'm' => Token::Minute,
+                            'h' => Token::Hour,
+                            'd' => Token::Day,
+                            _ => panic!(),
+                        },
+                    );
+                    ident_builder.clear();
+                }
+
+                i += 1;
             }
 
-            if !is_digit && parse_num {
-                parse_num = false;
-                tokens.push(Token::Num(num_builder.parse().unwrap()));
-                num_builder.clear();
+            // Expand
+            let mut current = 0;
+            let mut total = 0;
+            let mut i = 0;
+
+            while i < tokens.len() {
+                match tokens[i] {
+                    Token::Num(i) => current = i,
+                    Token::Second => total += current,
+                    Token::Minute => total += current * 60,
+                    Token::Hour => total += current * (60 * 60),
+                    Token::Day => total += current * (60 * 60 * 24),
+                }
+                i += 1;
             }
 
-            if parse_ident && (is_digit || i == chars.len() - 1) {
-                parse_ident = false;
-                tokens.push(
-                    match ident_builder.chars().next().unwrap().to_ascii_lowercase() {
-                        's' => Token::Second,
-                        'm' => Token::Minute,
-                        'h' => Token::Hour,
-                        'd' => Token::Day,
-                        _ => panic!(),
-                    },
-                );
-                ident_builder.clear();
-            }
-
-            if !is_digit && !chars[i].is_whitespace() {
-                parse_ident = true;
-                ident_builder.push(chars[i]);
-            }
-
-            i += 1;
+            out.push(total.to_string());
         }
 
-        // Expand
-        let mut current = 0;
-        let mut total = 0;
-        let mut i = 0;
-
-        while i < tokens.len() {
-            match tokens[i] {
-                Token::Num(i) => current = i,
-                Token::Second => total += current,
-                Token::Minute => total += current * 60,
-                Token::Hour => total += current * (60 * 60),
-                Token::Day => total += current * (60 * 60 * 24),
-            }
-            i += 1;
-        }
-
-        println!("{} secs", total);
+        assert_eq!(DurationParser.check(seed), out.join("\n"));
     }
 }

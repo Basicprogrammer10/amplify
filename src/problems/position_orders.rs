@@ -57,7 +57,7 @@ impl Problem for PositionOrders {
             out.push(format!("({},{})", pos.0, pos.1));
         }
 
-        out.join(" ")
+        out.join("\n")
     }
 }
 
@@ -86,6 +86,6 @@ mod test {
             out.push(format!("({},{})", slice_pos.0, slice_pos.1));
         }
 
-        assert_eq!(PositionOrders.check(seed), out.join(" "));
+        assert_eq!(PositionOrders.check(seed), out.join("\n"));
     }
 }

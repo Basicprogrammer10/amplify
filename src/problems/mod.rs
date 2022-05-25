@@ -15,6 +15,7 @@ lazy_static! {
     pub static ref PROBLEMS: Vec<Box<dyn Problem + Send + Sync>> = {
         let mut problems: Vec<Box<dyn Problem + Send + Sync>> = vec![
             Box::new(bracket_depth::BracketDepth),
+            Box::new(duration_parser::DurationParser),
             Box::new(nth_prime::NthPrime),
             Box::new(rust_tastic::RustTastic),
             Box::new(position_orders::PositionOrders),

@@ -26,7 +26,7 @@ impl Problem for LessSimpleMath {
         let mut rng = ChaCha8Rng::seed_from_u64(seed);
         let mut out = Vec::new();
 
-        for _ in 0..rng.gen_range(10..15) {
+        for _ in 0..10 {
             let mut seg = vec![rng.gen_range(1..100).to_string()];
             for _ in 0..rng.gen_range(3..10) {
                 match rng.gen_range(0..4) {
@@ -96,7 +96,7 @@ mod test {
 
     //     while tokens.len() > 1 {
     //         let f = tokens.iter().enumerate().find(|x| {
-                
+
     //         });
     //     }
     // }
@@ -152,9 +152,7 @@ mod test {
             // *ALL OF THE BODGES*
 
             for i in &mut tokens {
-                if let Token::Group(t) = i {
-
-                }
+                if let Token::Group(t) = i {}
             }
 
             println!("{}", exp);
