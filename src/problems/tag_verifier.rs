@@ -73,12 +73,18 @@ impl Problem for TagVerifier {
 
     fn check(&self, seed: u64) -> String {
         let mut rng = ChaCha8Rng::seed_from_u64(seed);
-        todo!()
+
+        (0..10)
+            .map(|_| rng.gen_bool(0.5).to_string())
+            .collect::<Vec<_>>()
+            .join("\n")
     }
 }
 
 #[cfg(test)]
 mod test {
+    use std::collections::HashMap;
+
     use super::{Problem, TagVerifier};
     use rand::RngCore;
 
@@ -90,11 +96,11 @@ mod test {
 
     #[test]
     fn simple_math() {
-        // let seed = rand::thread_rng().next_u64();
-        let seed = 12;
+        let seed = rand::thread_rng().next_u64();
         let tags = TagVerifier.gen(seed);
+        let mut out = Vec::new();
 
-        for line in tags.split(" ").take(1) {
+        for line in tags.split(" ") {
             // Tokenize
             let mut i = 0;
             let chars = line.chars().collect::<Vec<_>>();
@@ -106,31 +112,22 @@ mod test {
 
             while i < chars.len() {
                 match chars[i] {
-                    '<' => {
-                        parse_tag = true;
-                        i += 1;
-                        continue;
-                    }
+                    '<' => parse_tag = true,
                     '>' => {
                         parse_tag = false;
                         tokens.push(match tag_type {
                             true => Token::End(tag_builder.to_owned()),
                             false => Token::Start(tag_builder.to_owned()),
                         });
+                        tag_type = false;
                         tag_builder.clear();
-                        i += 1;
-                        continue;
                     }
-                    '/' => {
-                        tag_type = true;
-                        i += 1;
-                        continue;
+                    '/' => tag_type = true,
+                    _ => {
+                        if parse_tag {
+                            tag_builder.push(chars[i]);
+                        }
                     }
-                    _ => {}
-                }
-
-                if parse_tag {
-                    tag_builder.push(chars[i]);
                 }
 
                 i += 1;
@@ -138,8 +135,37 @@ mod test {
 
             // Check
             let mut i = 0;
+            let mut ok = true;
+            let mut stack = HashMap::<String, Vec<usize>>::new();
 
-            while i < tokens.len() {}
+            while i < tokens.len() {
+                match &tokens[i] {
+                    Token::Start(e) => {
+                        let arr = stack.entry(e.to_owned()).or_default();
+                        if !arr.contains(&i) {
+                            arr.push(i);
+                        }
+                    }
+                    Token::End(e) => {
+                        if let Some(oi) = stack.entry(e.to_owned()).or_default().pop() {
+                            tokens.remove(i);
+                            tokens.remove(oi);
+                            i = 0;
+                            continue;
+                        }
+
+                        ok = false;
+                        break;
+                    }
+                }
+
+                i += 1;
+            }
+
+            ok = ok && !stack.iter().fold(false, |inc, x| inc || x.1.len() > 0);
+            out.push(ok.to_string());
         }
+
+        assert_eq!(TagVerifier.check(seed), out.join("\n"));
     }
 }

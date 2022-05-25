@@ -4,7 +4,7 @@
 1. 🟢 Max bracket {} depth
 1. 🟢 Interprate Words (up down ect) to a xy pos
 1. 🔴 Pascal Triangle
-1. 🟡 Html Tag Valadator
+1. 🟢 Html Tag Valadator
 1. 🔴 Tic Tak Toe Win Checker
 1. 🔴 Poker Scorer
 1. 🔴 Cal callender gen

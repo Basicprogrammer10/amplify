@@ -22,6 +22,7 @@ lazy_static! {
             Box::new(position_orders::PositionOrders),
             Box::new(simple_math::SimpleMath),
             Box::new(increase_count::IncreaseCount),
+            Box::new(tag_verifier::TagVerifier),
         ];
         problems.sort_by_key(|b| Reverse(b.id()));
         problems
