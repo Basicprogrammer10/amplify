@@ -11,6 +11,7 @@ mod position_orders;
 mod rust_tastic;
 mod simple_math;
 mod tag_verifier;
+mod tic_tac_toe;
 
 lazy_static! {
     pub static ref PROBLEMS: Vec<Box<dyn Problem + Send + Sync>> = {
