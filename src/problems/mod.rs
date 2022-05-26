@@ -9,6 +9,7 @@ mod less_simple_math; //
 mod nth_prime;
 mod position_orders;
 mod rust_tastic;
+mod sierpinski_triangle; //
 mod simple_math;
 mod tag_verifier;
 mod tic_tac_toe;
