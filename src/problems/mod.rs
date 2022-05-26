@@ -5,7 +5,7 @@ use lazy_static::lazy_static;
 mod bracket_depth;
 mod duration_parser;
 mod increase_count;
-mod less_simple_math;
+mod less_simple_math; //
 mod nth_prime;
 mod position_orders;
 mod rust_tastic;
@@ -24,6 +24,7 @@ lazy_static! {
             Box::new(simple_math::SimpleMath),
             Box::new(increase_count::IncreaseCount),
             Box::new(tag_verifier::TagVerifier),
+            Box::new(tic_tac_toe::TicTacToe),
         ];
         problems.sort_by_key(|b| Reverse(b.id()));
         problems

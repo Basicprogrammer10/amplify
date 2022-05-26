@@ -57,7 +57,7 @@ impl Problem for TagVerifier {
 
             if !ans[i] {
                 for _ in 0..rng.gen_range(1..2) {
-                    if seg.len() == 0 {
+                    if seg.is_empty() {
                         break;
                     }
 

@@ -1,5 +1,3 @@
-use std::ops::RangeInclusive;
-
 use rand::prelude::*;
 use rand_chacha::ChaCha8Rng;
 
@@ -80,8 +78,8 @@ fn score_arr(bords: Vec<Vec<Vec<Token>>>) -> String {
 
     'b: for b in bords {
         // Check Hor
-        for i in 0..3_usize {
-            if b[i][0] == b[i][1] && b[i][1] == b[i][2] && b[i][2] != Token::None {
+        for i in b.iter() {
+            if i[0] == i[1] && i[1] == i[2] && i[2] != Token::None {
                 score.push("H");
                 continue 'b;
             }
