@@ -14,7 +14,7 @@
   <script src="/index.js"></script>
 </head>
 
-<body class="bg-slate-900 font-mono" x-data="{loading: true, session: null, problems: [], problem: null, page: 'home'}"
+<body class="bg-slate-900 font-mono" x-data="{loading: true, session: null, problems: [], problem: null, lang: 'rust', page: 'home'}"
   x-init="
     session = await getSession();
     loading = false;
@@ -98,7 +98,7 @@
     </template>
 
     <template x-if="page.startsWith('problem-') && !loading && problem != null">
-      <div problem-editor>
+      <div problem-editor @keydown.ctrl.enter="await run(lang, problem.id)">
         <div class="flex">
           <p class="text-2xl" x-text="problem.name" />
           <div class="ml-auto text-xs py-1 px-2.5 font-bold bg-slate-600 text-slate-100 rounded h-min"
@@ -109,23 +109,22 @@
         <div x-html="problem.text"></div>
         <br>
 
-
         <textarea id="code" name="code"></textarea>
         <div class="flex justify-end mt-3">
-          <select class="bg-slate-700 rounded p-2 cursor-pointer w-min mb-0 mr-2 h-10">
+          <select class="bg-slate-700 rounded p-2 cursor-pointer w-min mb-0 mr-2 h-10" x-model="lang">
             <template x-for="i in ['c', 'c++', 'js', 'python', 'rust']">
-              <option x-text="i"></option>
+              <option x-text="i" :selected="i == lang"></option>
             </template>
           </select>
 
-          <dir class="bg-blue-600 rounded p-2 flex items-center cursor-pointer w-min mb-0 mt-0">
+          <dir class="bg-blue-600 rounded p-2 flex items-center cursor-pointer w-min mb-0 mt-0" @click="await run(lang, problem.id)">
             <ion-icon name="play" class="mr-1"></ion-icon>
             <strong>RUN</strong>
           </dir>
         </div>
 
         <script>
-          CodeMirror.fromTextArea(document.querySelector('#code'), {
+          window.editor = CodeMirror.fromTextArea(document.querySelector('#code'), {
             lineNumbers: true,
             theme: 'material-darker',
             mode: 'rust'

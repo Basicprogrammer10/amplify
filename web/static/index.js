@@ -22,3 +22,18 @@ function statusBadgeColor(id) {
   let color = BADGE_COLORS[id];
   return `background: ${color[0]};color: ${color[1]};`;
 }
+
+async function run(lang, prob) {
+  let resp = await (
+    await fetch("http://localhost:8080/api/solve", {
+      method: "POST",
+      body: JSON.stringify({
+        lang,
+        problem: prob,
+        code: editor.getValue(),
+      }),
+    })
+  ).json();
+
+  console.log(resp);
+}

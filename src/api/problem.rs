@@ -27,23 +27,31 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
             .find(|x| x.id() == id)
             .expect("Problem Not Found");
 
-        let status = app
-            .db
-            .lock()
-            .query_row(
-                include_str!("../sql/query_problem_info.sql"),
-                params![session_id, id],
-                |row| row.get::<_, u64>(0),
-            )
-            .unwrap_or(0);
+        let db = app.db.lock();
+        let mut query = db
+            .prepare(include_str!("../sql/query_problem_info.sql"))
+            .unwrap();
+        let mut status = query.query(params![session_id, id]).unwrap();
 
-        // TODO: Send last solved languge and code from that atempt
+        let mut sol = Vec::new();
+        let mut max_state = 0;
+        while let Some(i) = status.next().unwrap() {
+            let state = i.get::<_, u64>(0).unwrap();
+            let date = i.get::<_, u64>(1).unwrap();
+            let lang = i.get::<_, String>(2).unwrap();
+            let code = i.get::<_, String>(3).unwrap();
+
+            max_state = max_state.max(state);
+            sol.push(json!({"lang": lang, "code": code, "date": date}));
+        }
 
         Response::new()
             .text(json!({
                 "name": problem.name(),
                 "text": problem.text(),
-                "status": status
+                "status": max_state,
+                "id": id,
+                "solutions": sol
             }))
             .content(Content::JSON)
     });

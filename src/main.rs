@@ -2,6 +2,7 @@ use std::fs;
 use std::sync::Arc;
 
 use afire::{Content, Response, ServeStatic, Server};
+use serde_json::json;
 
 mod api;
 mod app;
@@ -29,7 +30,7 @@ fn main() {
             "auth" | "api" => {
                 return Response::new()
                     .status(500)
-                    .text(format!(r#"{{"error": "{}"}}"#, err))
+                    .text(json!({ "error": err }))
                     .content(Content::JSON)
             }
             _ => {

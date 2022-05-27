@@ -3,5 +3,6 @@ CREATE TABLE IF NOT EXISTS solutions (
     problem_id INTEGER NOT NULL,
     state INTEGER NOT NULL,
     code TEXT NOT NULL,
-    language TEXT NOT NULL
+    language TEXT NOT NULL,
+    created INTEGER NOT NULL
 )
