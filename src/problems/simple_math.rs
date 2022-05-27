@@ -21,7 +21,7 @@ impl Problem for SimpleMath {
     }
 
     fn text(&self) -> &'static str {
-        include_str!("text/simple_math.html")
+        include_str!("text/build/simple_math.html")
     }
 
     fn gen(&self, seed: u64) -> String {

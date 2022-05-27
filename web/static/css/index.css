@@ -554,14 +554,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 100%;
 }
 
-.h-10 {
-  height: 2.5rem;
-}
-
 .h-min {
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
+}
+
+.h-10 {
+  height: 2.5rem;
 }
 
 .w-1\/2 {
@@ -711,6 +711,23 @@ body {
 a {
   color: #0ea5e9;
   text-decoration: underline;
+}
+
+[problem-text] > p,
+ul {
+  margin-bottom: 0.5em;
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 2em;
+}
+
+code {
+  padding: 2px 4px;
+  color: #fff;
+  background-color: #17202f;
+  border-radius: 4px;
 }
 
 .CodeMirror {
