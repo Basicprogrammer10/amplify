@@ -2,6 +2,7 @@ use std::{cmp::Reverse, vec};
 
 use lazy_static::lazy_static;
 
+mod base_64_decode;
 mod bracket_depth;
 mod duration_parser;
 mod increase_count;
@@ -19,6 +20,7 @@ mod tic_tac_toe;
 lazy_static! {
     pub static ref PROBLEMS: Vec<Box<dyn Problem + Send + Sync>> = {
         let mut problems: Vec<Box<dyn Problem + Send + Sync>> = vec![
+            Box::new(base_64_decode::Base64Decode),
             Box::new(bracket_depth::BracketDepth),
             Box::new(duration_parser::DurationParser),
             Box::new(nth_prime::NthPrime),

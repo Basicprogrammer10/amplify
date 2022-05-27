@@ -1,3 +1,9 @@
+*cheeter*
+
+yeah,,, i see you
+
+## TO-DO
+
 1. 🟢 Simple Math
 1. 🟢 Increase Count
 1. 🟢 Max bracket {} depth
@@ -10,10 +16,10 @@
 1. 🟢 Nth prime number
 1. 🟢 Readable Duration
 1. 🟢 Rule 30
-1. 🔴 Langton's ant
+1. 🟢 Base 64 decode
 1. 🔴 BrainF Runner
 1. 🔴 Conways Game of life to n steps
 1. 🟡 Order Of Ops [less simple math]
 1. 🟢 Scale of 1-10 how good is rust
 
-`11 / 17 ~ 71%`
+`12 / 17 ~ 71%`

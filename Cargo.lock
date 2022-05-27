@@ -30,6 +30,7 @@ name = "amplify"
 version = "0.1.0"
 dependencies = [
  "afire",
+ "base64",
  "chrono",
  "lazy_static",
  "parking_lot",
