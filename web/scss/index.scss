@@ -30,3 +30,14 @@ a {
 [item="true"] {
   background: #334155;
 }
+
+// Code Mirror
+
+.cm-s-material-darker.CodeMirror {
+  background: #17202f;
+  color: white;
+}
+
+.cm-s-material-darker .CodeMirror-gutters {
+  background: #121a26;
+}

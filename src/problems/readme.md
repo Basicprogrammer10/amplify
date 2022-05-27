@@ -22,4 +22,4 @@ yeah,,, i see you
 1. 🟡 Order Of Ops [less simple math]
 1. 🟢 Scale of 1-10 how good is rust
 
-`12 / 17 ~ 71%`
+`12 / 17 ~ 76%`

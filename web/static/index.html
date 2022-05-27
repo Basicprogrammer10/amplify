@@ -4,12 +4,13 @@
 <head>
   <meta charset="utf-8" />
   <title>amplify — home</title>
-  <link rel="stylesheet" href="/css/index.css" />
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.3/lib/codemirror.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.3/mode/rust/rust.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.3/lib/codemirror.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.4/theme/material-darker.css">
+  <link rel="stylesheet" href="/css/index.css" />
   <script src="/index.js"></script>
 </head>
 
@@ -98,17 +99,33 @@
 
     <template x-if="page.startsWith('problem-') && !loading && problem != null">
       <div problem-editor>
-        <script>
-          CodeMirror(document.querySelector('[problem-editor]'), {
-            lineNumbers: true,
-            theme: 'material-darker',
-          })
-        </script>
-
         <p class="text-2xl" x-text="problem.name" />
         <hr class="mb-3" />
-        <div x-html="problem.text" />
+        <div x-html="problem.text"></div>
         <br>
+
+
+        <textarea id="code" name="code"></textarea>
+        <div class="flex justify-end mt-3">
+          <select class="bg-slate-700 rounded p-2 cursor-pointer w-min mb-0 mr-2 h-10">
+            <template x-for="i in ['c', 'c++', 'js', 'python', 'rust']">
+              <option x-text="i"></option>
+            </template>
+          </select>
+
+          <dir class="bg-blue-600 rounded p-2 flex items-center cursor-pointer w-min mb-0 mt-0">
+            <ion-icon name="play" class="mr-1"></ion-icon>
+            <strong>RUN</strong>
+          </dir>
+        </div>
+
+        <script>
+          CodeMirror.fromTextArea(document.querySelector('#code'), {
+            lineNumbers: true,
+            theme: 'material-darker',
+            mode: 'rust'
+          })
+        </script>
       </div>
     </template>
 
