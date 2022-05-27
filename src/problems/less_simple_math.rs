@@ -102,7 +102,7 @@ mod test {
     // }
 
     #[test]
-    fn simple_math() {
+    fn less_simple_math() {
         let seed = rand::thread_rng().next_u64();
         let math = LessSimpleMath.gen(seed);
 

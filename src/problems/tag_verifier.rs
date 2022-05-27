@@ -95,7 +95,7 @@ mod test {
     }
 
     #[test]
-    fn simple_math() {
+    fn tag_verifier() {
         let seed = rand::thread_rng().next_u64();
         let tags = TagVerifier.gen(seed);
         let mut out = Vec::new();

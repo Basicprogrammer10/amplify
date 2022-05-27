@@ -90,7 +90,7 @@ mod test {
     }
 
     #[test]
-    fn simple_math() {
+    fn duration_parse() {
         let seed = rand::thread_rng().next_u64();
         let time = DurationParser.gen(seed);
         let mut out = Vec::new();

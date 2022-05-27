@@ -7,9 +7,11 @@ mod duration_parser;
 mod increase_count;
 mod less_simple_math; //
 mod nth_prime;
+mod poker_scorer; //
 mod position_orders;
+mod readable_duration;
 mod rust_tastic;
-mod sierpinski_triangle; //
+mod sierpinski_triangle;
 mod simple_math;
 mod tag_verifier;
 mod tic_tac_toe;
@@ -22,6 +24,8 @@ lazy_static! {
             Box::new(nth_prime::NthPrime),
             Box::new(rust_tastic::RustTastic),
             Box::new(position_orders::PositionOrders),
+            Box::new(readable_duration::ReadableDuration),
+            Box::new(sierpinski_triangle::SierpinskiTriangle),
             Box::new(simple_math::SimpleMath),
             Box::new(increase_count::IncreaseCount),
             Box::new(tag_verifier::TagVerifier),

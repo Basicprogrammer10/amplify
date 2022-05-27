@@ -5,11 +5,10 @@
 1. 🟢 Sierpiński triangle
 1. 🟢 Tic Tak Toe Win Checker
 1. 🟢 Html Tag Valadator
-1. 🔴 Poker Scorer
-1. 🔴 Cal callender gen
+1. 🟠 Poker Scorer
 1. 🟢 Time Duration Parser
 1. 🟢 Nth prime number
-1. 🔴 Readable Timestamp
+1. 🟢 Readable Duration
 1. 🔴 Rule 30
 1. 🔴 Langton's ant
 1. 🔴 BrainF Runner
@@ -17,4 +16,4 @@
 1. 🟡 Order Of Ops [less simple math]
 1. 🟢 Scale of 1-10 how good is rust
 
-`10 / 17 ~ 59%`
+`11 / 17 ~ 65%`
