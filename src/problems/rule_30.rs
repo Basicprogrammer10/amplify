@@ -41,13 +41,13 @@ impl Problem for Rule30 {
 
             let s = world;
             for i in 0..100 {
-                world[i] = match (s[i.saturating_sub(1)], s[i], s[i + 1]) {
+                world[i] = matches!(
+                    (s[i.saturating_sub(1)], s[i], s[i + 1]),
                     (true, false, false)
-                    | (false, true, true)
-                    | (false, true, false)
-                    | (false, false, true) => true,
-                    _ => false,
-                };
+                        | (false, true, true)
+                        | (false, true, false)
+                        | (false, false, true)
+                );
             }
         }
 

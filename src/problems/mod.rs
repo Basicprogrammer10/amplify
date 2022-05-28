@@ -4,6 +4,7 @@ use lazy_static::lazy_static;
 
 mod base_64_decode;
 mod bracket_depth;
+mod common;
 mod duration_parser;
 mod increase_count;
 mod less_simple_math; //
@@ -16,6 +17,7 @@ mod sierpinski_triangle;
 mod simple_math;
 mod tag_verifier;
 mod tic_tac_toe;
+mod url_decode; //
 
 lazy_static! {
     pub static ref PROBLEMS: Vec<Box<dyn Problem + Send + Sync>> = {

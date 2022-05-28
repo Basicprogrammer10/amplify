@@ -27,18 +27,14 @@ fn main() {
 
     server.error_handler(
         |req, err| match req.path.split('/').nth(1).unwrap_or_default() {
-            "auth" | "api" => {
-                return Response::new()
-                    .status(500)
-                    .text(json!({ "error": err }))
-                    .content(Content::JSON)
-            }
-            _ => {
-                return Response::new()
-                    .status(500)
-                    .text(format!("Internal Server Error :/\nError: {}", err))
-                    .content(Content::TXT)
-            }
+            "auth" | "api" => Response::new()
+                .status(500)
+                .text(json!({ "error": err }))
+                .content(Content::JSON),
+            _ => Response::new()
+                .status(500)
+                .text(format!("Internal Server Error :/\nError: {}", err))
+                .content(Content::TXT),
         },
     );
 

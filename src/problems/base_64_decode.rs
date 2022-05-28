@@ -1,8 +1,7 @@
-use base64;
 use rand::prelude::*;
 use rand_chacha::ChaCha8Rng;
 
-use super::Problem;
+use super::{common::rand_str, Problem};
 
 pub struct Base64Decode;
 
@@ -40,12 +39,6 @@ impl Problem for Base64Decode {
             .collect::<Vec<String>>()
             .join("\n")
     }
-}
-
-fn rand_str(rng: &mut ChaCha8Rng) -> String {
-    (0..rng.gen_range(10..20))
-        .map(|_| rng.gen_range(64..=126) as u8 as char)
-        .collect::<String>()
 }
 
 #[cfg(test)]

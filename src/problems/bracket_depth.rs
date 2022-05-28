@@ -88,8 +88,7 @@ mod test {
 
     #[test]
     fn bracket_depth() {
-        // let seed = rand::thread_rng().next_u64();
-        let seed = 50306817;
+        let seed = rand::thread_rng().next_u64();
         let brackets = BracketDepth.gen(seed);
         let mut out = Vec::new();
 
