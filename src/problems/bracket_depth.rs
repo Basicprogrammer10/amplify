@@ -7,7 +7,7 @@ pub struct BracketDepth;
 
 impl Problem for BracketDepth {
     fn id(&self) -> u64 {
-        2
+        3
     }
 
     fn time(&self) -> u64 {

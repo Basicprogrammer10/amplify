@@ -9,7 +9,7 @@ pub struct PositionOrders;
 
 impl Problem for PositionOrders {
     fn id(&self) -> u64 {
-        3
+        2
     }
 
     fn time(&self) -> u64 {

@@ -24,7 +24,7 @@ impl Problem for TagVerifier {
     }
 
     fn text(&self) -> &'static str {
-        "todo"
+        include_str!("./text/build/tag_verifier.html")
     }
 
     fn gen(&self, seed: u64) -> String {

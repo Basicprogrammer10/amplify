@@ -21,7 +21,7 @@ impl Problem for SierpinskiTriangle {
     }
 
     fn text(&self) -> &'static str {
-        "todo"
+        include_str!("./text/build/sierpinski_triangle.html")
     }
 
     fn gen(&self, seed: u64) -> String {
