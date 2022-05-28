@@ -17,7 +17,7 @@ mod sierpinski_triangle;
 mod simple_math;
 mod tag_verifier;
 mod tic_tac_toe;
-mod url_decode; //
+mod url_decode;
 
 lazy_static! {
     pub static ref PROBLEMS: Vec<Box<dyn Problem + Send + Sync>> = {
@@ -35,6 +35,7 @@ lazy_static! {
             Box::new(increase_count::IncreaseCount),
             Box::new(tag_verifier::TagVerifier),
             Box::new(tic_tac_toe::TicTacToe),
+            Box::new(url_decode::UrlDecode),
         ];
         problems.sort_by_key(|b| Reverse(b.id()));
         problems

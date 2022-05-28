@@ -1,0 +1,40 @@
+<p>Once Jeremiah leaves, you unlock and open the door again.
+You look inside and see a metal box.
+You reach in and grab it, it contains a signal sheet of paper.
+You start reading it but just at that moment the captain of the sub comes walking down the hallway and sees you.
+They have a <em>little talk</em> and they end up fireing you for <em>know too much</em>.
+Since you can’t really get off the sub the captain gives you some busywork.</p>
+<p>They task with simulating 50 steps of the <a href="https://en.wikipedia.org/wiki/Rule_30">Rule 30 cellular automaton</a>.
+In this cellular automaton you have a 1D array of cells, each with the possible state of alive or dead.
+Starting with cell #50 being alive, your program should print and simulate the next 49 steps.
+The simulation is governed by these simple rules:</p>
+<table>
+<thead>
+<tr>
+<th align="center">111</th>
+<th align="center">110</th>
+<th align="center">101</th>
+<th align="center">100</th>
+<th align="center">011</th>
+<th align="center">010</th>
+<th align="center">001</th>
+<th align="center">000</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<p>This can also be expressed at the following boolean expression: <code>left_cell ^ (central_cell || right_cell)</code>.
+Honestly Wikipedia explains this much bettor so just check that.
+When printing the world use a space for dead and <code>█</code> for live also make sure to trim the extra spaces at the end of each line.
+Example output <a href="https://paste.connorcode.com/b/a40394bc-a4d5-4d81-8521-acea21c5c79c">here</a>.</p>

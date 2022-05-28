@@ -27,7 +27,7 @@ impl Problem for ReadableDuration {
     }
 
     fn text(&self) -> &'static str {
-        "todo"
+        include_str!("./text/build/readable_duration.html")
     }
 
     fn gen(&self, seed: u64) -> String {

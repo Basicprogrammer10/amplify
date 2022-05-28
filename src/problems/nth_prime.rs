@@ -9,7 +9,7 @@ pub struct NthPrime;
 
 impl Problem for NthPrime {
     fn id(&self) -> u64 {
-        10
+        9
     }
 
     fn time(&self) -> u64 {
@@ -21,7 +21,7 @@ impl Problem for NthPrime {
     }
 
     fn text(&self) -> &'static str {
-        "todo"
+        include_str!("./text/build/nth_prime.html")
     }
 
     fn gen(&self, seed: u64) -> String {

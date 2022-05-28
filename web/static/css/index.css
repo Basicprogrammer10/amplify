@@ -714,7 +714,8 @@ a {
 }
 
 [problem-text] > p,
-ul {
+ul,
+table {
   margin-bottom: 0.5em;
 }
 
@@ -728,6 +729,28 @@ code {
   color: #fff;
   background-color: #17202f;
   border-radius: 4px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table td, table th {
+  border: 1px solid #334155;
+  padding: 5px;
+  border-collapse: collapse;
+}
+
+table thead tr th {
+  padding: 5px 10px 5px 10px;
+}
+
+table tbody {
+  color: #fffc;
+}
+
+table tbody tr:nth-child(n):nth-child(even) {
+  background: #3341557f;
 }
 
 .CodeMirror {

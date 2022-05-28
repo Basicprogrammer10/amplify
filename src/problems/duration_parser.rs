@@ -7,7 +7,7 @@ pub struct DurationParser;
 
 impl Problem for DurationParser {
     fn id(&self) -> u64 {
-        10
+        8
     }
 
     fn time(&self) -> u64 {
@@ -19,7 +19,7 @@ impl Problem for DurationParser {
     }
 
     fn text(&self) -> &'static str {
-        "todo"
+        include_str!("./text/build/duration_parser.html")
     }
 
     fn gen(&self, seed: u64) -> String {

@@ -16,7 +16,7 @@ impl Problem for Rule30 {
     }
 
     fn text(&self) -> &'static str {
-        "todo"
+        include_str!("./text/build/rule_30.html")
     }
 
     fn gen(&self, _: u64) -> String {
@@ -27,7 +27,7 @@ impl Problem for Rule30 {
         let mut out = Vec::new();
 
         let mut world = [false; 101];
-        world[50] = true;
+        world[49] = true;
 
         for _ in 0..50 {
             out.push(
@@ -64,7 +64,7 @@ mod test {
         let mut out = Vec::new();
 
         let mut world = [false; 101];
-        world[50] = true;
+        world[40] = true;
 
         for _ in 0..50 {
             out.push(
