@@ -7,7 +7,7 @@ pub struct BracketDepth;
 
 impl Problem for BracketDepth {
     fn id(&self) -> u64 {
-        3
+        2
     }
 
     fn time(&self) -> u64 {
@@ -19,7 +19,7 @@ impl Problem for BracketDepth {
     }
 
     fn text(&self) -> &'static str {
-        "todo"
+        include_str!("./text/build/bracket_depth.html")
     }
 
     fn gen(&self, seed: u64) -> String {
@@ -57,7 +57,7 @@ impl Problem for BracketDepth {
         let mut out = Vec::new();
 
         for _ in 0..10 {
-            let mut fixdepth = 0;
+            let mut fixdepth = 0usize;
             let mut max_depth = 0;
 
             for _ in 0..rng.gen_range(10..20) {
@@ -88,7 +88,8 @@ mod test {
 
     #[test]
     fn bracket_depth() {
-        let seed = rand::thread_rng().next_u64();
+        // let seed = rand::thread_rng().next_u64();
+        let seed = 50306817;
         let brackets = BracketDepth.gen(seed);
         let mut out = Vec::new();
 
@@ -107,5 +108,8 @@ mod test {
 
             out.push(max_depth.to_string());
         }
+
+        print!("{}", brackets);
+        assert_eq!(BracketDepth.check(seed), out.join("\n"));
     }
 }

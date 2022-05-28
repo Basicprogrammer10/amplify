@@ -21,7 +21,7 @@ impl Problem for IncreaseCount {
     }
 
     fn text(&self) -> &'static str {
-        "todo"
+        include_str!("./text/build/increase_count.html")
     }
 
     fn gen(&self, seed: u64) -> String {
@@ -62,7 +62,7 @@ impl Problem for IncreaseCount {
             );
         }
 
-        out.join(" ")
+        out.join("\n")
     }
 }
 
@@ -94,6 +94,6 @@ mod test {
             out.push(inc.to_string());
         }
 
-        assert_eq!(out.join(" "), IncreaseCount.check(seed));
+        assert_eq!(out.join("\n"), IncreaseCount.check(seed));
     }
 }

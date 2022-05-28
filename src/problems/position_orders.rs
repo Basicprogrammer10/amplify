@@ -9,7 +9,7 @@ pub struct PositionOrders;
 
 impl Problem for PositionOrders {
     fn id(&self) -> u64 {
-        4
+        3
     }
 
     fn time(&self) -> u64 {
@@ -21,7 +21,7 @@ impl Problem for PositionOrders {
     }
 
     fn text(&self) -> &'static str {
-        "todo"
+        include_str!("./text/build/position_orders.html")
     }
 
     fn gen(&self, seed: u64) -> String {
