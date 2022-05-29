@@ -73,10 +73,11 @@ async function run(lang, prob) {
       COMPLETE_MESSAGES[[Math.floor(Math.random() * COMPLETE_MESSAGES.length)]];
     document.querySelector("[problem-badge]").style = statusBadgeColor(2);
     document.querySelector("[problem-badge]").innerHTML = BADGE_TEXT[2];
-    return;
+    return 2;
   }
 
   document.querySelector("[finish-box]").classList.remove("hidden");
   document.querySelector("[complete-message]").innerHTML =
     FAIL_MESSAGES[[Math.floor(Math.random() * FAIL_MESSAGES.length)]];
+  return 1;
 }

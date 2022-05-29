@@ -107,10 +107,31 @@ table {
   }
 }
 
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: solid 3px rgb(203, 213, 225);
+  border-radius: 100%;
+  position: absolute;
+  border-bottom: solid transparent;
+  right: 22px;
+  animation: spin 1s linear infinite;
+}
+
 .ace_content {
   background: #17202f;
 }
 
 .ace_gutter-layer {
   background: #121a26;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

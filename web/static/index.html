@@ -22,7 +22,7 @@
 
   <body
     class="bg-slate-900 font-mono"
-    x-data="{loading: true, session: null, problems: [], problem: null, lang: 'rust', page: 'home'}"
+    x-data="{loading: true, session: null, problems: [], problem: null, lang: 'rust', running: false, page: 'home'}"
     x-init="
     session = await getSession();
     loading = false;
@@ -131,6 +131,8 @@
                 problem=null;
                 page=`problem-${p.id}`;
                 problem=await (await fetch(`/api/problem/${p.id}`)).json();
+                let pr = problems.find(d => d.id == p.id); 
+                pr.status = Math.max(pr.status, 1);
                 window.startCode=problem.solutions;
               "
             >
@@ -159,7 +161,17 @@
       <template
         x-if="page.startsWith('problem-') && !loading && problem != null"
       >
-        <div problem-editor @keydown.ctrl.enter="await run(lang, problem.id)">
+        <div
+          problem-editor
+          @keydown.ctrl.enter="
+          if (running) return;
+          running=true;
+          run(lang, problem.id).then((d) => {
+            problems.find(d => d.id == problem.id).status = d;
+            running = false;
+          })
+          "
+        >
           <div class="flex">
             <p class="text-2xl" x-text="problem.name" />
             <div
@@ -191,13 +203,19 @@
               </template>
             </select>
 
-            <dir
-              class="bg-blue-600 rounded p-2 flex items-center cursor-pointer w-min mb-0 mt-0"
-              @click="await run(lang, problem.id)"
+            <div
+              class="bg-blue-600 rounded p-2 flex items-center cursor-pointer mb-0 mt-0 w-16"
+              @click="if (running) return;
+                      running=true;
+                      run(lang, problem.id).then((d) => {
+                        problems.find(d => d.id == problem.id).status = d;
+                        running = false;
+                      })"
             >
-              <ion-icon name="play" class="mr-1"></ion-icon>
-              <strong>RUN</strong>
-            </dir>
+              <div class="spinner" x-show="running"></div>
+              <ion-icon name="play" class="mr-1" x-show="!running"></ion-icon>
+              <strong x-show="!running">RUN</strong>
+            </div>
           </div>
 
           <div finish-box class="text-output rounded mt-3 p-1 pl-2 hidden">

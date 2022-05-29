@@ -3,6 +3,7 @@ First off, Welcome to _amplify_!
 Let's start with some basic info that will apply to every problem:
 
 - You write your code in the text box provided below, pick the language you want to use then press run or use `CTRL + ENTER`
+- Make sure you press run to save your code changing the language or your progress will be deleted, yes i could fix this, no im not going to
 - The code is build and run in the server in a docker container and its STDOUT is compared to the correct output
 - The tests are supplied to your program as command line arguments separated by a space
 - This is the first time I've done anything like this so if you run into any issues you can file an issue on GitHub [here](https://github.com/Basicprogrammer10/amplify/issues)
