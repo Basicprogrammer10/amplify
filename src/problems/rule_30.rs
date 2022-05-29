@@ -64,7 +64,7 @@ mod test {
         let mut out = Vec::new();
 
         let mut world = [false; 101];
-        world[40] = true;
+        world[49] = true;
 
         for _ in 0..50 {
             out.push(
