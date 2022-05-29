@@ -1,5 +1,5 @@
 SELECT problem_id,
     state
-FROM solutions
+FROM problems
     JOIN sessions
 WHERE sessions.user_id = ?;

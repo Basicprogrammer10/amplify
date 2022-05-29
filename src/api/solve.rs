@@ -4,6 +4,7 @@ use std::string::String;
 use std::time::Instant;
 
 use afire::{Content, Method, Response, Server};
+use rusqlite::params;
 use serde_json::{from_str, json, Value};
 
 use super::langs::LANGS;
@@ -55,7 +56,7 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
             .lock()
             .query_row(
                 "SELECT id FROM sessions JOIN users ON sessions.user_id = id WHERE session_id = ?",
-                [session_id],
+                [&session_id],
                 |row| row.get::<_, String>(0),
             )
             .expect("Invalid Session")
@@ -75,16 +76,16 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
             .args([
                 "run",
                 "--rm",
-                "--cap-drop=ALL",
-                "--security-opt=no-new-privileges",
-                "--net",
-                "none",
-                "--memory",
-                "128m",
-                "--memory-swap",
-                "256m",
-                "--pids-limit",
-                "512",
+                // "--cap-drop=ALL",
+                // "--security-opt=no-new-privileges",
+                // "--net",
+                // "none",
+                // "--memory",
+                // "128m",
+                // "--memory-swap",
+                // "256m",
+                // "--pids-limit",
+                // "512",
                 "-v",
                 &format!(
                     "{}:/runner/{}",
@@ -108,6 +109,25 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
         // Send response
         let out = String::from_utf8_lossy(&run.stdout);
         let check = problem.check(seed);
+        let success = check == out.trim_end();
+
+        // Update solutions database
+        app.db
+            .lock()
+            .execute(
+                include_str!("../sql/upsert_solutions.sql"),
+                params![session_id, raw_problem, code, raw_language],
+            )
+            .unwrap();
+
+        // Update problems
+        app.db
+            .lock()
+            .execute(
+                include_str!("../sql/upsert_problems.sql"),
+                params![session_id, raw_problem, if success { 2 } else { 1 }],
+            )
+            .unwrap();
 
         Response::new()
             .text(json!(
@@ -116,7 +136,7 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
                     "status": run.status.code().unwrap_or_default(),
                     "stdout": out,
                     "stderr": String::from_utf8_lossy(&run.stderr),
-                    "success": check == out.trim(),
+                    "success": success,
                     "input": args,
                     "expected": check
                 }

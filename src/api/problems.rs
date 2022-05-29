@@ -41,7 +41,8 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
         let mut user_problems = db
             .prepare(include_str!("../sql/query_problem_status.sql"))
             .unwrap();
-        while let Some(i) = user_problems.query([&session.1]).unwrap().next().unwrap() {
+        let mut query = user_problems.query([&session.1]).unwrap();
+        while let Some(i) = query.next().unwrap() {
             let id = i.get::<_, u64>(0).unwrap();
             let status = i.get::<_, u64>(1).unwrap();
 

@@ -3,7 +3,7 @@ use rusqlite::params;
 use serde_json::json;
 
 use crate::{
-    common::{get_cookie, json_err},
+    common::{current_epoch, get_cookie, json_err},
     problems::PROBLEMS,
     App, Arc,
 };
@@ -27,6 +27,10 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
             .find(|x| x.id() == id)
             .expect("Problem Not Found");
 
+        if problem.time() > current_epoch() {
+            return json_err("Not Yet");
+        }
+
         let db = app.db.lock();
         let mut query = db
             .prepare(include_str!("../sql/query_problem_info.sql"))
@@ -34,14 +38,13 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
         let mut status = query.query(params![session_id, id]).unwrap();
 
         let mut sol = Vec::new();
-        let mut max_state = 0;
+        let mut state = 0;
         while let Some(i) = status.next().unwrap() {
-            let state = i.get::<_, u64>(0).unwrap();
+            state = i.get::<_, u64>(0).unwrap_or_default();
             let date = i.get::<_, u64>(1).unwrap();
             let lang = i.get::<_, String>(2).unwrap();
             let code = i.get::<_, String>(3).unwrap();
 
-            max_state = max_state.max(state);
             sol.push(json!({"lang": lang, "code": code, "date": date}));
         }
 
@@ -49,7 +52,7 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
             .text(json!({
                 "name": problem.name(),
                 "text": problem.text(),
-                "status": max_state,
+                "status": state,
                 "id": id,
                 "solutions": sol
             }))

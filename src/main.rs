@@ -1,7 +1,7 @@
 use std::fs;
 use std::sync::Arc;
 
-use afire::{Content, Response, ServeStatic, Server};
+use afire::{Content, Logger, Middleware, Response, ServeStatic, Server};
 use serde_json::json;
 
 mod api;
@@ -21,6 +21,7 @@ fn main() {
 
     let mut server = Server::new(&app.cfg.host, app.cfg.port);
     ServeStatic::new("web/static").attach(&mut server);
+    Logger::new().attach(&mut server);
 
     auth::attatch(&mut server, app.clone());
     api::attatch(&mut server, app);

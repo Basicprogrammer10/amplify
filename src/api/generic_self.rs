@@ -18,7 +18,7 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
         let session = app
             .db
             .lock()
-            .query_row::<(u64, String, String, String, u64), _, _>(
+            .query_row::<(u64, String, String, String, u64, Option<String>), _, _>(
                 include_str!("../sql/query_generic_info.sql"),
                 [&session_id],
                 |row| {
@@ -28,6 +28,7 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
                         row.get(2).unwrap_or_default(),
                         row.get(3).unwrap_or_default(),
                         row.get(4).unwrap_or_default(),
+                        row.get(5).ok(),
                     ))
                 },
             )
@@ -46,7 +47,7 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
 
         // Send Response
         Response::new()
-            .text(json!({"name": session.1, "avatar": session.2, "id": session.3, "new": new}))
+            .text(json!({"name": session.1, "avatar": session.2, "id": session.3, "new": new, "lang": session.5}).to_string())
             .content(Content::JSON)
     });
 }

@@ -27,9 +27,8 @@ const FAIL_MESSAGES = [
 ];
 
 async function getSession() {
-  let info = await (
-    await fetch("http://localhost:8080/api/generic_self")
-  ).json();
+  let info = await (await fetch("/api/generic_self")).json();
+  window.startLang = info.lang;
 
   if (!("error" in info)) return info;
   return null;
@@ -46,7 +45,7 @@ function statusBadgeColor(id) {
 
 async function run(lang, prob) {
   let resp = await (
-    await fetch("http://localhost:8080/api/solve", {
+    await fetch("/api/solve", {
       method: "POST",
       body: JSON.stringify({
         lang,

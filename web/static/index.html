@@ -26,10 +26,11 @@
     x-init="
     session = await getSession();
     loading = false;
-    if (session)
-      fetch('/api/problems')
-        .then((d) => d.json())
-        .then((d) => (problems = d));
+    if (!session) return;
+    lang=session.lang;
+    fetch('/api/problems')
+      .then((d) => d.json())
+      .then((d) => (problems = d));
     "
   >
     <nav
@@ -126,7 +127,12 @@
           <template x-for="p in problems">
             <div
               problem
-              @click="page=`problem-${p.id}`;problem=await (await fetch(`/api/problem/${p.id}`)).json()"
+              @click="
+                problem=null;
+                page=`problem-${p.id}`;
+                problem=await (await fetch(`/api/problem/${p.id}`)).json();
+                window.startCode=problem.solutions;
+              "
             >
               <div
                 class="flex items-center bg-slate-800 hover:bg-slate-700 rounded p-1.5 cursor-pointer"
@@ -171,7 +177,14 @@
             <select
               class="bg-slate-700 rounded p-2 cursor-pointer w-min mb-0 mr-2 h-10"
               x-model="lang"
-              @change="editor.session.setMode(LANG_IDENTIFIERS[lang])"
+              @change="
+                  editor.session.setMode(LANG_IDENTIFIERS[lang]);
+
+                  let code = '';
+                  window.startCode.forEach(s => {if (s.lang == lang) code = s.code});
+                  editor.setValue(code);
+                  editor.gotoLine(0);
+                "
             >
               <template x-for="i in ['c', 'c++', 'js', 'python', 'rust']">
                 <option x-text="i" :selected="i == lang"></option>
@@ -216,7 +229,9 @@
             );
 
             editor.setTheme("ace/theme/one_dark");
-            editor.session.setMode("ace/mode/rust");
+            editor.session.setMode(LANG_IDENTIFIERS[startLang]);
+            if (startCode.length != 0) editor.setValue(startCode[0].code);
+            editor.gotoLine(0);
           </script>
         </div>
       </template>
