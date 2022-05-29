@@ -98,7 +98,10 @@
       <template x-if="page == 'home' && !session && !loading">
         <div>
           <p>Hello and welcome to <em>amplify</em>!</p>
-          <p>// TODO: finish this home page</p>
+          <p>
+            check out the
+            <a href="#" @click="page='about'">about tab</a> to learn more.
+          </p>
           <br />
           <p>
             To start
@@ -154,6 +157,7 @@
           <div class="flex">
             <p class="text-2xl" x-text="problem.name" />
             <div
+              problem-badge
               class="ml-auto text-xs py-1 px-2.5 font-bold bg-slate-600 text-slate-100 rounded h-min"
               x-text="BADGE_TEXT[Math.max(problem.status, 1)]"
               :style="statusBadgeColor(Math.max(problem.status, 1))"
@@ -183,6 +187,10 @@
             </dir>
           </div>
 
+          <div finish-box class="text-output rounded mt-3 p-1 pl-2 hidden">
+            <span complete-message></span>
+          </div>
+
           <div class="text-output rounded mt-3 p-1 h-32">
             <div class="vertical-text">
               <strong>STDERR</strong>
@@ -203,6 +211,9 @@
             window.editor = ace.edit("code");
             editor.setShowPrintMargin(false);
             editor.setFontSize(16);
+            editor.on("change", () =>
+              document.querySelector("[finish-box]").classList.add("hidden")
+            );
 
             editor.setTheme("ace/theme/one_dark");
             editor.session.setMode("ace/mode/rust");
@@ -216,9 +227,26 @@
 
       <template x-if="page == 'about' && !loading">
         <div>
-          <p>This is amplify</p>
+          <p>welcome to amplify.</p>
+          <br />
           <p>
-            Check it out on github
+            every day from june first to june 17 you will get a new programming
+            problem to solve. amplify supports rust, python, javascript, c and
+            c++.
+            <span x-show="!session"
+              ><a href="#" @click="redirect('/auth/redirect')">login</a> in with
+              github to try it out!</span
+            >
+            <span x-show="session">
+              check out the
+              <a
+                href="#"
+                @click="page='problem-0';problem=await (await fetch(`/api/problem/0`)).json()"
+                >first problem</a
+              >
+              to learn more!</span
+            >
+            you can also check out the source code on github
             <a href="https://github.com/Basicprogrammer10/amplify">here</a>!
           </p>
         </div>
