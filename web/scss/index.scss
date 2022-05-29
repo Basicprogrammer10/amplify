@@ -54,10 +54,6 @@ table {
   }
 }
 
-.CodeMirror {
-  border-radius: 4px;
-}
-
 [log] {
   color: #94a3b8;
   font-size: 30px;
@@ -72,13 +68,49 @@ table {
   background: #334155;
 }
 
-// Code Mirror
-
-.cm-s-material-darker.CodeMirror {
-  background: #17202f;
-  color: white;
+#code {
+  border-radius: 4px;
+  height: 300px;
+  margin: 0;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-.cm-s-material-darker .CodeMirror-gutters {
+.vertical-separator {
+  width: 116px;
+  background: #cbd5e1;
+  top: -25px;
+  position: relative;
+  border: solid 1px #cbd5e1;
+  padding-left: 8px;
+  border-radius: 4px;
+}
+
+.vertical-text {
+  position: absolute;
+  transform-origin: 0 0;
+  transform: rotate(90deg) translateX(3px) translateY(-20px);
+}
+
+.text-output {
+  background: #17202f;
+
+  pre {
+    left: 30px;
+    position: relative;
+    font-size: 12px;
+    min-height: 100%;
+    width: calc(100% - 30px);
+  }
+}
+
+.ace_content {
+  background: #17202f;
+}
+
+.ace_gutter-layer {
   background: #121a26;
 }

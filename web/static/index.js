@@ -4,6 +4,13 @@ const BADGE_COLORS = [
   ["#CA8A04", "#FEF9C3"],
   ["#059669", "#D1FAE5"],
 ];
+const LANG_IDENTIFIERS = {
+  c: "ace/mode/c_cpp",
+  "c++": "ace/mode/c_cpp",
+  js: "ace/mode/javascript",
+  python: "ace/mode/python",
+  rust: "ace/mode/rust",
+};
 
 async function getSession() {
   let info = await (
@@ -35,5 +42,15 @@ async function run(lang, prob) {
     })
   ).json();
 
-  console.log(resp);
+  let stdout = Diff.diffLines(resp.expected, resp.stdout.trimEnd());
+  let stdoutDiff = "";
+
+  stdout.forEach((d) => {
+    if (d.added) stdoutDiff += "<" + d.value.replace("\n", "\n<");
+    else if (d.removed) stdoutDiff += ">" + d.value.replace("\n", "\n<");
+    else stdoutDiff += d.value;
+  });
+
+  document.querySelector("[stderr]").innerHTML = resp.stderr;
+  document.querySelector("[stdout]").innerHTML = stdoutDiff;
 }

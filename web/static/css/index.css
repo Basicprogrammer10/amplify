@@ -468,6 +468,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-backdrop-sepia:  ;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.right-6 {
+  right: 1.5rem;
+}
+
 .m-6 {
   margin: 1.5rem;
 }
@@ -564,6 +572,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 2.5rem;
 }
 
+.h-32 {
+  height: 8rem;
+}
+
+.max-h-full {
+  max-height: 100%;
+}
+
 .w-1\/2 {
   width: 50%;
 }
@@ -572,6 +588,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
+}
+
+.-translate-y-16 {
+  --tw-translate-y: -4rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .cursor-pointer {
@@ -588,6 +609,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .justify-end {
   justify-content: flex-end;
+}
+
+.overflow-scroll {
+  overflow: scroll;
+}
+
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
+
+.break-words {
+  overflow-wrap: break-word;
 }
 
 .rounded {
@@ -753,10 +786,6 @@ table tbody tr:nth-child(n):nth-child(even) {
   background: #3341557f;
 }
 
-.CodeMirror {
-  border-radius: 4px;
-}
-
 [log] {
   color: #94a3b8;
   font-size: 30px;
@@ -771,12 +800,50 @@ table tbody tr:nth-child(n):nth-child(even) {
   background: #334155;
 }
 
-.cm-s-material-darker.CodeMirror {
-  background: #17202f;
-  color: white;
+#code {
+  border-radius: 4px;
+  height: 300px;
+  margin: 0;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-.cm-s-material-darker .CodeMirror-gutters {
+.vertical-separator {
+  width: 116px;
+  background: #cbd5e1;
+  top: -25px;
+  position: relative;
+  border: solid 1px #cbd5e1;
+  padding-left: 8px;
+  border-radius: 4px;
+}
+
+.vertical-text {
+  position: absolute;
+  transform-origin: 0 0;
+  transform: rotate(90deg) translateX(3px) translateY(-20px);
+}
+
+.text-output {
+  background: #17202f;
+}
+
+.text-output pre {
+  left: 30px;
+  position: relative;
+  font-size: 12px;
+  min-height: 100%;
+  width: calc(100% - 30px);
+}
+
+.ace_content {
+  background: #17202f;
+}
+
+.ace_gutter-layer {
   background: #121a26;
 }
 
