@@ -27,7 +27,7 @@ lazy_static! {
     };
 }
 
-pub fn attatch(server: &mut Server, _: Arc<App>) {
+pub fn attach(server: &mut Server, _: Arc<App>) {
     let langs_json = format!(
         "[\"{}\"]",
         LANGS

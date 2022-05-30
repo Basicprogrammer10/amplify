@@ -19,7 +19,7 @@ impl Problem for BracketDepth {
     }
 
     fn text(&self) -> &'static str {
-        include_str!("./text/build/bracket_depth.html")
+        include_str!("./text/build/bracket_depth")
     }
 
     fn gen(&self, seed: u64) -> String {

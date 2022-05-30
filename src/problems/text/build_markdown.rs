@@ -28,7 +28,7 @@ fn main() {
 
         println!("[BUILDING] {}", &i.to_string_lossy());
         let md = fs::read_to_string(&i).unwrap();
-        i.set_extension("html");
+        i.set_extension("");
 
         fs::write(
             Path::new("./build").join(&i),

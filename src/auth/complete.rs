@@ -7,7 +7,7 @@ use afire::{Method, Query, Response, Server, SetCookie};
 use rusqlite::params;
 use serde_json::Value;
 
-pub fn attatch(server: &mut Server, app: Arc<App>) {
+pub fn attach(server: &mut Server, app: Arc<App>) {
     server.route(Method::GET, "/auth/complete", move |req| {
         // Get Code from URI
         let code = match req.query.get("code") {

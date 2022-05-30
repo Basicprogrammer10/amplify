@@ -19,7 +19,7 @@ impl Problem for UrlDecode {
     }
 
     fn text(&self) -> &'static str {
-        include_str!("./text/build/url_decode.html")
+        include_str!("./text/build/url_decode")
     }
 
     fn gen(&self, seed: u64) -> String {

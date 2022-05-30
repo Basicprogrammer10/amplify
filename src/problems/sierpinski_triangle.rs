@@ -19,7 +19,7 @@ impl Problem for SierpinskiTriangle {
     }
 
     fn text(&self) -> &'static str {
-        include_str!("./text/build/sierpinski_triangle.html")
+        include_str!("./text/build/sierpinski_triangle")
     }
 
     fn gen(&self, seed: u64) -> String {

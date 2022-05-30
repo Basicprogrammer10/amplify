@@ -8,12 +8,12 @@ mod problems;
 mod profile;
 mod solve;
 
-pub fn attatch(server: &mut Server, app: Arc<App>) {
-    generic_self::attatch(server, app.clone());
-    langs::attatch(server, app.clone());
-    leaderboard::attatch(server, app.clone());
-    problem::attatch(server, app.clone());
-    problems::attatch(server, app.clone());
-    profile::attatch(server, app.clone());
-    solve::attatch(server, app);
+pub fn attach(server: &mut Server, app: Arc<App>) {
+    generic_self::attach(server, app.clone());
+    langs::attach(server, app.clone());
+    leaderboard::attach(server, app.clone());
+    problem::attach(server, app.clone());
+    problems::attach(server, app.clone());
+    profile::attach(server, app.clone());
+    solve::attach(server, app);
 }

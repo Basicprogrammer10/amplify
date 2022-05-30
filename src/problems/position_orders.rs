@@ -21,7 +21,7 @@ impl Problem for PositionOrders {
     }
 
     fn text(&self) -> &'static str {
-        include_str!("./text/build/position_orders.html")
+        include_str!("./text/build/position_orders")
     }
 
     fn gen(&self, seed: u64) -> String {

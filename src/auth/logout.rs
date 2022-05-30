@@ -2,7 +2,7 @@ use crate::{common::json_err, App, Arc};
 
 use afire::{Method, Response, Server, SetCookie};
 
-pub fn attatch(server: &mut Server, app: Arc<App>) {
+pub fn attach(server: &mut Server, app: Arc<App>) {
     server.route(Method::GET, "/auth/logout", move |req| {
         // Get Session token
         let session = match req.cookies.iter().find(|x| x.name == "session") {

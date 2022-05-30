@@ -4,8 +4,8 @@ mod complete;
 mod logout;
 mod redirect;
 
-pub fn attatch(server: &mut Server, app: Arc<App>) {
-    redirect::attatch(server, app.clone());
-    complete::attatch(server, app.clone());
-    logout::attatch(server, app);
+pub fn attach(server: &mut Server, app: Arc<App>) {
+    redirect::attach(server, app.clone());
+    complete::attach(server, app.clone());
+    logout::attach(server, app);
 }

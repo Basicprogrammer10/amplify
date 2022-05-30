@@ -23,8 +23,8 @@ fn main() {
     ServeStatic::new("web/static").attach(&mut server);
     Logger::new().attach(&mut server);
 
-    auth::attatch(&mut server, app.clone());
-    api::attatch(&mut server, app);
+    auth::attach(&mut server, app.clone());
+    api::attach(&mut server, app);
 
     server.error_handler(
         |req, err| match req.path.split('/').nth(1).unwrap_or_default() {

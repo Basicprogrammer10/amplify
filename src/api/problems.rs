@@ -9,7 +9,7 @@ use chrono::NaiveDateTime;
 use rusqlite::params;
 use serde_json::json;
 
-pub fn attatch(server: &mut Server, app: Arc<App>) {
+pub fn attach(server: &mut Server, app: Arc<App>) {
     let problems = PROBLEMS
         .iter()
         .map(|x| (x.name(), x.id(), x.time(), 0))

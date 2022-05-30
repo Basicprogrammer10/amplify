@@ -15,7 +15,7 @@ use crate::{
     App, Arc,
 };
 
-pub fn attatch(server: &mut Server, app: Arc<App>) {
+pub fn attach(server: &mut Server, app: Arc<App>) {
     server.route(Method::POST, "/api/solve", move |req| {
         // Get session
         let session_id = match get_cookie(&req, "session") {

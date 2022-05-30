@@ -19,7 +19,7 @@ impl Problem for Base64Decode {
     }
 
     fn text(&self) -> &'static str {
-        include_str!("./text/build/base_64_decode.html")
+        include_str!("./text/build/base_64_decode")
     }
 
     fn gen(&self, seed: u64) -> String {

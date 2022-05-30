@@ -21,7 +21,7 @@ impl Problem for IncreaseCount {
     }
 
     fn text(&self) -> &'static str {
-        include_str!("./text/build/increase_count.html")
+        include_str!("./text/build/increase_count")
     }
 
     fn gen(&self, seed: u64) -> String {

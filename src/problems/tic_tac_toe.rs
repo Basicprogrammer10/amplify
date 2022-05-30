@@ -21,7 +21,7 @@ impl Problem for TicTacToe {
     }
 
     fn text(&self) -> &'static str {
-        include_str!("./text/build/tic_tac_toe.html")
+        include_str!("./text/build/tic_tac_toe")
     }
 
     fn gen(&self, seed: u64) -> String {

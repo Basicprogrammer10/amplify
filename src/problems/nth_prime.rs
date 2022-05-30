@@ -21,7 +21,7 @@ impl Problem for NthPrime {
     }
 
     fn text(&self) -> &'static str {
-        include_str!("./text/build/nth_prime.html")
+        include_str!("./text/build/nth_prime")
     }
 
     fn gen(&self, seed: u64) -> String {

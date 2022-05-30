@@ -19,7 +19,7 @@ impl Problem for DurationParser {
     }
 
     fn text(&self) -> &'static str {
-        include_str!("./text/build/duration_parser.html")
+        include_str!("./text/build/duration_parser")
     }
 
     fn gen(&self, seed: u64) -> String {

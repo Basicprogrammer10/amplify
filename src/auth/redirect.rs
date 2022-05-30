@@ -5,7 +5,7 @@ use crate::{
 
 use afire::{Method, Response, Server};
 
-pub fn attatch(server: &mut Server, app: Arc<App>) {
+pub fn attach(server: &mut Server, app: Arc<App>) {
     server.route(Method::GET, "/auth/redirect", move |_| {
         let state = rand_str(10);
 

@@ -16,7 +16,7 @@ impl Problem for Rule30 {
     }
 
     fn text(&self) -> &'static str {
-        include_str!("./text/build/rule_30.html")
+        include_str!("./text/build/rule_30")
     }
 
     fn gen(&self, _: u64) -> String {

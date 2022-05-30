@@ -6,7 +6,7 @@ use crate::{
 use afire::{Content, Method, Response, Server};
 use serde_json::json;
 
-pub fn attatch(server: &mut Server, app: Arc<App>) {
+pub fn attach(server: &mut Server, app: Arc<App>) {
     server.route(Method::GET, "/api/generic_self", move |req| {
         // Get Session
         let session_id = match get_cookie(&req, "session") {
