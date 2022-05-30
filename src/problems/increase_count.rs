@@ -13,7 +13,7 @@ impl Problem for IncreaseCount {
     }
 
     fn time(&self) -> u64 {
-        1653273796
+        1654142400
     }
 
     fn name(&self) -> &'static str {

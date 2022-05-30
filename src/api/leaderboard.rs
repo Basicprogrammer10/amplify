@@ -9,7 +9,7 @@ pub fn attach(server: &mut Server, app: Arc<App>) {
 
         let mut events = Vec::new();
         // :p
-        events.push(json!({"name": "Connor Slade", "url": "https://github.com/Basicprogrammer10", "avatar": "https://avatars.githubusercontent.com/u/50306817?v=4", "time": 1652400000, "msg": "<em>created amplify</em>"}));
+        events.push(json!({"name": "Connor Slade", "url": "https://github.com/Basicprogrammer10", "avatar": "https://avatars.githubusercontent.com/u/50306817?v=4", "time": 1652474100, "msg": "<em>created amplify</em>"}));
 
         let mut query = db
             .prepare(include_str!("../sql/query_leaderbord.sql"))

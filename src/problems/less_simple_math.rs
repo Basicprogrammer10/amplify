@@ -7,11 +7,11 @@ pub struct LessSimpleMath;
 
 impl Problem for LessSimpleMath {
     fn id(&self) -> u64 {
-        16
+        15
     }
 
     fn time(&self) -> u64 {
-        1653273796
+        1655352000
     }
 
     fn name(&self) -> &'static str {

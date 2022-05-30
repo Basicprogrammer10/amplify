@@ -8,7 +8,7 @@ impl Problem for Rule30 {
     }
 
     fn time(&self) -> u64 {
-        1653273796
+        1655006400
     }
 
     fn name(&self) -> &'static str {

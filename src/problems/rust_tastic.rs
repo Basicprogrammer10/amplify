@@ -8,7 +8,7 @@ impl Problem for RustTastic {
     }
 
     fn time(&self) -> u64 {
-        1653273796
+        1655438400
     }
 
     fn name(&self) -> &'static str {

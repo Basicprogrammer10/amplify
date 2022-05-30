@@ -11,7 +11,7 @@ impl Problem for SierpinskiTriangle {
     }
 
     fn time(&self) -> u64 {
-        1653273796
+        1654401600
     }
 
     fn name(&self) -> &'static str {

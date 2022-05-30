@@ -13,7 +13,7 @@ impl Problem for NthPrime {
     }
 
     fn time(&self) -> u64 {
-        1653273796
+        1654833600
     }
 
     fn name(&self) -> &'static str {

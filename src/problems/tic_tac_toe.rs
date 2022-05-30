@@ -13,7 +13,7 @@ impl Problem for TicTacToe {
     }
 
     fn time(&self) -> u64 {
-        1653273796
+        1654488000
     }
 
     fn name(&self) -> &'static str {
