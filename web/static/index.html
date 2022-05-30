@@ -5,7 +5,7 @@
     <title>amplify — home</title>
     <script
       defer
-      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.2/dist/cdn.min.js"
     ></script>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/diff@5.1.0/dist/diff.min.js"></script>
@@ -22,12 +22,12 @@
 
   <body
     class="bg-slate-900 font-mono"
-    x-data="{loading: true, session: null, problems: [], problem: null, lang: 'rust', running: false, page: 'home'}"
+    x-data="{loading: true, session: null, problems: [], problem: null, lang: 'rust', running: false, profile: null, page: 'home'}"
     x-init="
     session = await getSession();
     loading = false;
     if (!session) return;
-    lang=session.lang;
+    lang=session.lang || 'rust';
     fetch('/api/problems')
       .then((d) => d.json())
       .then((d) => (problems = d));
@@ -69,7 +69,7 @@
       <template x-if="session">
         <div class="ml-auto flex mr-1.5">
           <img
-            @click="page = 'profile'"
+            @click="page = 'profile';profile=await (await fetch('/api/profile')).json()"
             :item="page == 'profile'"
             :src="session.avatar"
             width="36px"
@@ -92,7 +92,9 @@
     <div
       class="bg-slate-800 m-8 w-1/2 p-3 h-full mx-auto rounded drop-shadow-lg"
     >
-      <p x-show="loading || (page.startsWith('problem-') && problem == null)">
+      <p
+        x-show="loading || (page.startsWith('problem-') && problem == null) || (page=='profile' && profile == null)"
+      >
         Loading
       </p>
 
@@ -254,8 +256,40 @@
         </div>
       </template>
 
-      <template x-if="page == 'profile' && !loading">
-        <p>PROFILE</p>
+      <template x-if="page == 'profile' && !loading && profile != null">
+        <div>
+          <div class="w-full flex justify-center">
+            <div>
+              <img
+                :src="session.avatar"
+                @click=""
+                class="w-24 rounded center-trans cursor-pointer"
+              />
+              <p x-text="session.name"></p>
+            </div>
+          </div>
+          <br />
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="rounded border p-2">
+              <p>Completed Problems</p>
+              <ul>
+                <template x-for="j in profile.problems">
+                  <li x-text="j"></li>
+                </template>
+              </ul>
+            </div>
+
+            <div class="rounded border p-2">
+              <p>Languages</p>
+              <ul>
+                <template x-for="j in Object.keys(profile.langs)">
+                  <li x-text="`${j} (${profile.langs[j]})`"></li>
+                </template>
+              </ul>
+            </div>
+          </div>
+        </div>
       </template>
 
       <template x-if="page == 'about' && !loading">

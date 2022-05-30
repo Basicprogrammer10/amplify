@@ -4,6 +4,7 @@ mod generic_self;
 mod langs;
 mod problem;
 mod problems;
+mod profile;
 mod solve;
 
 pub fn attatch(server: &mut Server, app: Arc<App>) {
@@ -11,5 +12,6 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
     langs::attatch(server, app.clone());
     problem::attatch(server, app.clone());
     problems::attatch(server, app.clone());
+    profile::attatch(server, app.clone());
     solve::attatch(server, app);
 }

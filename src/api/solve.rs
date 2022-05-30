@@ -116,7 +116,13 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
             .lock()
             .execute(
                 include_str!("../sql/upsert_solutions.sql"),
-                params![session_id, raw_problem, code, raw_language],
+                params![
+                    session_id,
+                    raw_problem,
+                    if success { 2 } else { 1 },
+                    code,
+                    raw_language
+                ],
             )
             .unwrap();
 

@@ -1,0 +1,90 @@
+50306817,0,int main() {},c,1653854221,50306817,0,2
+50306817,0,"import sys
+
+for i in sys.argv[1:]:
+    print(eval(i))",python,1653852461,50306817,0,2
+50306817,0,"fn main() {
+    for i in std::env::args().skip(1) {
+        let a = i[0..3].parse::<i32>().unwrap();
+        let b = i[4..7].parse::<i32>().unwrap();
+        
+        match i.chars().collect::<Vec<_>>()[3] {
+            '+' => println!(""{}"", a + b),
+            '-' => println!(""{}"", a - b),
+            '*' => println!(""{}"", a * b),
+            _ => {}
+        }
+    }
+}",rust,1653867009,50306817,0,2
+50306817,1,"fn main() {
+    for i in std::env::args().skip(1) {
+        let mut inc = 0;
+        let mut last = u32::MAX;
+        
+        for j in i.split("","").map(|x| x.parse::<u32>().unwrap()) {
+            if j > last {
+                inc += 1;
+            }
+            
+            last = j;
+        }
+        
+        println!(""{inc}"")
+    }
+}",rust,1653859078,50306817,1,2
+50306817,2,"fn main() {
+    for i in std::env::args().skip(1) {
+        let mut poz = (0, 0);
+        
+        for j in i.split("","") {
+            match j {
+                ""up"" => poz.0 += 1,
+                ""down"" => poz.0 -= 1,
+                ""left"" => poz.1 -= 1,
+                ""right"" => poz.1 += 1,
+                _ => {}
+            }
+        }
+        
+        println!(""({},{})"", poz.0, poz.1)
+    }
+}",rust,1653859529,50306817,2,2
+50306817,3,"fn main() {
+    for i in std::env::args().skip(1) {
+        let mut depth = 0;
+        let mut max_depth = 0;
+        
+        for j in i.chars() {
+            match j {
+                '{' => depth += 1,
+                '}' => depth -= 1,
+                _ => {}
+            }
+            
+            max_depth = max_depth.max(depth);
+        }
+        
+        println!(""{max_depth}"")
+    }
+}",rust,1653864104,50306817,3,2
+50306817,4,"fn main() {
+    let mut triangle = vec![""▲"".to_string()];
+    for i in 0..std::env::args().nth(1).unwrap().parse::<usize>().unwrap() {
+        let space = "" "".repeat(2_usize.pow(i as u32));
+        let mut d = triangle.clone();
+
+        d.iter_mut().for_each(|r| {
+            let new_row = format!(""{}{}{}"", space, r, space);
+            *r = new_row;
+        });
+
+        triangle.iter().for_each(|r| {
+            let new_row = format!(""{}{}{}"", r, "" "", r);
+            d.push(new_row);
+        });
+
+        triangle = d;
+    }
+
+    triangle.iter().for_each(|r| println!(""{}"", r.trim_end()));
+}",rust,1653864436,50306817,4,2

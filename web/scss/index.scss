@@ -107,6 +107,12 @@ table {
   }
 }
 
+.center-trans {
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
+}
+
 .spinner {
   width: 20px;
   height: 20px;

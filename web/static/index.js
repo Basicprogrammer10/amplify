@@ -28,7 +28,7 @@ const FAIL_MESSAGES = [
 
 async function getSession() {
   let info = await (await fetch("/api/generic_self")).json();
-  window.startLang = info.lang;
+  window.startLang = info.lang ?? "rust";
 
   if (!("error" in info)) return info;
   return null;
