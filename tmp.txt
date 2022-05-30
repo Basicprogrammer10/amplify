@@ -88,3 +88,82 @@ for i in sys.argv[1:]:
 
     triangle.iter().for_each(|r| println!(""{}"", r.trim_end()));
 }",rust,1653864436,50306817,4,2
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+enum Token {
+    Ex,
+    Oh,
+    None,
+}
+
+fn main() {
+    let raw = std::env::args()
+        .skip(1)
+        .next()
+        .unwrap();
+    let seg = raw
+        .split(",")
+        .collect::<Vec<_>>();
+    let mut lines = Vec::new();
+
+    for i in seg {
+        let chars = i.chars().collect::<Vec<_>>();
+        let mut line = Vec::new();
+        let mut i = 0;
+
+        while i < chars.len() {
+            match chars[i] {
+                'X' => line.push(Token::Ex),
+                'O' => line.push(Token::Oh),
+                '_' => line.push(Token::None),
+                _ => {}
+            }
+
+            i += 1;
+        }
+
+        lines.push(line);
+    }
+
+    // Score bords
+    let bords = lines
+        .chunks(3)
+        .map(|x| {
+            let mut v = Vec::new();
+            v.extend(x.iter().map(|x| x.to_owned()));
+            v
+        })
+        .collect::<Vec<_>>();
+
+    let mut score = Vec::new();
+
+    'b: for b in bords {
+        // Check Hor
+        for i in b.iter() {
+            if i[0] == i[1] && i[1] == i[2] && i[2] != Token::None {
+                score.push("H");
+                continue 'b;
+            }
+        }
+
+        // Check Ver
+        for i in 0..3 {
+            if b[0][i] == b[1][i] && b[1][i] == b[2][i] && b[2][i] != Token::None {
+                score.push("V");
+                continue 'b;
+            }
+        }
+
+        // Check Diag
+        if b[1][1] != Token::None && (b[0][0] == b[1][1] && b[1][1] == b[2][2])
+            || (b[0][2] == b[1][1] && b[1][1] == b[2][0])
+        {
+            score.push("D");
+            continue 'b;
+        }
+
+        score.push("_");
+    }
+
+    println!("{}", format!("[{}]", score.join(",")));
+}

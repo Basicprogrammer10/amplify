@@ -8,6 +8,7 @@ use rusqlite::params;
 use serde_json::{from_str, json, Value};
 
 use super::langs::LANGS;
+use crate::common::current_epoch;
 use crate::{
     common::{get_cookie, json_err},
     problems::PROBLEMS,
@@ -131,7 +132,7 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
             .lock()
             .execute(
                 include_str!("../sql/upsert_problems.sql"),
-                params![session_id, raw_problem, if success { 2 } else { 1 }],
+                params![session_id, raw_problem, if success { 2 } else { 1 },],
             )
             .unwrap();
 

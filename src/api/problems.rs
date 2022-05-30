@@ -6,6 +6,7 @@ use crate::{
 
 use afire::{Content, Method, Response, Server};
 use chrono::NaiveDateTime;
+use rusqlite::params;
 use serde_json::json;
 
 pub fn attatch(server: &mut Server, app: Arc<App>) {

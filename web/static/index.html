@@ -272,16 +272,16 @@
 
           <div class="grid grid-cols-2 gap-3">
             <div class="rounded border p-2">
-              <p>Completed Problems</p>
+              <p x-text="`Completed Problems (${profile.problems.length}/${profile.totalProblems})`"></p>
               <ul>
                 <template x-for="j in profile.problems">
-                  <li x-text="j"></li>
+                  <li x-text="`${j.name} (${bestTime(j.time)})`"></li>
                 </template>
               </ul>
             </div>
 
             <div class="rounded border p-2">
-              <p>Languages</p>
+              <p x-text="`Languages (${Object.keys(profile.langs).length}/5)`"></p>
               <ul>
                 <template x-for="j in Object.keys(profile.langs)">
                   <li x-text="`${j} (${profile.langs[j]})`"></li>
@@ -294,7 +294,7 @@
 
       <template x-if="page == 'about' && !loading">
         <div>
-          <p>welcome to amplify.</p>
+          <p>Welcome to amplify.</p>
           <br />
           <p>
             every day from june first to june 17 you will get a new programming
@@ -316,6 +316,7 @@
             you can also check out the source code on github
             <a href="https://github.com/Basicprogrammer10/amplify">here</a>!
           </p>
+          <p>- connor slade</p>
         </div>
       </template>
     </div>

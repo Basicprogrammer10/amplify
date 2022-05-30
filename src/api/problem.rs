@@ -48,6 +48,13 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
             sol.push(json!({"lang": lang, "code": code, "date": date}));
         }
 
+        // Update Problems
+        db.execute(
+            include_str!("../sql/insert_problem.sql"),
+            params![session_id, id],
+        )
+        .unwrap();
+
         Response::new()
             .text(json!({
                 "name": problem.name(),

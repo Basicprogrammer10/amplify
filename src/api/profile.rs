@@ -50,21 +50,24 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
         // Get Completed Problems
         let mut problems = Vec::new();
         let mut problems_query = db
-            .prepare("SELECT problem_id FROM problems WHERE user_id=? AND state>=2;")
+            .prepare("SELECT problem_id, start_time, end_time FROM problems WHERE user_id=? AND state>=2 AND end_time IS NOT NULL;")
             .unwrap();
         let mut problem_query = problems_query.query([&user_id]).unwrap();
         while let Some(i) = problem_query.next().unwrap() {
-            problems.push(
-                PROBLEMS
+            let name = PROBLEMS
                     .iter()
                     .find(|x| x.id() == i.get::<_, u64>(0).unwrap())
                     .unwrap()
-                    .name(),
+                    .name();
+            let time = i.get::<_, u64>(2).unwrap()- i.get::<_, u64>(1).unwrap();
+
+            problems.push(
+                json!({"name": name, "time": time})
             );
         }
 
         Response::new()
-            .text(json!({"signup": signup, "langs": langs, "problems": problems}))
+            .text(json!({"signup": signup, "langs": langs, "problems": problems, "totalProblems": PROBLEMS.len()}))
             .content(Content::JSON)
     });
 }

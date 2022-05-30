@@ -1,3 +1,11 @@
+const TIME_UNITS = [
+  ["sec", 60],
+  ["min", 60],
+  ["hor", 24],
+  ["day", 30],
+  ["month", 12],
+  ["year", 0],
+];
 const BADGE_TEXT = ["Not Started", "In Progress", "Complete"];
 const BADGE_COLORS = [
   ["#475569", "#F1F5F9"],
@@ -80,4 +88,19 @@ async function run(lang, prob) {
   document.querySelector("[complete-message]").innerHTML =
     FAIL_MESSAGES[[Math.floor(Math.random() * FAIL_MESSAGES.length)]];
   return 1;
+}
+
+function bestTime(time) {
+  for (let e = 0; e < TIME_UNITS.length; e++) {
+    const i = TIME_UNITS[e];
+
+    if (i[1] == 0 || time < i[1]) {
+      time = Math.round(time);
+      return `${time} ${i[0]}${time > 1 ? "s" : ""}`;
+    }
+
+    time /= i[1];
+  }
+
+  return `${Math.round(time)} years`;
 }
