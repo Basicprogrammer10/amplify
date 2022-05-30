@@ -124,6 +124,13 @@ table {
   animation: spin 1s linear infinite;
 }
 
+.peopleIcon {
+  position: absolute;
+  transform: translateX(-24px);
+  background: #334155;
+  box-shadow: 0 0 7px #00000082;
+}
+
 .ace_content {
   background: #17202f;
 }

@@ -64,7 +64,8 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
         // Parse Jason
         let user: Value = serde_json::from_reader(user_raw).unwrap();
         let id = user.get("id").unwrap().as_u64().unwrap();
-        let name = user.get("name").unwrap().as_str().unwrap();
+        let login = user.get("login").unwrap().as_str().unwrap();
+        let name = user.get("name").unwrap().as_str().unwrap_or(login);
 
         // Add to / Update database
         app.db
@@ -75,7 +76,8 @@ pub fn attatch(server: &mut Server, app: Arc<App>) {
                     id,
                     name,
                     user.get("avatar_url").unwrap().as_str().unwrap(),
-                    token
+                    token,
+                    login
                 ],
             )
             .unwrap();

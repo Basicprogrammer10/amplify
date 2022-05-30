@@ -1,10 +1,24 @@
 const TIME_UNITS = [
   ["sec", 60],
   ["min", 60],
-  ["hor", 24],
+  ["hour", 24],
   ["day", 30],
   ["month", 12],
   ["year", 0],
+];
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 const BADGE_TEXT = ["Not Started", "In Progress", "Complete"];
 const BADGE_COLORS = [
