@@ -1,3 +1,5 @@
+use std::cmp::Reverse;
+
 use afire::{Content, Method, Response, Server};
 use serde_json::json;
 
@@ -28,7 +30,7 @@ pub fn attach(server: &mut Server, app: Arc<App>) {
             let login = i.get::<_, String>(4).unwrap();
 
             events.push(
-                json!({"name": name, "login": format!("https://github.com/{login}"), "avatar": avatar_url, "problem": problem, "problemId": problem_id,  "time": time}),
+                json!({"name": name, "url": format!("https://github.com/{login}"), "avatar": avatar_url, "problem": problem, "problemId": problem_id,  "time": time}),
             );
         }
 
@@ -45,7 +47,7 @@ pub fn attach(server: &mut Server, app: Arc<App>) {
             events.push(json!({"name": name, "url": format!("https://github.com/{login}"), "avatar": avatar_url, "time": created, "msg": "joined"}))
         }
 
-        events.sort_unstable_by(|a, b| b.get("time").unwrap().as_u64().unwrap().cmp(&a.get("time").unwrap().as_u64().unwrap()));
+        events.sort_unstable_by_key(|b| Reverse(b.get("time").unwrap().as_u64().unwrap()));
 
         Response::new()
             .text(json!(events))

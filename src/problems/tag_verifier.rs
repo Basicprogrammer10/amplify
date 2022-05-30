@@ -32,7 +32,7 @@ impl Problem for TagVerifier {
         let mut out = Vec::new();
         let ans = (0..10).map(|_| rng.gen_bool(0.5)).collect::<Vec<_>>();
 
-        for i in 0..10 {
+        for i in ans {
             let mut open = Vec::new();
             let mut seg = Vec::new();
 
@@ -55,7 +55,7 @@ impl Problem for TagVerifier {
 
             seg.extend(open.iter().rev().map(|x| format!("</{x}>")));
 
-            if !ans[i] {
+            if !i {
                 for _ in 0..rng.gen_range(1..2) {
                     if seg.is_empty() {
                         break;

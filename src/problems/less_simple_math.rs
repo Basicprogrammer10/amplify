@@ -44,8 +44,8 @@ impl Problem for LessSimpleMath {
         out.join(" ")
     }
 
-    fn check(&self, seed: u64) -> String {
-        let mut rng = ChaCha8Rng::seed_from_u64(seed);
+    fn check(&self, _seed: u64) -> String {
+        // let mut rng = ChaCha8Rng::seed_from_u64(seed);
         todo!()
     }
 }
@@ -87,19 +87,6 @@ mod test {
         }
         tokens.push(token);
     }
-
-    // fn execute(mut tokens: Vec<Token>) {
-    //     // Mul = 2
-    //     // Add / Sub = 1
-    //     let mut level = 0;
-    //     let mut i = 0;
-
-    //     while tokens.len() > 1 {
-    //         let f = tokens.iter().enumerate().find(|x| {
-
-    //         });
-    //     }
-    // }
 
     #[test]
     fn less_simple_math() {
@@ -151,9 +138,9 @@ mod test {
             // Execute parentasies
             // *ALL OF THE BODGES*
 
-            for i in &mut tokens {
-                if let Token::Group(t) = i {}
-            }
+            // for i in &mut tokens {
+            //     if let Token::Group(t) = i {}
+            // }
 
             println!("{}", exp);
             dbg!(tokens);
