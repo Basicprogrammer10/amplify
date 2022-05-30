@@ -48,6 +48,14 @@ const FAIL_MESSAGES = [
   "you're getting close, i can feel it",
 ];
 
+function safeHtml(text) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 async function getSession() {
   let info = await (await fetch("/api/generic_self")).json();
   window.startLang = info.lang ?? "rust";
@@ -79,15 +87,16 @@ async function run(lang, prob) {
 
   let stdout = Diff.diffLines(resp.expected, resp.stdout.trimEnd());
   let stdoutDiff = "";
+  let rem = false;
 
   stdout.forEach((d) => {
-    if (d.added) stdoutDiff += "<" + d.value.replace("\n", "\n<");
-    else if (d.removed) stdoutDiff += ">" + d.value.split("\n").join("\n>");
-    else stdoutDiff += d.value;
+    if (d.added) stdoutDiff += "\n<" + d.value.replace("\n", "\n<");
+    else if (d.removed) stdoutDiff += "\n>" + d.value.split("\n").join("\n>");
+    else stdoutDiff += "\n" + d.value;
   });
 
-  document.querySelector("[stderr]").innerHTML = resp.stderr;
-  document.querySelector("[stdout]").innerHTML = stdoutDiff;
+  document.querySelector("[stderr]").innerHTML = safeHtml(resp.stderr);
+  document.querySelector("[stdout]").innerHTML = safeHtml(stdoutDiff.substring(1));
 
   if (resp.success) {
     document.querySelector("[finish-box]").classList.remove("hidden");
