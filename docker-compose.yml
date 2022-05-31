@@ -1,0 +1,9 @@
+services:
+  web-server:
+    image: amplify
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./data:/amplify/data"
+      - "/var/run/docker.sock:/var/run/docker.sock"
