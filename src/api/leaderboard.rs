@@ -8,10 +8,10 @@ use crate::{problems::PROBLEMS, App, Arc};
 pub fn attach(server: &mut Server, app: Arc<App>) {
     server.route(Method::GET, "/api/leaderboard", move |_| {
         let db = app.db.lock();
-
         let mut events = Vec::new();
+        
         // :p
-        events.push(json!({"name": "Connor Slade", "url": "https://github.com/Basicprogrammer10", "avatar": "https://avatars.githubusercontent.com/u/50306817?v=4", "time": 1652474100, "msg": "<em>created amplify</em>"}));
+        events.push(json!({"name": "Connor Slade", "url": "https://github.com/Basicprogrammer10", "avatar": "https://avatars.githubusercontent.com/u/50306817?v=4", "time": 1652474100, "msg": "<em>created amplify</em>", "id": "50306817"}));
 
         let mut query = db
             .prepare(include_str!("../sql/query_leaderbord.sql"))
@@ -28,9 +28,10 @@ pub fn attach(server: &mut Server, app: Arc<App>) {
             let avatar_url = i.get::<_, String>(2).unwrap();
             let time = i.get::<_, u64>(3).unwrap();
             let login = i.get::<_, String>(4).unwrap();
+            let id = i.get::<_, String>(5).unwrap();
 
             events.push(
-                json!({"name": name, "url": format!("https://github.com/{login}"), "avatar": avatar_url, "problem": problem, "problemId": problem_id,  "time": time}),
+                json!({"name": name, "url": format!("https://github.com/{login}"), "avatar": avatar_url, "problem": problem, "problemId": problem_id,  "time": time, "id": id}),
             );
         }
 
@@ -43,8 +44,9 @@ pub fn attach(server: &mut Server, app: Arc<App>) {
             let created = i.get::<_, u64>(1).unwrap();
             let avatar_url = i.get::<_, String>(2).unwrap();
             let login = i.get::<_, String>(3).unwrap();
+            let id = i.get::<_, String>(4).unwrap();
 
-            events.push(json!({"name": name, "url": format!("https://github.com/{login}"), "avatar": avatar_url, "time": created, "msg": "joined"}))
+            events.push(json!({"name": name, "url": format!("https://github.com/{login}"), "avatar": avatar_url, "time": created, "msg": "joined", "id": id}))
         }
 
         events.sort_unstable_by_key(|b| Reverse(b.get("time").unwrap().as_u64().unwrap()));

@@ -2,7 +2,8 @@ SELECT problem_id,
     name,
     avatar_url,
     end_time,
-    login
+    login,
+    user_id
 FROM problems
     JOIN users u on problems.user_id = u.id
 WHERE state >= 2

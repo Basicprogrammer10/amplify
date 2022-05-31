@@ -1,6 +1,7 @@
 SELECT name,
     created,
     avatar_url,
-    login
+    login,
+    id
 FROM users
 ORDER BY created DESC;

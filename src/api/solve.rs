@@ -67,7 +67,7 @@ pub fn attach(server: &mut Server, app: Arc<App>) {
         let args = problem.gen(seed);
 
         // Write code to a temp file
-        let mut code_file = tempfile::NamedTempFile::new_in("data/tmp").unwrap();
+        let mut code_file = tempfile::NamedTempFile::new_in(&app.cfg.tmp_folder).unwrap();
         code_file.write_all(code.as_bytes()).unwrap();
 
         // Build and run in a docker container

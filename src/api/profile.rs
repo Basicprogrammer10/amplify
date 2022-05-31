@@ -3,30 +3,12 @@ use std::collections::HashMap;
 use afire::{Content, Method, Response, Server};
 use serde_json::json;
 
-use crate::{
-    common::{get_cookie, json_err},
-    problems::PROBLEMS,
-    App, Arc,
-};
+use crate::{problems::PROBLEMS, App, Arc};
 
 pub fn attach(server: &mut Server, app: Arc<App>) {
-    server.route(Method::GET, "/api/profile", move |req| {
-        // Get Session
-        let session_id = match get_cookie(&req, "session") {
-            Some(i) => i.value,
-            None => return json_err("No Session!?"),
-        };
-
+    server.route(Method::GET, "/api/profile/{user_id}", move |req| {
+        let user_id = req.path_param("user_id").unwrap();
         let db = app.db.lock();
-
-        // Get User ID from Session
-        let user_id = db
-            .query_row(
-                "SELECT user_id FROM sessions WHERE session_id=?",
-                [session_id],
-                |row| row.get::<_, String>(0),
-            )
-            .unwrap();
 
         // Get Signup Date
         let signup = db
@@ -36,6 +18,9 @@ pub fn attach(server: &mut Server, app: Arc<App>) {
                 |req| req.get::<_, u64>(0),
             )
             .unwrap();
+
+        // Get Basic Info
+        let (name, avatar, login) = db.query_row("SELECT name, avatar_url, login FROM users WHERE id = ?", [&user_id], |row| Ok((row.get::<_, String>(0)?, row.get::<_, String>(1)?, row.get::<_, String>(2)?))).unwrap();
 
         // Get Used Langs
         let mut langs = HashMap::new();
@@ -67,7 +52,7 @@ pub fn attach(server: &mut Server, app: Arc<App>) {
         }
 
         Response::new()
-            .text(json!({"signup": signup, "langs": langs, "problems": problems, "totalProblems": PROBLEMS.len()}))
+            .text(json!({"name": name, "avatar": avatar, "signup": signup, "langs": langs, "problems": problems, "totalProblems": PROBLEMS.len(), "login": login, "id": user_id}))
             .content(Content::JSON)
     });
 }

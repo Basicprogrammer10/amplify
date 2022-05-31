@@ -75,7 +75,7 @@
       <template x-if="session">
         <div class="ml-auto flex mr-1.5">
           <img
-            @click="page = 'profile';profile=await (await fetch('/api/profile')).json()"
+            @click="page = 'profile';profile=await (await fetch(`/api/profile/${session.id}`)).json()"
             :item="page == 'profile'"
             :src="session.avatar"
             width="36px"
@@ -206,7 +206,7 @@
                   editor.gotoLine(0);
                 "
             >
-              <template x-for="i in ['c', 'c++', 'js', 'python', 'rust']">
+              <template x-for="i in ['c', 'c++', 'javascript', 'python', 'rust']">
                 <option x-text="i" :selected="i == lang"></option>
               </template>
             </select>
@@ -265,16 +265,17 @@
         </div>
       </template>
 
-      <template x-if="page == 'profile' && !loading && profile != null">
+      <template
+        x-if="page.startsWith('profile') && !loading && profile != null"
+      >
         <div>
           <div class="w-full flex justify-center">
             <div>
               <img
-                :src="session.avatar"
-                @click=""
-                class="w-24 rounded center-trans cursor-pointer"
+                :src="profile.avatar"
+                class="w-24 rounded center-trans border border-slate-700"
               />
-              <p x-text="session.name" class="text-center"></p>
+              <p x-text="profile.name" class="text-center mt-2"></p>
             </div>
           </div>
           <br />
@@ -291,15 +292,42 @@
               </ul>
             </div>
 
-            <div class="rounded border p-2">
-              <p
-                x-text="`Languages (${Object.keys(profile.langs).length}/5)`"
-              ></p>
-              <ul>
-                <template x-for="j in Object.keys(profile.langs)">
-                  <li x-text="`${j} (${profile.langs[j]})`"></li>
-                </template>
-              </ul>
+            <div>
+              <div class="rounded border p-2 mb-3">
+                <p>About</p>
+                <ul>
+                  <li x-show="profile.id == 50306817">
+                    <strong><em>Literally created amplify</em></strong>
+                  </li>
+                  <li x-show="COOL_BEANS.includes(parseInt(profile.id))">
+                    Is a cool bean
+                  </li>
+                  <li>
+                    Joined:
+                    <span
+                      x-text="let date = new Date(profile.signup * 1000);return `${MONTHS[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;"
+                    ></span>
+                  </li>
+                  <li>
+                    Github:
+                    <a
+                      :href="`https://github.com/${profile.login}`"
+                      x-text="profile.login"
+                    ></a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="rounded border p-2">
+                <p
+                  x-text="`Languages (${Object.keys(profile.langs).length}/5)`"
+                ></p>
+                <ul>
+                  <template x-for="j in Object.keys(profile.langs)">
+                    <li x-text="`${j} (${profile.langs[j]})`"></li>
+                  </template>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -334,7 +362,7 @@
                     <p class="ml-2">
                       <a
                         href="#"
-                        @click="location=e.url"
+                        @click="page = `profile-${e.name}`;profile=await (await fetch(`/api/profile/${e.id}`)).json()"
                         x-text="`${e.name}`"
                       ></a>
                       <span x-show="e.msg" x-html="e.msg"></span>

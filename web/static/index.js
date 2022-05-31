@@ -29,7 +29,7 @@ const BADGE_COLORS = [
 const LANG_IDENTIFIERS = {
   c: "ace/mode/c_cpp",
   "c++": "ace/mode/c_cpp",
-  js: "ace/mode/javascript",
+  javascript: "ace/mode/javascript",
   python: "ace/mode/python",
   rust: "ace/mode/rust",
 };
@@ -47,6 +47,7 @@ const FAIL_MESSAGES = [
   "never give up",
   "you're getting close, i can feel it",
 ];
+const COOL_BEANS = [48413902, 25418058, 50306817];
 
 function safeHtml(text) {
   return text
@@ -96,7 +97,9 @@ async function run(lang, prob) {
   });
 
   document.querySelector("[stderr]").innerHTML = safeHtml(resp.stderr);
-  document.querySelector("[stdout]").innerHTML = safeHtml(stdoutDiff.substring(1));
+  document.querySelector("[stdout]").innerHTML = safeHtml(
+    stdoutDiff.substring(1)
+  );
 
   if (resp.success) {
     document.querySelector("[finish-box]").classList.remove("hidden");

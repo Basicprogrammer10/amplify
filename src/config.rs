@@ -12,6 +12,7 @@ pub struct Config {
 
     pub docker_command: String,
     pub docker_timeout: String,
+    pub tmp_folder: String
 }
 
 impl Config {
@@ -27,6 +28,7 @@ impl Config {
             req_duration: Duration::from_secs(cfg.get("req_duration").ok()?),
             docker_command: cfg.get("docker_command").ok()?,
             docker_timeout: cfg.get("docker_timeout").ok()?,
+            tmp_folder: cfg.get("tmp_folder").ok()?,
         })
     }
 }
