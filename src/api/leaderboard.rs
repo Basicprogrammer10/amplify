@@ -9,7 +9,7 @@ pub fn attach(server: &mut Server, app: Arc<App>) {
     server.route(Method::GET, "/api/leaderboard", move |_| {
         let db = app.db.lock();
         let mut events = Vec::new();
-        
+
         // :p
         events.push(json!({"name": "Connor Slade", "url": "https://github.com/Basicprogrammer10", "avatar": "https://avatars.githubusercontent.com/u/50306817?v=4", "time": 1652474100, "msg": "<em>created amplify</em>", "id": "50306817"}));
 

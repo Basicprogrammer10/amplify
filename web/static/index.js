@@ -96,9 +96,9 @@ async function run(lang, prob) {
     else stdoutDiff += "\n" + d.value;
   });
 
-  document.querySelector("[stderr]").innerHTML = safeHtml(resp.stderr);
+  document.querySelector("[stderr]").innerHTML = safeHtml(resp.stderr ?? "");
   document.querySelector("[stdout]").innerHTML = safeHtml(
-    stdoutDiff.substring(1)
+    stdoutDiff.substring(1) ?? ""
   );
 
   if (resp.success) {

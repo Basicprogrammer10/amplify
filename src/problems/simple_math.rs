@@ -13,7 +13,7 @@ impl Problem for SimpleMath {
     }
 
     fn time(&self) -> u64 {
-        0 //1654056000
+        1654056000
     }
 
     fn name(&self) -> &'static str {

@@ -12,7 +12,7 @@ pub struct Config {
 
     pub docker_command: String,
     pub docker_timeout: String,
-    pub tmp_folder: String
+    pub tmp_folder: String,
 }
 
 impl Config {

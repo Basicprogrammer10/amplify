@@ -24,7 +24,7 @@
         "sourcePath": "src/main.c"
     },
     {
-        "name": "cpp",
+        "name": "c++",
         "path": "cpp",
         "imageName": "cpp-runner",
         "sourcePath": "src/main.cpp"

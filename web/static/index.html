@@ -175,7 +175,8 @@
           if (running) return;
           running=true;
           run(lang, problem.id).then((d) => {
-            problems.find(d => d.id == problem.id).status = d;
+            let s = problems.find(d => d.id == problem.id);
+            s.status = Math.max(s.status, d);
             running = false;
           })
           "
@@ -206,7 +207,9 @@
                   editor.gotoLine(0);
                 "
             >
-              <template x-for="i in ['c', 'c++', 'javascript', 'python', 'rust']">
+              <template
+                x-for="i in ['c', 'c++', 'javascript', 'python', 'rust']"
+              >
                 <option x-text="i" :selected="i == lang"></option>
               </template>
             </select>
@@ -216,7 +219,8 @@
               @click="if (running) return;
                       running=true;
                       run(lang, problem.id).then((d) => {
-                        problems.find(d => d.id == problem.id).status = d;
+                        let s = problems.find(d => d.id == problem.id);
+                        s.status = Math.max(s.status, d);
                         running = false;
                       })"
             >
