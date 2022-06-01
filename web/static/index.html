@@ -2,7 +2,7 @@
 <html
   lang="en"
   dir="ltr"
-  x-data="{loading: true, session: null, problems: [], problem: null, lang: 'rust', running: false, profile: null, events: null, page: 'home'}"
+  x-data="{loading: true, session: null, problems: [], problem: null, lang: 'rust', running: false, profile: null, events: null, stats: null, page: 'home'}"
   x-init="
     session = await getSession();
     loading = false;
@@ -16,6 +16,9 @@
   if (page == 'events') fetch('/api/leaderboard')
     .then((d) => d.json())
     .then((d) => (events = d));
+  if (page == 'about') fetch('/api/stats')
+    .then((d) => d.json())
+    .then((d) => (stats = d));
     "
 >
   <head>
@@ -366,7 +369,7 @@
                     <p class="ml-2">
                       <a
                         href="#"
-                        @click="page = `profile-${e.name}`;profile=await (await fetch(`/api/profile/${e.id}`)).json()"
+                        @click="profile=null;page = `profile-${e.name}`;profile=await (await fetch(`/api/profile/${e.id}`)).json()"
                         x-text="`${e.name}`"
                       ></a>
                       <span x-show="e.msg" x-html="e.msg"></span>
@@ -399,6 +402,8 @@
 
       <template x-if="page == 'about' && !loading">
         <div>
+          <p class="text-2xl">About</p>
+          <hr class="mb-3" />
           <p>Welcome to amplify.</p>
           <br />
           <p>
@@ -422,6 +427,18 @@
             <a href="https://github.com/Basicprogrammer10/amplify">here</a>!
           </p>
           <p>- connor slade</p>
+          <br />
+
+          <p class="text-2xl">Stats</p>
+          <hr class="mb-3" />
+          <ul>
+            <li x-text="`Total users: ${stats.users ?? ''}`"></li>
+            <li x-text="`Problem attempts: ${stats.tries ?? ''}`"></li>
+            <li x-text="`Problem solves: ${stats.solves ?? ''}`"></li>
+            <li
+              x-text="`Time spent on problems: ${bestTime(stats.timeSpent) ?? ''}`"
+            ></li>
+          </ul>
         </div>
       </template>
     </div>

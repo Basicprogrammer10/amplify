@@ -17,14 +17,11 @@ VALUES (
     ) ON CONFLICT DO
 UPDATE
 SET state = max(?3, problems.state),
-    end_time = min(
-        excluded.end_time,
-        CASE
-            problems.end_time IS NULL
-            WHEN 1 THEN strftime('%s', 'now')
-            ELSE problems.end_time
-        END
-    ),
+    end_time = CASE
+        problems.end_time IS NULL
+        WHEN 1 THEN strftime('%s', 'now')
+        ELSE problems.end_time
+    END,
     tries = CASE
         (
             SELECT state
