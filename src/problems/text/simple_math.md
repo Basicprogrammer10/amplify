@@ -6,6 +6,7 @@ Let's start with some basic info that will apply to every problem:
 - Make sure you press run to save your code changing the language or your progress will be deleted, yes i could fix this, no im not going to
 - The code is build and run in the server in a docker container and its STDOUT is compared to the correct output
 - The tests are supplied to your program as command line arguments separated by a space
+- If you don't know how to get command line arguments in any of the supported languages, you can look [here](https://paste.connorcode.com/b/bc292e1a-9da8-4e4a-a221-07465927ba03)
 - This is the first time I've done anything like this so if you run into any issues you can file an issue on GitHub [here](https://github.com/Basicprogrammer10/amplify/issues)
 - These problems will start simple but get a bit more complicated as time goes on
 

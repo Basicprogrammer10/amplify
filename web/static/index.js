@@ -47,7 +47,7 @@ const FAIL_MESSAGES = [
   "never give up",
   "you're getting close, i can feel it",
 ];
-const COOL_BEANS = [48413902, 25418058, 50306817];
+const COOL_BEANS = [48413902, 25418058, 50306817, 106675353];
 
 function safeHtml(text) {
   return text
@@ -87,18 +87,25 @@ async function run(lang, prob) {
   ).json();
 
   let stdout = Diff.diffLines(resp.expected, resp.stdout.trimEnd());
-  let stdoutDiff = "";
-  let rem = false;
+  let fragment = document.createDocumentFragment();
 
-  stdout.forEach((d) => {
-    if (d.added) stdoutDiff += "\n<" + d.value.replace("\n", "\n<");
-    else if (d.removed) stdoutDiff += "\n>" + d.value.split("\n").join("\n>");
-    else stdoutDiff += "\n" + d.value;
+  stdout.forEach((part) => {
+    let color = part.added
+      ? "rgb(239 68 68)"
+      : part.removed
+      ? " rgb(34 197 94)"
+      : "";
+    let span = document.createElement("span");
+    span.style.color = color;
+    span.appendChild(document.createTextNode(part.value));
+    fragment.appendChild(span);
   });
 
-  document.querySelector("[stderr]").innerHTML = safeHtml(resp.stderr ?? "");
-  document.querySelector("[stdout]").innerHTML = safeHtml(
-    stdoutDiff.substring(1) ?? ""
+  document.querySelector("[stdout]").innerHTML = "";
+  document.querySelector("[stdout]").appendChild(fragment);
+
+  document.querySelector("[stderr]").innerHTML = safeHtml(
+    `ARGS: ${resp.input}\n${resp.stderr ?? ""}`
   );
 
   if (resp.success) {
