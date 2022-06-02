@@ -41,10 +41,10 @@
     <script src="/index.js"></script>
   </head>
 
-  <body class="bg-slate-900 font-mono">
+  <body class="bg-slate-900 font-mono max-w-screen-xl w-1/2 left-1/2 -translate-x-1/2 relative">
     <nav
       nav-bar
-      class="bg-slate-800 m-6 w-1/2 h-12 mx-auto rounded flex justify-start items-center drop-shadow-lg"
+      class="bg-slate-800 m-6 h-12 mx-auto rounded flex justify-start items-center drop-shadow-lg"
     >
       <div
         class="flex items-center cursor-pointer mr-1.5"
@@ -99,7 +99,7 @@
     </nav>
 
     <div
-      class="bg-slate-800 m-8 w-1/2 p-3 h-full mx-auto rounded drop-shadow-lg"
+      class="bg-slate-800 m-8 p-3 h-full mx-auto rounded drop-shadow-lg"
     >
       <p
         x-show="loading || (page.startsWith('problem-') && problem == null) || (page=='profile' && profile == null) || (page=='events' && events == null)"

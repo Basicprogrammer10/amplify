@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff36 rgb(23, 32, 47);
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: rgb(23, 32, 47);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ffffff36;
+  }
+
+  &::-webkit-scrollbar-corner {
+    display: none;
+  }
+}
+
 body {
   background-image: radial-gradient(#1e293b 1px, transparent 1px);
   background-size: 20px 20px;
