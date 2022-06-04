@@ -1,7 +1,10 @@
 use std::fs;
 use std::sync::Arc;
 
-use afire::{Content, Logger, Middleware, Response, ServeStatic, Server};
+use afire::{
+    extension::{Logger, ServeStatic},
+    Content, Middleware, Response, Server,
+};
 use serde_json::json;
 
 mod api;
