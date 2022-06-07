@@ -4,6 +4,7 @@ use lazy_static::lazy_static;
 
 mod base_64_decode;
 mod bracket_depth;
+mod brain_f; //
 mod common;
 mod duration_parser;
 mod increase_count;

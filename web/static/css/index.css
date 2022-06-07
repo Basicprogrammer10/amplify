@@ -826,6 +826,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 *::-webkit-scrollbar-thumb {
   background-color: #ffffff36;
+  border-radius: 2px;
 }
 
 *::-webkit-scrollbar-corner {
