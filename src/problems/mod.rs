@@ -4,7 +4,7 @@ use lazy_static::lazy_static;
 
 mod base_64_decode;
 mod bracket_depth;
-mod brain_f; //
+mod brain_f;
 mod common;
 mod duration_parser;
 mod increase_count;
@@ -25,6 +25,7 @@ lazy_static! {
         let mut problems: Vec<Box<dyn Problem + Send + Sync>> = vec![
             Box::new(base_64_decode::Base64Decode),
             Box::new(bracket_depth::BracketDepth),
+            Box::new(brain_f::BrainF),
             Box::new(duration_parser::DurationParser),
             Box::new(nth_prime::NthPrime),
             Box::new(rust_tastic::RustTastic),

@@ -1,0 +1,45 @@
+<p>With your base 64 decoding program the navagation is going very smoothly.
+You are completing your tasks quicker than expected leaving time for more amazing programming problems!</p>
+<p>You start to learn about <a href="https://en.wikipedia.org/wiki/Esoteric_programming_language">Esoteric programming languages</a>.
+This <em>inspires</em> you to make your own <a href="https://en.wikipedia.org/wiki/Brainfuck">brain,,,<em>fun</em></a> interpreter.
+In this language there you are on an infinite array of cells and there are only 8 instructions (7 for this problem):</p>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>Description (C code)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt;</td>
+<td>Increment data pointer (<code>++ptr</code>)</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>Decrement data pointer (<code>--ptr</code>)</td>
+</tr>
+<tr>
+<td>+</td>
+<td>Increment data value (<code>++*prt</code>)</td>
+</tr>
+<tr>
+<td>––</td>
+<td>Decrement data value (<code>--*prt</code>)</td>
+</tr>
+<tr>
+<td>.</td>
+<td>Print data as ASCII (<code>putchar(*ptr)</code>)</td>
+</tr>
+<tr>
+<td>[</td>
+<td>If data value is 0 jump 1 past <code>]</code> (<code>while (*ptr) {</code>)</td>
+</tr>
+<tr>
+<td>]</td>
+<td>If the data value is not 0 jump 1 past <code>[</code> (<code>}</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>So make a program to take in <em>brainfun</em> programs from argv and run them.
+Example input / output <a href="https://paste.connorcode.com/b/0d8e6692-fb41-4af6-9106-14d011ce7138">here</a>.</p>

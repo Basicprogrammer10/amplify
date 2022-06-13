@@ -24,7 +24,7 @@ impl Problem for BrainF {
     }
 
     fn time(&self) -> u64 {
-        0
+        1655179200
     }
 
     fn name(&self) -> &'static str {
@@ -32,7 +32,7 @@ impl Problem for BrainF {
     }
 
     fn text(&self) -> &'static str {
-        "todo"
+        include_str!("./text/build/brain_f")
     }
 
     fn gen(&self, seed: u64) -> String {
