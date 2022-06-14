@@ -17,11 +17,11 @@ yeah,,, i see you
 1. 🟢 Readable Duration
 1. 🟢 Rule 30
 1. 🟢 Base 64 decode
-1. 🟡 BrainF Runner
+1. 🟢 BrainF Runner
 1. 🔴 Conways Game of life to n steps
 1. 🟡 Order Of Ops [less simple math]
 1. 🟠 Scale of 1-10 how good is rust
 
-PROBLEM: `14 / 17 ~ 82%`
+PROBLEM: `16 / 17 ~ 94%`
 
-STORY: `13 / 17 ~ 76%`
+STORY: `14 / 17 ~ 82%`

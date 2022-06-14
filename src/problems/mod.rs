@@ -6,6 +6,7 @@ mod base_64_decode;
 mod bracket_depth;
 mod brain_f;
 mod common;
+mod conways_game_of_life; //
 mod duration_parser;
 mod increase_count;
 mod less_simple_math; //
