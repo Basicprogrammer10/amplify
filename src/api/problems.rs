@@ -52,7 +52,7 @@ pub fn attach(server: &mut Server, app: Arc<App>) {
         }
 
         // Gen Json
-        let time = current_epoch();
+        let time = 1654056001;
         let out = problems
             .iter()
             .filter(|x| x.2 <= time)

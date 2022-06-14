@@ -30,7 +30,7 @@ fn main() {
     api::attach(&mut server, app);
 
     server.error_handler(
-        |req, err| match req.path.split('/').nth(1).unwrap_or_default() {
+        |req, err| match req.unwrap().path.split('/').nth(1).unwrap_or_default() {
             "auth" | "api" => Response::new()
                 .status(500)
                 .text(json!({ "error": err }))

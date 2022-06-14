@@ -40,7 +40,7 @@ impl Problem for BrainF {
 
         let mut prbs = PROBLEMS.to_owned();
         prbs.shuffle(&mut rng);
-        prbs.join(",")
+        prbs.join(" ")
     }
 
     fn check(&self, seed: u64) -> String {
@@ -63,7 +63,7 @@ mod test {
         let mut out = Vec::new();
 
         // from my code golf soluion,,,
-        for i in inp.split(",") {
+        for i in inp.split(" ") {
             let code = i.chars().collect::<Vec<_>>();
             let mut pout = String::new();
             let mut data = [0; 99];
