@@ -26,7 +26,7 @@ impl Problem for ConwaysGameOfLife {
     }
 
     fn time(&self) -> u64 {
-        0
+        1655265600
     }
 
     fn name(&self) -> &'static str {
