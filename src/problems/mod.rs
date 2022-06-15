@@ -6,7 +6,7 @@ mod base_64_decode;
 mod bracket_depth;
 mod brain_f;
 mod common;
-mod conways_game_of_life; //
+mod conways_game_of_life;
 mod duration_parser;
 mod increase_count;
 mod less_simple_math; //
@@ -27,6 +27,7 @@ lazy_static! {
             Box::new(base_64_decode::Base64Decode),
             Box::new(bracket_depth::BracketDepth),
             Box::new(brain_f::BrainF),
+            Box::new(conways_game_of_life::ConwaysGameOfLife),
             Box::new(duration_parser::DurationParser),
             Box::new(nth_prime::NthPrime),
             Box::new(rust_tastic::RustTastic),

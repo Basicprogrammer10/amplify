@@ -29,8 +29,8 @@ fn main() {
     auth::attach(&mut server, app.clone());
     api::attach(&mut server, app);
 
-    server.error_handler(
-        |req, err| match req.unwrap().path.split('/').nth(1).unwrap_or_default() {
+    server.error_handler(|req, err| match req {
+        Ok(i) => match i.path.split('/').nth(1).unwrap_or_default() {
             "auth" | "api" => Response::new()
                 .status(500)
                 .text(json!({ "error": err }))
@@ -40,7 +40,8 @@ fn main() {
                 .text(format!("Internal Server Error :/\nError: {}", err))
                 .content(Content::TXT),
         },
-    );
+        Err(e) => Response::new().text(format!("{:?}", e)),
+    });
 
     server.start().unwrap();
 }

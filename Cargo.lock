@@ -11,7 +11,7 @@ checksum = "f26201604c87b1e01bd3d98f8d5d9a8fcbb815e8cedb41ffccbeb4bf593a35fe"
 [[package]]
 name = "afire"
 version = "1.1.0"
-source = "git+https://github.com/Basicprogrammer10/afire.git?branch=dev#5d2ab04d7137bf0ac492367dd96757427e2748cd"
+source = "git+https://github.com/Basicprogrammer10/afire.git?branch=dev#4fc7bf219f4010c534cf1576f838079636d5a016"
 
 [[package]]
 name = "ahash"
