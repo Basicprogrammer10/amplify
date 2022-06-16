@@ -1,8 +1,3 @@
-use std::ops::RangeInclusive;
-
-use rand::prelude::*;
-use rand_chacha::ChaCha8Rng;
-
 use super::Problem;
 
 const PROBLEM: [(&str, u8); 4] = [

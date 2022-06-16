@@ -9,7 +9,7 @@ mod common;
 mod conways_game_of_life;
 mod duration_parser;
 mod increase_count;
-mod less_simple_math; //
+mod less_simple_math;
 mod nth_prime;
 mod position_orders;
 mod readable_duration;
@@ -37,6 +37,7 @@ lazy_static! {
             Box::new(sierpinski_triangle::SierpinskiTriangle),
             Box::new(simple_math::SimpleMath),
             Box::new(increase_count::IncreaseCount),
+            Box::new(less_simple_math::LessSimpleMath),
             Box::new(tag_verifier::TagVerifier),
             Box::new(tic_tac_toe::TicTacToe),
             Box::new(url_decode::UrlDecode),

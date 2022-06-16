@@ -16,7 +16,7 @@ impl Problem for RustTastic {
     }
 
     fn text(&self) -> &'static str {
-        "todo"
+        include_str!("./text/build/rust_tastic")
     }
 
     fn gen(&self, _: u64) -> String {
