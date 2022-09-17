@@ -4,15 +4,14 @@ name = "amplify"
 version = "0.1.0"
 
 [dependencies]
-afire = { git = "https://github.com/Basicprogrammer10/afire.git", branch = "dev", features = ["extensions", "tracing"] }
-# afire = { version = "1.1.0", features = ["serve_static", "logging", "tracing"] }
+afire = {version = "1.2.0", features = ["extensions", "tracing"]}
 base64 = "0.13.0"
 chrono = "0.4.19"
 lazy_static = "1.4.0"
 parking_lot = "0.12.0"
 rand = "0.8.5"
 rand_chacha = "0.3.1"
-rusqlite = { version = "0.27.0", features = ["bundled"] }
+rusqlite = {version = "0.28.0", features = ["bundled"]}
 serde_json = "1.0.79"
 simple_config_parser = "1.0.0"
 tempfile = "3.3.0"
