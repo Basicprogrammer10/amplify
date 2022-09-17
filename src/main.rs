@@ -27,7 +27,7 @@ fn main() {
     Logger::new().attach(&mut server);
 
     auth::attach(&mut server, app.clone());
-    api::attach(&mut server, app);
+    api::attach(&mut server, app.clone());
 
     server.error_handler(|req, err| match req {
         Ok(i) => match i.path.split('/').nth(1).unwrap_or_default() {
@@ -43,5 +43,5 @@ fn main() {
         Err(e) => Response::new().text(format!("{:?}", e)),
     });
 
-    server.start_threaded(16).unwrap();
+    server.start_threaded(app.cfg.workers).unwrap();
 }
