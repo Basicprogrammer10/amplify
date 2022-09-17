@@ -43,5 +43,5 @@ fn main() {
         Err(e) => Response::new().text(format!("{:?}", e)),
     });
 
-    server.start().unwrap();
+    server.start_threaded(16).unwrap();
 }

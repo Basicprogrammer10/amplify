@@ -33,7 +33,7 @@ impl Problem for ReadableDuration {
     fn gen(&self, seed: u64) -> String {
         let mut rng = ChaCha8Rng::seed_from_u64(seed);
         (0..10)
-            .map(|_| rng.gen_range(0..100000000).to_string())
+            .map(|_| gen_next(&mut rng).to_string())
             .collect::<Vec<_>>()
             .join(" ")
     }
@@ -42,7 +42,7 @@ impl Problem for ReadableDuration {
         let mut rng = ChaCha8Rng::seed_from_u64(seed);
         (0..10)
             .map(|_| {
-                let mut i = rng.gen_range(0..100000000) as f32;
+                let mut i = gen_next(&mut rng) as f32;
 
                 for j in DURATION_CONVERSION {
                     if j.1 == 0 || i < j.1 as f32 {
@@ -57,6 +57,17 @@ impl Problem for ReadableDuration {
             })
             .collect::<Vec<_>>()
             .join("\n")
+    }
+}
+
+fn gen_next(rng: &mut ChaCha8Rng) -> i32 {
+    match rng.gen_range::<u8, _>(0..=4) {
+        0 => rng.gen_range(0..60),
+        1 => rng.gen_range(60..3600),
+        2 => rng.gen_range(3600..216000),
+        3 => rng.gen_range(216000..5184000),
+        4 => rng.gen_range(5184000..36288000),
+        _ => unreachable!(),
     }
 }
 
