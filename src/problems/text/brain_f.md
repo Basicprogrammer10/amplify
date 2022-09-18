@@ -16,4 +16,4 @@ In this language there you are on an infinite array of cells and there are only 
 | ]           | If the data value is not 0 jump 1 past `[` (`}`)      |
 
 So make a program to take in _brainfun_ programs from argv and run them.
-Example input / output [here](https://paste.connorcode.com/b/0d8e6692-fb41-4af6-9106-14d011ce7138).
+Example input / output [here](https://paste.connorcode.com/b/b663b4b4-6250-4979-9125-02ed5c22844a).

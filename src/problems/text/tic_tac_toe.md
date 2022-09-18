@@ -9,4 +9,4 @@ The input looks a little something like this: `[[XX_,_XX,_XX],[OOX,X_O,X_X]...`.
 As you can see it's each board is a list of three strings of length 3.
 X means that there is an x there, O means that there is an o there and \_ means that there is no peice there.
 The output for the input shown above is this: `[V,_,...`.
-A full example will explain this whole thing bettor so make sure to check out an example Input and Output [here](https://paste.connorcode.com/b/39aed5a8-a495-4855-9d52-bdd116c5f058).
+A full example will explain this whole thing bettor so make sure to check out an example Input and Output [here](https://paste.connorcode.com/b/8e50279f-fe67-40e6-9f66-3836054ceb5c).

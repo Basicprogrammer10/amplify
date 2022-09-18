@@ -5,4 +5,4 @@ To start you need a simple HTML tag verifier.</p>
 Just like this: <code>&lt;ol&gt;&lt;ol&gt;&lt;sub&gt;&lt;/sub&gt;&lt;/ol&gt; &lt;li&gt;&lt;h5&gt;&lt;/h5&gt;&lt;/li&gt;</code>.
 Your program should print <code>true</code> or <code>false</code> depending on if the tag sequence is valid.<br />
 It is valid if the tags are nested correctly and the tags are closed properly.
-Example input and output <a href="https://paste.connorcode.com/b/206e4b54-840f-4c61-9f12-9e745a013e66">here</a>.</p>
+Example input and output <a href="https://paste.connorcode.com/b/71367d16-ec1b-42b6-8b52-369a4ee7c6a1">here</a>.</p>

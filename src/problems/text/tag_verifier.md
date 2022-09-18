@@ -6,4 +6,4 @@ Your program will be supplied with some arguments, each being a sequence of open
 Just like this: `<ol><ol><sub></sub></ol> <li><h5></h5></li>`.
 Your program should print `true` or `false` depending on if the tag sequence is valid.\
 It is valid if the tags are nested correctly and the tags are closed properly.
-Example input and output [here](https://paste.connorcode.com/b/206e4b54-840f-4c61-9f12-9e745a013e66).
+Example input and output [here](https://paste.connorcode.com/b/71367d16-ec1b-42b6-8b52-369a4ee7c6a1).

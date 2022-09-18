@@ -16,4 +16,4 @@ The units are:
 
 Your program output should be in the following format: `# unit(s)`.
 Remember to add that s if the number is more than 1.
-Example input and output [here](https://paste.connorcode.com/b/08611f24-baff-402e-9c94-fe6fb7bc3c5a).
+Example input and output [here](https://paste.connorcode.com/b/d02ef4d9-8543-4051-a52b-269fc67123ab).

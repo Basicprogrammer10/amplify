@@ -10,4 +10,4 @@ Each depth is notated through a square brackets where the depth in hundreds of f
 For example `{}{}{}{{}}`, the max depth would be 2 (200 feet).
 For each bracket sequence just print out the depth in hundreds of feet.
 
-Example Input and Output [here](https://paste.connorcode.com/b/63b6a9d5-7de7-4cd4-a4da-0acd7bbe5a04).
+Example Input and Output [here](https://paste.connorcode.com/b/a4548b75-6cf7-4acd-bc56-095c28984e33).

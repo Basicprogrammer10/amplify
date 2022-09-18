@@ -16,5 +16,5 @@ These orders are comma separates lists of the words “up”, “down”, “lef
 
 For each argument print out the new coordinates of the submarine in the following format: `(X,Y)`.
 Also, the coordinates always start at 0,0.
-As always an example Input and Output are [here](https://paste.connorcode.com/b/7578c931-3051-4aa8-a25e-cbca2bc3d7fb).
+As always an example Input and Output are [here](https://paste.connorcode.com/b/84c882d7-e96a-4d06-9a04-5d96b67f2644).
 oh and also the third dimension has disappeared, a search team has been sent out but it's not looking promising.

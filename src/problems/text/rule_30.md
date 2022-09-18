@@ -17,4 +17,4 @@ The simulation is governed by these simple rules:
 This can also be expressed at the following boolean expression: `left_cell ^ (central_cell || right_cell)`.
 Honestly Wikipedia explains this much bettor so just check that.
 When printing the world use a space for dead and `█` for live also make sure to trim the extra spaces at the end of each line.
-Example output [here](https://paste.connorcode.com/b/a40394bc-a4d5-4d81-8521-acea21c5c79c).
+Example output [here](https://paste.connorcode.com/b/b3cc1705-9eae-4539-a4f4-cdb320967799).

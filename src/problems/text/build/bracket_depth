@@ -7,4 +7,4 @@ In this new position you will be decoding the depths on the maps.</p>
 Each depth is notated through a square brackets where the depth in hundreds of feet is the maximum depth of the brackets.
 For example <code>{}{}{}{{}}</code>, the max depth would be 2 (200 feet).
 For each bracket sequence just print out the depth in hundreds of feet.</p>
-<p>Example Input and Output <a href="https://paste.connorcode.com/b/63b6a9d5-7de7-4cd4-a4da-0acd7bbe5a04">here</a>.</p>
+<p>Example Input and Output <a href="https://paste.connorcode.com/b/a4548b75-6cf7-4acd-bc56-095c28984e33">here</a>.</p>

@@ -5,4 +5,4 @@ It's a mystery how they have this much free time.
 
 Anyway the information is now all base64 encoded, and trying to decode it manually is not going well.
 Write a program that base64 decodes all of its arguments and prints them out.
-Example input and output [here](https://paste.connorcode.com/b/24ccfa01-24ca-4777-adb9-99f2767472d6).
+Example input and output [here](https://paste.connorcode.com/b/56416dcf-b94a-4e21-832f-bd3c723159c0).

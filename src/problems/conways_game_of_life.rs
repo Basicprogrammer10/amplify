@@ -46,14 +46,12 @@ impl Problem for ConwaysGameOfLife {
 
 #[cfg(test)]
 mod test {
-    use super::{ConwaysGameOfLife, Problem};
-    use rand::RngCore;
+    // use super::{ConwaysGameOfLife, Problem};
+    // use rand::RngCore;
 
     #[test]
     fn game_of_life() {
-        let seed = rand::thread_rng().next_u64();
-        println!("{}", ConwaysGameOfLife.gen(12));
-        println!();
-        println!("{}", ConwaysGameOfLife.check(12));
+        // let seed = rand::thread_rng().next_u64();
+        // TODO: Solve this for the test
     }
 }

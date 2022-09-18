@@ -12,4 +12,4 @@ Each of the time units can be encoded in any of the following ways:
 - Minutes: ["m", "min", "minute"]
 - Seconds: ["s", "sec", "second"]
 
-As always, example inputs and outputs [here](https://paste.connorcode.com/b/1834222b-bdcd-4574-b8e8-1f57597e11ed).
+As always, example inputs and outputs [here](https://paste.connorcode.com/b/e4fec8b4-024b-4fdf-9ad4-8f92d304765f).

@@ -13,4 +13,4 @@ It is your job to simulate the board using the 3 rules of [Conway game of life](
 <br>
 
 Print the final state after the set ammount of simulation steps in the same format of 2d array with the X and \_.
-Example input and output [here](https://paste.connorcode.com/b/8596b85b-fbc0-4670-947d-523c86ce4482).
+Example input and output [here](https://paste.connorcode.com/b/3c4bd80a-d8b0-4ebf-90ce-0e9bd92b7e9c).
