@@ -161,6 +161,7 @@ mod test {
                         if let Some(oi) = stack.entry(e.to_owned()).or_default().pop() {
                             tokens.remove(i);
                             tokens.remove(oi);
+                            stack.clear();
                             i = 0;
                             continue;
                         }
