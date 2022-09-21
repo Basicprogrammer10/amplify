@@ -10,6 +10,7 @@ use serde_json::Value;
 pub fn attach(server: &mut Server, app: Arc<App>) {
     server.route(Method::GET, "/auth/complete", move |req| {
         // Get Code from URI
+        let verbose = req.query.get("verbose").is_some();
         let code = match req.query.get("code") {
             Some(i) => i,
             _ => return json_err("No Auth Code Found"),
@@ -25,7 +26,12 @@ pub fn attach(server: &mut Server, app: Arc<App>) {
             let mut os = app.oauth_state.lock();
             let real_state = match os.iter().position(|x| x.0 == state) {
                 Some(i) => os.remove(i),
-                None => return json_err("Invalid State"),
+                None => {
+                    if verbose {
+                        return json_err("Invalid State");
+                    }
+                    return Response::new().status(308).header("Location", "/");
+                }
             };
 
             if current_epoch() - real_state.1 >= 60 * 10 {
