@@ -41,7 +41,9 @@
     <script src="/index.js"></script>
   </head>
 
-  <body class="bg-slate-900 font-mono max-w-screen-xl w-1/2 left-1/2 -translate-x-1/2 relative">
+  <body
+    class="bg-slate-900 font-mono max-w-screen-xl w-1/2 left-1/2 -translate-x-1/2 relative"
+  >
     <nav
       nav-bar
       class="bg-slate-800 m-6 h-12 mx-auto rounded flex justify-start items-center drop-shadow-lg"
@@ -98,9 +100,7 @@
       </template>
     </nav>
 
-    <div
-      class="bg-slate-800 m-8 p-3 h-full mx-auto rounded drop-shadow-lg"
-    >
+    <div class="bg-slate-800 m-8 p-3 h-full mx-auto rounded drop-shadow-lg">
       <p
         x-show="loading || (page.startsWith('problem-') && problem == null) || (page=='profile' && profile == null) || (page=='events' && events == null)"
       >
@@ -374,18 +374,23 @@
                       ></a>
                       <span x-show="e.msg" x-html="e.msg"></span>
                       <span x-show="e.problem">solved </span>
-                      <a
-                        href="#"
-                        x-show="e.problem"
-                        x-text="e.problem"
-                        @click="
-                      problem=null;
-                      page=`problem-${e.problemId}`;
-                      problem=await (await fetch(`/api/problem/${e.problemId}`)).json();
-                      let pr = problems.find(d => d.id == e.problemId); 
-                      pr.status = Math.max(pr.status, 1);
-                      window.startCode=problem.solutions;"
-                      ></a>
+                      <template x-if="session">
+                        <a
+                          href="#"
+                          x-show="e.problem"
+                          x-text="e.problem"
+                          @click="
+                        problem=null;
+                        page=`problem-${e.problemId}`;
+                        problem=await (await fetch(`/api/problem/${e.problemId}`)).json();
+                        let pr = problems.find(d => d.id == e.problemId); 
+                        pr.status = Math.max(pr.status, 1);
+                        window.startCode=problem.solutions;"
+                        ></a>
+                      </template>
+                      <template x-if="!session">
+                        <code x-show="e.problem" x-text="e.problem"></code>
+                      </template>
                       at
                       <span
                         x-text="let date = new Date(e.time * 1000);
