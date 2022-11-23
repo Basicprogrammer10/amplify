@@ -11,7 +11,11 @@ pub fn attach(server: &mut Server, app: Arc<App>) {
         // Get Session
         let session_id = match get_cookie(&req, "session") {
             Some(i) => i.value,
-            None => return json_err("No Session!?"),
+            None => {
+                return Response::new()
+                    .text(json!({ "error": "No Session!?" }))
+                    .content(Content::JSON)
+            }
         };
 
         // Query Database
