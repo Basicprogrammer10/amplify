@@ -1,3 +1,5 @@
+use std::fmt::Write;
+
 use rand::prelude::*;
 use rand_chacha::ChaCha8Rng;
 
@@ -38,12 +40,14 @@ impl Problem for DurationParser {
                 let count = rng.gen_range(0..1000);
                 let sub_index = rng.gen_range(0..3);
 
-                seg.push_str(&format!(
+                write!(
+                    seg,
                     "{}{}{}",
                     count,
                     i[sub_index as usize],
                     if count > 1 && sub_index > 0 { "s" } else { "" }
-                ));
+                )
+                .unwrap();
             }
 
             out.push(seg);

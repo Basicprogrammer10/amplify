@@ -94,8 +94,8 @@ fn score_arr(bords: Vec<Vec<Vec<Token>>>) -> String {
         }
 
         // Check Diag
-        if b[1][1] != Token::None && (b[0][0] == b[1][1] && b[1][1] == b[2][2])
-            || (b[0][2] == b[1][1] && b[1][1] == b[2][0])
+        if (b[0][0] == b[1][1] && b[1][1] == b[2][2])
+            || (b[0][2] == b[1][1] && b[1][1] == b[2][0]) && b[1][1] != Token::None
         {
             score.push("D");
             continue 'b;
