@@ -3,9 +3,6 @@ use rand_chacha::ChaCha8Rng;
 
 use super::Problem;
 
-const PROBLEMS: &[&str] = &["71+71+45-57*99-5-(91*42+67*25)-45*9","51+(61+39*1)-(89*84+48-54-56+65)*78+(38*53*87*37)+(8+37*67+81+18-70)*72+(27-38+23+9)+(19*42+38*27*16*83)-(72+31+23*47-2+60)","13*1-84+(94*7*19+2)","96-28+22+96-36-69+74+44+(95+34-73*33-54+39)","82-(64+29*96*75)*20*84","22*14*36*35-72-(20*25*47)","34*59+65+20+74-10","76+33-(20*65-26)-84+(69*11-1+9)+(62*23*21*78)-27-88+23","40-19+(30+95*46)+77-(20+34*38-48)-6*80*23","36*40+23-47+3","42*27*11+(83*71-24+99+18+47)-(6+48*92+86+74)","3+(85*10+38)*46*50+(52-69-80)-(16*95+78*93)-(52-68+25+62)*47","60+(80-87+19*38)-60-(26*70-34*1)-74-32-(18+87-99)+(11+75-5*42)*76-97","6*61-(39+23-89-70+14)*59-(43+1+28+86)*36+55","31-62-(43+77-74+9+16*95)-(3-46-93-27*68)*83+(57-98-26-44)-70","11+24+41*74-80","32+(11*37-70-53-51*17)-49-9","24-49*50+(2-45-53-92+31*6)+(90*4-18-78-74+37)*3+16-20","34*37-78-7-(70+14-46-42+2)","18-14*22*95*41","8+31+79+(89-63-16*28-77+88)","38-41-19-9-(1*79*24)+(59+64*79+28)-96-9+(55+61*51-42-89+22)","64+46+(88*89*42)-58-(92+33-9-27+60-28)-3","73-36*71*75-82+72-93+(29+23+46+28+93*66)-(71+9-8-84+35*67)","16*35+(71*77+37-57-1*98)-33*44+55-(3*87*24-67-16)+5*78","85-(76+58+77)*64+(99+95+30-32-22)","80-(45*68*22+84)*83+99","51+(17*79*89)-(6*91-78+40)-61","97+38+33+71*83-(98+49-12-65*81)-(77*31-36)*14+(27-72-81*37-67*52)+5","21+90-99*80-79-48","84+(43+7*45-45*29-30)-93+(82+89+7-52+39)+(61*48-1)*65+14-(6-46-91)-5+14","8+(26*86+48)*30*36+(20-39+80)","93*67*27-49+68","72-(25-59*98)*19-44-61*98-(68*84-15*10)","94*75+83-(12-53+88*92*97-72)*78","28-(15-18+77*95*77-1)*54-79-60+(51+4*46)*53*65","44*39-(84+28-42-9)+63-69+(47*97+58-51*81)","42-50+23*94-(76*2*7+85-71)+(86-22*57-71+61-83)-89-(11+17*58*37-40)*66-73","62+17*27*28+76","21+84*93-66+25","28+32-25+(24+72-45-57-65)+13-(14+61-5)*55-38+14+56","21-15*49*64+82-15","54-64-44+(32*39+71)-(4+65*63*25)+88-31-48","37-58+28*66+77+55*51*62-(95+20+29-74+76+70)*66","79*50*8+(86+82-91-73-22)*1+(84+87*87*1*42*64)-(69*10+82+43)","36-46+(56*39*44*99+18-39)-(17-94*70+79*90-71)*53+(99+98-83-90+29*9)","43+31+79-93","60+(69-63*98+92-68)-62-76+(82-32*81+84)+(49-34-96)-19","88+(27-28-70+45)-(34*96+90-27*67*17)-(59*10+59*68-86)-(84+9-47)","23+91+(28+74+25*19+35)*47-(72+89*25+97-29-57)+(15-23+84+4*51*39)+92*66+(30+50+72)*8","92+56*51-(3*46-89-61*42)*97+59","64*95-58*71-4-(57-22*37+31*37+90)+(42*40*10*44*86-4)+51-(67+6+30+1*13)","44-44+94-6-45-(14*75-27-12*62*79)-(43-88-81-85)+74","6-24*37-91-1-12+76+(39+40*69*93-28)*38*6","3+49-(52-7+24)-40-17+(61*15+29*61)","84*56-(98*64-96-82)+53-(35-65*19*5)+45-65-(24+62-8*1)+42","58+(84+94*63*83*66+91)-40*90","21*11+60+(42*29+20)","69*90*77-71","15-21+72+8*36","17*61-14+80+(69+65-87)-14+52-22*71+35","60-76+(2+68+86-50-77*19)-36+42+(65-69-27+67*61*50)-(68*86*49)*4+68+25","14-(61-62*83+69-6-41)-37-26+(41-4+17)+(99-28-32*75+1)","55*69-62+68","16+61+81+95","54-1+15*45-1+63+84-80-(37*47+78*34*19-54)","75+50-99+(38-94*93*68*51+99)*91","91-(38-49+27*74-35+74)+(4-96-90*78*64)*38-48+80","61*77*98+33+13-54-87","60+(5*34-26-34-86)+74+14-(43-57*46-69)-55*92","99*42+(17-79-74)*87-69","26*43+56-3*62+66-(46*5*49*30-20*63)+82-17","65-(14-79*1-27+33)-60*91-(71+32-94+65*1)*40+62-(90+3-32-84+8*56)-(98+70*4)-70","32+89-(66-48+44*79+99)+(35*94*60*33-18-72)+82+(25*61-45)","61+21-(85-96+22*56-3)+72+(75-39-85*86)","90-59*13+74*52-76*79+(61+89+85)","3*71-61*85-99+50","11*97*39*24*24","24-32+(15-59+71)*30+(93+93-4+51+95)*33*99-90","54+37*10*77-81+88*32+(23-23+57*55*38)*85","95-(34*48*22*93+98*62)-5-60+34+(34-79*49+18+69+81)-41-40-(43-81+95)+(16*13*80-8+13)","83+(10*42*57)*54*52-80*22*76*54-74","29*48-81-15*90*21-97","4+75+72+(86+26*29-71)-99-(11*35*98+68)+72","46*6*87+(68+80*87*94+18)*42+49","96+59+30+19-18-85-(4*93*43)","29+(51+8*2+60*86)*22*12-94*36-(25-18*30+39-95)","33-29-85-92-(36*52*8)*53+92+49","68*90-21+67+27","1+32-78+62","82+36-(25*27+10+18)-(78-94-67*58)*54","74*96+84+60+(58*73*8-92*80*37)-99-(69*59-52+43*56)-74","63-75*17-98+(95+94*85+7)-28-12-6","57+(5*39+85)+4+33-4+72-(54-13-14-42*73)*62","17-7-66-6+(36-34*63+92+26-74)*45-97*3","90+(60+35+62)-22+(21+97+5*58*23)","84+82*90+(22*73-72*45)+(98-55*21*3-15*47)+34","31-37*89+23+6+86","1-53+83-65*12-(35-63*43*62+98-85)-60","54*8-87+75-72+65-13+99"];
-const SOLUTIONS: &[&str] = &["-11363","7443112","12433","-2096","-350891438","364508","2155","2335214","-7806","1419","13925","2030195","-10704","-370","161889","2989","-609","-1751","1175","-1199642","-293","6168","328872","-187799","-1279","-13249","-5594353","119009","-28244","-7936","189588","2466789","168256","97871","-61238389","-29606090","2135","-2406245","12990","7792","-3841","-46952","-101105","161558","20376323","9488530","60","-8685","22899","41890","246768","63572609","58081","58524638","2610","4747","32437349","1529","478099","354","-339","-943163","2740","3801","253","-51279","-2758857803","-17078039","460211","-2240","-7743","-335721","-9107","6512200","-8338","-2598","-5021","23969088","1072288","10157329","-3332246","60000489","-27136","-36905","27505753","-15895","1377144","-793760","6193","17","210123","-237800","6736","188860","-93143","7013","1792","-3147","167101","499"];
-
 pub struct LessSimpleMath;
 
 impl Problem for LessSimpleMath {
@@ -30,129 +27,205 @@ impl Problem for LessSimpleMath {
         let mut out = Vec::new();
 
         for _ in 0..10 {
-            // let mut seg = vec![rng.gen_range(1..100).to_string()];
-            // for _ in 0..rng.gen_range(3..10) {
-            //     match rng.gen_range(0..4) {
-            //         0 => seg.push(format!("+{}", rng.gen_range(1..100))),
-            //         1 => seg.push(format!("-{}", rng.gen_range(1..100))),
-            //         2 => seg.push(format!("*{}", rng.gen_range(1..100))),
-            //         3 => seg.push(gen_par_seg(&mut rng)),
-            //         _ => unreachable!(),
-            //     }
-            // }
+            let mut seg = vec![rng.gen_range(1..100).to_string()];
+            for _ in 0..rng.gen_range(3..10) {
+                match rng.gen_range(0..4) {
+                    0 => seg.push(format!("+{}", rng.gen_range(1..100))),
+                    1 => seg.push(format!("-{}", rng.gen_range(1..100))),
+                    2 => seg.push(format!("*{}", rng.gen_range(1..100))),
+                    3 => seg.push(gen_par_sec(&mut rng)),
+                    _ => unreachable!(),
+                }
+            }
 
-            // out.push(seg.join(""));
-            out.push(PROBLEMS[rng.gen_range(0..PROBLEMS.len())]);
+            out.push(seg.join(""));
         }
 
         out.join(" ")
     }
 
     fn check(&self, seed: u64) -> String {
-        let mut rng = ChaCha8Rng::seed_from_u64(seed);
         let mut out = Vec::new();
+        let real = self.gen(seed);
 
-        for _ in 0..10 {
-            out.push(SOLUTIONS[rng.gen_range(0..SOLUTIONS.len())]);
+        // TODO: gen tokens to skip tokenizing
+        for i in real.split(' ') {
+            out.push(evaluate(create_tree(tokenize(i))).to_string());
         }
 
         out.join("\n")
     }
 }
 
-// TODO: this,,, maybe
-// fn gen_par_seg(rng: &mut ChaCha8Rng) -> String {
-//     let mut out = rng.gen_range(1..100).to_string();
+fn gen_par_sec(rng: &mut ChaCha8Rng) -> String {
+    let mut out = rng.gen_range(1..100).to_string();
 
-//     for _ in 0..rng.gen_range(2..6) {
-//         match rng.gen_range(0..3) {
-//             0 => out.push_str(&format!("+{}", rng.gen_range(1..100))),
-//             1 => out.push_str(&format!("-{}", rng.gen_range(1..100))),
-//             2 => out.push_str(&format!("*{}", rng.gen_range(1..100))),
-//             _ => unreachable!(),
-//         }
-//     }
+    for _ in 0..rng.gen_range(2..6) {
+        match rng.gen_range(0..3) {
+            0 => out.push_str(&format!("+{}", rng.gen_range(1..100))),
+            1 => out.push_str(&format!("-{}", rng.gen_range(1..100))),
+            2 => out.push_str(&format!("*{}", rng.gen_range(1..100))),
+            _ => unreachable!(),
+        }
+    }
 
-//     format!("{}({out})", ["+", "-"][rng.gen_range(0..2) as usize])
-// }
+    format!("{}({out})", ["+", "-"][rng.gen_range(0..2) as usize])
+}
 
-// #[cfg(test)]
-// mod test {
-//     use super::{LessSimpleMath, Problem};
-//     use rand::RngCore;
+#[derive(Debug, Clone)]
+enum Token {
+    Number(i32),
+    Op(Ops),
+    Group(Vec<Token>),
+    Tree(Ops, Box<Token>, Box<Token>),
+}
 
-//     const DIGIT: [char; 10] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+#[derive(Debug, Clone, Copy)]
+enum Ops {
+    Add,
+    Sub,
+    Mul,
+}
 
-//     #[derive(Debug)]
-//     enum Token {
-//         Group(Vec<Token>),
-//         Num(i32),
-//         Add,
-//         Sub,
-//         Mul,
-//     }
+fn evaluate(tree: Token) -> i32 {
+    match tree {
+        Token::Tree(op, left, right) => {
+            let left = evaluate(*left);
+            let right = evaluate(*right);
 
-//     fn push_token(tokens: &mut Vec<Token>, group: &mut Option<Vec<Token>>, token: Token) {
-//         if let Some(i) = group {
-//             return i.push(token);
-//         }
-//         tokens.push(token);
-//     }
+            match op {
+                Ops::Add => left + right,
+                Ops::Sub => left - right,
+                Ops::Mul => left * right,
+            }
+        }
+        Token::Number(n) => n,
+        _ => panic!("Invalid token"),
+    }
+}
 
-//     #[test]
-//     fn less_simple_math() {
-//         for exp in math.split(" ").take(1) {
-//             println!("{}", exp);
-//             // Tokenize
-//             let mut tokens = Vec::new();
-//             let chars = exp.chars().collect::<Vec<_>>();
-//             let mut i = 0;
+fn create_tree(mut tokens: Vec<Token>) -> Token {
+    fn get_max_prio(tokens: &[Token]) -> usize {
+        tokens
+            .iter()
+            .filter_map(|x| match x {
+                Token::Op(i) => Some(i.prio()),
+                _ => None,
+            })
+            .max()
+            .unwrap()
+    }
 
-//             let mut parse_num = false;
-//             let mut num_build = String::new();
-//             let mut group = None;
+    fn contains_non_tree(tokens: &[Token]) -> bool {
+        tokens
+            .iter()
+            .filter(|x| !matches!(x, Token::Tree(_, _, _)))
+            .count()
+            > 0
+    }
 
-//             while i < chars.len() {
-//                 let on_digit = DIGIT.contains(&chars[i]);
-//                 if on_digit {
-//                     parse_num = true;
-//                     num_build.push(chars[i]);
-//                 }
-//                 if !on_digit && parse_num {
-//                     parse_num = false;
-//                     push_token(
-//                         &mut tokens,
-//                         &mut group,
-//                         Token::Num(num_build.parse::<i32>().unwrap()),
-//                     );
-//                     num_build.clear();
-//                 }
+    while contains_non_tree(&tokens) {
+        let max_prio = get_max_prio(&tokens);
 
-//                 match chars[i] {
-//                     '+' => push_token(&mut tokens, &mut group, Token::Add),
-//                     '-' => push_token(&mut tokens, &mut group, Token::Sub),
-//                     '*' => push_token(&mut tokens, &mut group, Token::Mul),
-//                     '(' => group = Some(Vec::new()),
-//                     ')' => {
-//                         tokens.push(Token::Group(group.unwrap()));
-//                         group = None;
-//                     }
+        let mut i = 0;
+        while i < tokens.len() {
+            if let Token::Op(op) = tokens[i] {
+                if op.prio() < max_prio {
+                    i += 1;
+                    continue;
+                }
 
-//                     _ => {}
-//                 }
+                let left = tokens.remove(i - 1).make_tree();
+                let right = tokens.remove(i).make_tree();
 
-//                 i += 1;
-//             }
+                tokens[i - 1] = Token::Tree(op, Box::new(left), Box::new(right));
+                break;
+            }
 
-//             // Execute parentasies
-//             // *ALL OF THE BODGES*
+            i += 1;
+        }
+    }
 
-//             // for i in &mut tokens {
-//             //     if let Token::Group(t) = i {}
-//             // }
+    debug_assert!(tokens.len() == 1);
+    tokens[0].clone()
+}
 
-//             println!("{}", exp);
-//             dbg!(tokens);
-//         }
-//     }
-// }
+fn tokenize(inp: &str) -> Vec<Token> {
+    let mut out = Vec::new();
+    let mut working = String::new();
+    let mut in_group = false;
+
+    for i in inp.chars() {
+        if !i.is_ascii_digit() && !working.is_empty() && !in_group {
+            out.push(Token::Number(working.parse().unwrap()));
+            working.clear();
+        }
+
+        match i {
+            // Groups
+            '(' => in_group = true,
+            ')' => {
+                in_group = false;
+                out.push(Token::Group(tokenize(&working)));
+                working.clear();
+            }
+            i if in_group => working.push(i),
+
+            // Operations
+            '+' => out.push(Token::Op(Ops::Add)),
+            '-' => out.push(Token::Op(Ops::Sub)),
+            '*' => out.push(Token::Op(Ops::Mul)),
+
+            // Numbers
+            i if i.is_ascii_digit() => working.push(i),
+
+            _ => panic!("INVALID CHAR: {}", i),
+        }
+    }
+
+    if !working.is_empty() {
+        out.push(Token::Number(working.parse().unwrap()));
+    }
+
+    out
+}
+
+impl Ops {
+    fn prio(&self) -> usize {
+        match self {
+            Ops::Add | Ops::Sub => 1,
+            Ops::Mul => 2,
+        }
+    }
+}
+
+impl Token {
+    fn make_tree(self) -> Token {
+        match self {
+            Token::Group(tokens) => create_tree(tokens),
+            _ => self,
+        }
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::{create_tree, evaluate, tokenize, LessSimpleMath, Problem};
+    use rand::RngCore;
+
+    #[test]
+    fn less_simple_math() {
+        let seed = rand::thread_rng().next_u64();
+        let raw = LessSimpleMath.gen(seed);
+        let mut out = Vec::new();
+
+        for i in raw.split(" ") {
+            let tokens = tokenize(&i);
+            let tree = create_tree(tokens);
+            let result = evaluate(tree);
+            out.push(result.to_string());
+        }
+
+        assert_eq!(LessSimpleMath.check(seed), out.join("\n"));
+    }
+}
